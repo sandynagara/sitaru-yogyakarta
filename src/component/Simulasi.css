@@ -1,0 +1,165 @@
+.simulasi {
+  position: relative;
+}
+
+.simulasi .judul {
+  display: flex;
+  font-weight: 500;
+}
+
+.simulasi input[type=text] {
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 14px;
+  margin-top: 10px;
+  height: 35px;
+  border-width: 1px;
+  border-radius: 8px;
+  border-color: gray;
+  transition: 500ms;
+}
+
+.simulasi .input {
+  position: relative;
+}
+
+.simulasi .input p {
+  position: absolute;
+  top: 0;
+  font-weight: bold;
+  margin: 0px 9px;
+  padding: 4px 6px;
+  background-color: white;
+  font-size: 11px;
+  transition: 500ms;
+}
+
+.simulasi .dropdown{
+    width: 100%;
+    color: white;
+    background-color: #673AB7;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+} 
+
+.simulasi .dropdown p{
+    margin: 0;
+    font-size: 14px;
+}
+
+.simulasi input:focus {
+  border-color: #673AB7;
+  outline-width: 0;
+}
+
+.simulasi button.tombol {
+  cursor: pointer;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 20px;
+  outline-width: 0px;
+  border-width: 0px;
+  background-color: #03dac5;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.simulasi button.tombol.back{
+    background-color: red;
+    color: white
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 0px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #673AB7;
+    cursor: pointer;
+    transition: 500ms;
+  }
+
+  .slider::-webkit-slider-thumb:hover {
+    box-shadow: 0px 0px 20px #673AB7;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 1px;
+    height: 12px;
+    border-radius: 0%;
+    background: #04AA6D;
+    cursor: pointer;
+  }
+
+  .input-slider{
+      margin-bottom: 10px;
+  }
+
+  .input-slider p{
+      margin: 15px 0 20px 0;
+      font-size: 15px;
+      font-weight: 400;
+  }
+
+  #selector{
+      background-color: rgb(92, 92, 92);
+      padding: 5px 15px;
+      color: white;
+      position: absolute;
+      margin-top: -35px;
+      top: 0;
+      border-radius: 5px;
+      margin-left: -5px;
+  }
+
+  #selector p{
+      font-size: 12px;
+      margin: 0px;
+  }
+
+  .status-perizinan .izin{
+    margin: 0px;
+    text-align: center;
+    color:#673AB7 ;
+  }
+
+  .item-perizinan{
+      display: flex;
+      align-items: center;
+      color: #10C8B9;
+  }
+
+  .item-perizinan.close h5{
+    color: red;
+  }
+
+  .item-perizinan h5{
+      margin: 15px 0px;
+  }
+
+  .list-item-perizinan{
+      padding: 0px 20px;
+  }
