@@ -13,6 +13,10 @@
     justify-content: space-between;
 } 
 
+#keterangan .dropdown:hover{
+    background-color: #510ec5;
+}
+
 #keterangan .dropdown p{
     margin: 0;
     font-size: 14px;

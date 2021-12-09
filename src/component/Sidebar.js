@@ -3,6 +3,7 @@ import "./Sidebar.css";
 import * as Ai from "react-icons/ai";
 import {FaRegMap} from "react-icons/fa"
 import * as Bs from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 function Icon({ icon ,judul ,open, setOpen}) {
     const [hover ,setHover] = useState(false)
@@ -48,12 +49,25 @@ function NavPeta({open,setOpen }) {
         setOpen={setOpen}
       />  
       
+      {localStorage.getItem("username") ? 
+      <Link to="profile">
+        <Icon
+          icon={<Ai.AiOutlineUser style={{ width: "20px", height: "20px" }} /> }
+          judul="Admin"
+          open={open}
+          setOpen={setOpen}
+        />
+      </Link> :
+      <Link to="login">
       <Icon
         icon={<Ai.AiOutlineUser style={{ width: "20px", height: "20px" }} /> }
         judul="Admin"
         open={open}
         setOpen={setOpen}
       />
+    </Link>
+      }
+      
     </div>
   );
 }

@@ -6,8 +6,6 @@ function Keterangan() {
 
   const [active, setActive] = useState(false)
 
- 
-
   return (
     <div id="keterangan">
       <div className="dropdown" onClick={()=>setActive(!active)}>
