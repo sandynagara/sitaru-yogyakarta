@@ -51,7 +51,7 @@ function ItemBasemap({item,setInputBasemap,inputBasemap}){
   return(
     <div className="item-basemap" onClick={()=>setInputBasemap(item.url)}>
       <div className="judul">
-        <div className="radio" style={inputBasemap===item.url ? {backgroundColor:"#673AB7"} : {}}></div>
+        <div className="radio" style={inputBasemap===item.url ? {backgroundColor:"#1976D2"} : {}}></div>
         <p>{item.nama}</p>
       </div>
       <img src={item.gambar} alt=""/>
@@ -63,7 +63,7 @@ function ItemBasemap({item,setInputBasemap,inputBasemap}){
 function Basemap({setInputBasemap ,inputBasemap ,open}) {
   return <div className="basemap-container" style={ open === "Basemap" ? {marginLeft:"50px"} :  {marginLeft:"-200px"}}>
     {jenisBasemap.map((e)=>{
-      return <ItemBasemap item = {e} setInputBasemap={setInputBasemap} inputBasemap={inputBasemap}/>
+      return <ItemBasemap key={e.url} item = {e} setInputBasemap={setInputBasemap} inputBasemap={inputBasemap}/>
     })}
   </div>;
 }

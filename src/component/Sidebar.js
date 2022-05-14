@@ -3,7 +3,9 @@ import "./Sidebar.css";
 import * as Ai from "react-icons/ai";
 import {FaRegMap} from "react-icons/fa"
 import * as Bs from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { BiTestTube } from "react-icons/bi";
+import {MdReportGmailerrorred} from "react-icons/md"
+import configData from "./config.json"
 
 function Icon({ icon ,judul ,open, setOpen}) {
     const [hover ,setHover] = useState(false)
@@ -11,20 +13,45 @@ function Icon({ icon ,judul ,open, setOpen}) {
     const changeOpenSidebar = () => {
         var style
         if (open === judul) {
-            style = {borderRadius : "5px 0px 0px 5px" ,padding:"10px 12px 10px 10px" ,backgroundColor:"white",color:"#673AB7"}
+            style = {borderRadius : "5px 0px 0px 5px" ,padding:"10px 12px 10px 10px" ,backgroundColor:"white",color:"#1976D2"}
         }
         return style
     }
 
+    const gantiTombol = () =>{
+      if(open === judul){
+        setOpen(false)
+      }else{
+        if(judul==="Login"){
+          const url = configData.SERVER_API + "check"
+          fetch(url,{
+            method:"GET",
+            credentials:"include"
+          })
+          .then(res=>res.json())
+          .then(res=>{
+            if(res != "unauthorized"){
+              console.log(res,"res")
+              setOpen("Profile")
+            }else{
+              setOpen("Login")
+            }
+          })
+        }else{
+          setOpen(judul)
+        }
+      }
+    }
+
   return (
     <div style={{display:"flex" ,alignItems:"center"}}>
-      <div className={"menu-logo"} style={changeOpenSidebar()} onMouseEnter={() => {setHover(true)}} onMouseLeave={()=>{setHover(false)}} onClick={(e)=> {open === judul ?  setOpen(false) : setOpen(judul)}}>{icon}</div>
-      {hover ?  <div className="menu-name">{judul}</div> : ""}
+      <div className={"menu-logo"} style={changeOpenSidebar()} onMouseEnter={() => {setHover(true)}} onMouseLeave={()=>{setHover(false)}} onClick={gantiTombol}>{icon}</div>
+      {hover && <div className="menu-name">{judul}</div> }
     </div>
   );
 }
 
-function NavPeta({open,setOpen }) {
+function NavPeta({open,setOpen,width }) {
 
   return (
     <div className="navbar-peta">
@@ -48,26 +75,36 @@ function NavPeta({open,setOpen }) {
         open={open}
         setOpen={setOpen}
       />  
-      
-      {localStorage.getItem("username") ? 
-      <Link to="profile">
-        <Icon
-          icon={<Ai.AiOutlineUser style={{ width: "20px", height: "20px" }} /> }
-          judul="Admin"
-          open={open}
-          setOpen={setOpen}
-        />
-      </Link> :
-      <Link to="login">
+
+ 
       <Icon
-        icon={<Ai.AiOutlineUser style={{ width: "20px", height: "20px" }} /> }
-        judul="Admin"
+      icon={<BiTestTube style={{ width: "20px", height: "20px" }} /> }
+      judul="Simulasi"
+      open={open}
+      setOpen={setOpen}
+      />  
+
+      <Icon
+        icon={<MdReportGmailerrorred style={{ width: "20px", height: "20px" }} /> }
+        judul="Lapor"
         open={open}
         setOpen={setOpen}
-      />
-    </Link>
-      }
-      
+      /> 
+
+        <div style={{position: "absolute",bottom:"0"}}>
+          <Icon
+            icon={<Ai.AiOutlineQuestion style={{ width: "20px", height: "20px" }} /> }
+            judul="Panduan"
+            open={open}
+            setOpen={setOpen}
+          />
+          <Icon
+            icon={<Ai.AiOutlineUser style={{ width: "20px", height: "20px" }} /> }
+            judul="Login"
+            open={open}
+            setOpen={setOpen}
+          />
+        </div>
     </div>
   );
 }

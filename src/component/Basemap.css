@@ -2,7 +2,7 @@
     width: 230px;
     height: 100vh;
     max-width: 100vh;
-    overflow: scroll;
+    overflow-y: scroll;
     background-color: white;
     position: absolute;
     padding: 5px 5px;
@@ -46,7 +46,7 @@
     height: 15px;
     border-radius: 100%;
     border: solid 1px;
-    border-color: #673AB7;
+    border-color: #1976D2;
     background-color: white;
 
 }

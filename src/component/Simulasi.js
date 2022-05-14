@@ -154,7 +154,7 @@ function Simulasi() {
         <p>Simulasi</p>
         <IoMdArrowDropdown style={active ? {marginRight:"20px",width:"22px",height:"22px"} : {marginRight:"20px",width:"22px",height:"22px" ,transform:"rotate(90deg)"}}/>
     </div>
-    {active ? <div>
+    {active && <div>
       {/* <div className="judul">
         <Fa.FaMapMarkerAlt style={{width: "20px",height: "20px",color: "#03DAC5"}}/>
         <p> Cagar Budaya </p>
@@ -162,12 +162,13 @@ function Simulasi() {
     <div style={{padding:"10px 20px 20px 20px"}}>
         {urutan === 1 ? (
             <JenisKegiatan setUrutan={(e) => setUrutan(urutan + e)} />
-        ) : (urutan === 2 ?
+        ) : 
+        (urutan === 2 ?
             <Perizinan setUrutan={(e) => setUrutan(urutan + e)}/> :
             <StatusPerizinan setUrutan={(e) => setUrutan(urutan + e)}/>
         )}
-    </div>  
-    </div>:""}
+      </div>  
+    </div>}
    
     </div>
   );

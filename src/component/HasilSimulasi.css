@@ -1,0 +1,126 @@
+.pop-up{    
+    top:0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.black-layer{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+}
+
+.hasil-simulasi{
+    z-index: 20;
+}
+
+.hasil-simulasi-izin{
+    width: 550px;
+    background-color: white;
+    z-index: 999999999990;
+    padding: 10px 30px;
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+/* width */
+.hasil-simulasi-izin::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  .hasil-simulasi-izin::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  .hasil-simulasi-izin::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Handle on hover */
+  .hasil-simulasi-izin::-webkit-scrollbar-thumb:hover {
+    background: rgba(20, 20, 20, 1);
+}
+
+.hasil-simulasi .perizinan{
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.hasil-simulasi .perizinan .list{
+    margin: 5px 0px;
+}
+
+.hasil-simulasi-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0075eb;
+    padding:15px 30px 15px 30px;
+    color: white;
+}
+
+.hasil-simulasi-ketentuan{
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+
+.hasil-simulasi-ketentuan .syarat{
+    text-align: center;
+    color: #77aee6;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    border: #77aee6 solid ;
+    border-width: 0px 0px 2px 0px;
+}
+
+.hasil-simulasi-ketentuan .syarat:hover{
+    color: #0075eb;
+}
+
+.syarat-hasil-simulasi-list{
+    padding: 10px;
+}
+
+.intensitas-hasil{
+    padding: 8px 10px;
+    display: grid;
+    grid-template-columns: 40% 5% 55%;
+}
+
+.cetak-simulasi{
+    margin-top: 5px;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #1983ec;
+    color: white;
+    border-radius: 5px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.cetak-simulasi:hover{
+    background-color: #0075eb;
+}
+
+.tutup-simulasi{
+    margin-top: 5px;
+    padding: 12px 20px;
+    background-color: #1983ec;
+    color: white;
+    border-radius: 5px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}

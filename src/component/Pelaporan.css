@@ -1,0 +1,77 @@
+.pop-up{    
+    top:0;
+    left: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+}
+
+.black-layer{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+}
+
+.pelaporan{
+    z-index: 2;
+    background-color: white;
+    padding: 25px;
+    border-radius: 5px;
+}
+
+.pelaporan .keterangan{
+    width: 350px;
+}
+
+.pelaporan .jenis-laporan{
+    width: 100%;
+}
+
+.pelaporan .jenis-laporan select{
+    width: 100%;
+    padding: 8px;
+}
+
+.pelaporan .keterangan textarea{
+    width: 98%;
+    height: 200px;
+}
+
+.pelaporan  p{
+    font-size: 14px;
+    margin: 10px 0px;
+    font-weight: 500;
+}
+
+.pelaporan .tombol{
+    display: flex;
+    justify-content: end;
+}
+
+.pelaporan .tombol .submit{
+    cursor: pointer;
+    width: 80px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: #1983ec;
+    color: white;
+    padding: 10px 10px;
+}
+
+.pelaporan .tombol .batal{
+    cursor: pointer;
+    width: 80px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: #ec1919;
+    color: white;
+    padding: 10px 10px;
+    margin-right: 10px;
+}

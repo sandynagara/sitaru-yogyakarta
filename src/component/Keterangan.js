@@ -2,42 +2,30 @@ import React,{useState} from "react";
 import {IoMdArrowDropdown} from 'react-icons/io'
 import "./Keterangan.css";
 
-function Keterangan() {
+function ListKeterangan({judul,isi}){
+  return <div className="kode">
+  <p><b>{judul}</b></p>
+  <p className="isi">{isi}</p>
+</div>
+}
+
+function Keterangan({data}) {
 
   const [active, setActive] = useState(false)
+  
+  console.log(data)
 
   return (
-    <div id="keterangan">
-      <div className="dropdown" onClick={()=>setActive(!active)}>
-        <p>Keterangan Bidang Tanah</p>
-        <IoMdArrowDropdown style={active ? {marginRight:"20px",width:"22px",height:"22px"} : {marginRight:"20px",width:"22px",height:"22px" ,transform:"rotate(90deg)"}}/>
-      </div>
-      {active ? <div className="list">   
-        <div className="kode">
-            <p>Kode Zona : </p>
-            <p className="isi">LU</p>
-          </div>
-          <div className="kode">
-            <p>Zona RDTR : </p>
-            <p className="isi">Cagar Budaya</p>
-          </div>
-          <div className="kode">
-            <p>Sub-Zona RDTR : </p>
-            <p className="isi">Cagar Budaya</p>
-          </div>
-          <div className="kode">
-            <p>Status Kawasan : </p>
-            <p className="isi">Kawasan Lindung</p>
-          </div>
-          <div className="kode">
-            <p>Jenis Hak : </p>
-            <p className="isi">Sultan Ground</p>
-          </div>
-          <div className="kode">
-            <p>Luas Bidang : </p>
-            <p className="isi">8579 m2</p>
-          </div>
-      </div> : ""}
+    <div id="keterangan"> 
+      <div className="list">
+        <ListKeterangan judul="Kelurahan" isi={data["WADMKD"]}/>
+        <ListKeterangan judul="Kecamatan" isi={data["WADMKC"]}/>
+        <ListKeterangan judul="Zona" isi={data["NAMOBJ"]}/>
+        <ListKeterangan judul="Kawasan" isi={data["CAGBUD"]}/>
+        <ListKeterangan judul="SWP" isi={data["KODSWP"]}/>
+        <ListKeterangan judul="Kode Zona" isi={data["nilai_kolo"].split("_")[1].split("-")[0]}/>
+        <ListKeterangan judul="Kode sub Zona" isi={data["nilai_kolo"].split("_")[1]}/>
+      </div> 
       
     </div>
   );

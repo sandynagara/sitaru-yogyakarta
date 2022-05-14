@@ -38,7 +38,7 @@
 .simulasi .dropdown{
     width: 100%;
     color: white;
-    background-color: #673AB7;
+    background-color: #1976D2;
     padding: 10px;
     cursor: pointer;
     display: flex;
@@ -46,7 +46,7 @@
 } 
 
 .simulasi .dropdown:hover{
-  background-color: #510ec5;
+  background-color: #1667b8;
 }
 
 .simulasi .dropdown p{
