@@ -248,9 +248,6 @@ function DataProfile({setOpen}){
   }
 
   return <div className='data-diri'>
-          {/* <div id='logo-profile'>
-            <AiOutlineUser style={{width:"100px",height:"100px"}}/>
-          </div> */}
           {dataUser && <div>
             <b>Biodata</b>
             <div className='biodata'>
@@ -303,7 +300,7 @@ function DataProfile({setOpen}){
 
 }
 
-function Profile({setOpen, user, setUser}) {
+function Profile({setOpen, user}) {
 
   const [fiturSelected, setFiturSelected] = useState("Pelaporan")
 

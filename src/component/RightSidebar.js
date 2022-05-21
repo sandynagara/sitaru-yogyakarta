@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./RightSidebar.css";
 import * as Md from "react-icons/md";
 import logo from "../images/Logo_Kota_Yogyakarta.png";
-import Keterangan from "./Keterangan";
+import Keterangan from "./Keterangan/Keterangan";
 
 function RightSidebar({data,setOpen}) {
   const [Tampil, setTampil] = useState(true);

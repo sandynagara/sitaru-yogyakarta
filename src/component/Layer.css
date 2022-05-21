@@ -1,6 +1,6 @@
 .layer{
     position: absolute;
-    padding: 10px;
+    padding-right: 10px;
     width: 250px;
     height: 100vh;
     background-color: white;
@@ -9,8 +9,12 @@
 }
 
 .layer-item{
+    background-color: rgb(226, 226, 226);
+    margin-right: 15px;
+    padding: 0.5rem;
     width: 100%;
     display: flex;
+    border-radius: 10px;
     margin-bottom: 1rem;
     flex-direction: column;
 }

@@ -1,7 +1,6 @@
 .basemap-container{
     width: 230px;
-    height: 100vh;
-    max-width: 100vh;
+    height: 98vh;
     overflow-y: scroll;
     background-color: white;
     position: absolute;

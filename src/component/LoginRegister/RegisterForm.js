@@ -1,23 +1,10 @@
-import React,{useState,createRef,forwardRef,useRef} from 'react'
-import './LoginRegisterForm.css'
-import  {AiOutlineUser ,AiOutlineLock,AiOutlineContacts,AiOutlineClose} from 'react-icons/ai'
-import  {BsPhone} from 'react-icons/bs'
+import React,{useState,createRef,useRef} from 'react'
+import InputLoginRegister from './InputLoginRegister';
+import {AiOutlineUser ,AiOutlineLock,AiOutlineContacts,AiOutlineClose} from 'react-icons/ai'
+import {BsPhone} from 'react-icons/bs'
 import {FaRegAddressBook} from "react-icons/fa"
-import configData from "./config.json"
 import Swal from 'sweetalert2'
-
-const InputLoginRegister = forwardRef(({tipe,label,logo,ganti},ref) => {
-
-    const [active, setActive] = useState(false)
-
-    return(<div style={{marginTop:"20px"}}>
-        <div className="logo-input" style={active ? {color : "#1983ec"} : {color : "grey"}}>
-            {logo}
-        </div>
-        <input name={label} onChange={ganti} ref={ref} placeholder={label} type={tipe} onFocus={()=>setActive(true)} onBlur={()=>setActive(false)}/>
-    </div>
-    )
-})
+import configData from "../config.json"
 
 function RegisterForm({setLogin,setOpen}){
 
@@ -137,78 +124,4 @@ function RegisterForm({setLogin,setOpen}){
     )
 }
 
-function LoginForm({setLogin,setOpen}){
-
-    var submitHandler = (event) =>{
-        event.preventDefault();
-        var username = event.target.Username.value
-        var password = event.target.Password.value
-        if(username === ""){
-            alert("Username tidak boleh kosong")
-        }else if(password === ""){
-            alert("Password tidak boleh kosong")
-        }else{
-            const url = configData.SERVER_API + "login"
-            fetch(url,{method:"POST", headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },body: JSON.stringify({
-                username: username,
-                password: password
-              }),
-              credentials: 'include'
-            })
-            .then(res=>res.json())
-            .then(hasil=>{
-                if(hasil.RTN){
-                    setOpen(false)
-                    Swal.fire({
-                        icon: 'success',
-                        title:'Anda berhasil login',
-                        timer: 2000,
-                        }
-                    )
-                }else{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Maaf',
-                        text: 'Username / Password yang anda masukkan salah',
-                    })
-                }
-            }).catch((err)=>console.log(err))
-        }
-        console.log(password)
-    }
-
-    return (
-        <div className="login-container">
-            <div style={{width:"100%",display:"flex",padding:0,minWidth:"100%",justifyContent:"justify-between",alignItems:"center"}}>
-                <h2 style={{width:"100%"}}>Login</h2>
-                <AiOutlineClose style={{cursor:"pointer"}} size={22} color="red" onClick={()=>setOpen(true)}/>
-            </div>
-            <form onSubmit={(e)=> submitHandler(e)}>
-                <InputLoginRegister tipe="text" label="Username" logo={<AiOutlineUser/>}/>
-                <InputLoginRegister tipe="password" label="Password" logo={<AiOutlineLock/>}/>
-                <button type="submit">Login </button>
-            </form>
-            <div className='register-link'>
-                <p>Belum punya akun?</p>
-                <p className='to-register' onClick={()=>setLogin(false)}>Register</p>
-            </div>
-        </div>
-    )
-}   
-
-function LoginRegisterForm({setOpen}) {
-
-    const [login, setLogin] = useState(true)
-
-    return (
-        <div className='pop-up'>
-            {login ? <LoginForm setLogin={setLogin} setOpen={setOpen}/> : <RegisterForm setOpen={setOpen} setLogin={setLogin}/> } 
-            <div className='black-layer' onClick={()=>setOpen(false)}></div>
-        </div>
-    )
-}
-
-export default LoginRegisterForm
+export default RegisterForm

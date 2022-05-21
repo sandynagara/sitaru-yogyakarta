@@ -1,82 +1,12 @@
 import React,{useEffect,useState} from 'react'
 import "./HasilSimulasi.css"
 import {AiOutlineClose} from "react-icons/ai"
-import PDF from './PDF'
+import PDF from '../PDF'
 import {PDFDownloadLink} from "@react-pdf/renderer"
-import configData from "./config.json"
-
-function SyaratHasilSimulasi({syarat}){
-
-  const [syaratSimulasi, setSyaratSimulasi] = useState(false)
-
-  useEffect(() => {
-    if(syarat!=""){
-      setSyaratSimulasi(syarat.split(";"))
-    }
-  }, [])
-  
-  return (
-    <div className='syarat-hasil-simulasi'>
-      {syaratSimulasi && syaratSimulasi.map((syarat,index)=>{
-        return(
-          <div className="syarat-hasil-simulasi-list">
-            {index+1}. {syarat}
-          </div>
-        )
-      })}
-    </div>
-  )
-}
-
-function KetentuanHasilSimulasi ({ketentuan}) {
-
-  const [ketentuanSimulasi, setKetentuanSimulasi] = useState(false)
-
-  useEffect(() => {
-    if(ketentuan!=""){
-      setKetentuanSimulasi(ketentuan.split(";"))
-    }
-  }, [])
-
-  return <div>
-    {ketentuanSimulasi && ketentuanSimulasi.map((ketentuan,index)=>{
-        return(
-          <div className="syarat-hasil-simulasi-list">
-            {index+1}. {ketentuan}
-          </div>
-        )
-      })}
-  </div>
-}
-
-function IntensitasHasilSimulasi ({intensitas}) {
-
-    return <div className='syarat-hasil-simulasi'>
-      <p style={{margin:"10px 10px"}}>Untuk luas tanah seluas {intensitas.luas} m<sup>2</sup> maka aturannya sebagai berikut:</p>
-      <div>
-          <div className="intensitas-hasil">
-            <b>Koefisien Dasar Bangunan</b>
-            <p>:</p>
-            <p> KDB maksimal adalah {intensitas.kdb}% atau sebesar {(intensitas.luas*intensitas.kdb*0.01).toFixed(2)} m<sup>2</sup></p>
-          </div>
-          <div className="intensitas-hasil">
-            <p><b>Koefisien Lantai Bangunan</b></p>
-            <p>:</p>
-            <p> KLB maksimal adalah {intensitas.klb} atau sebesar {(intensitas.luas*intensitas.klb.replace(/,/g, '.')).toFixed(2)} m<sup>2</sup></p>
-          </div>
-          <div className="intensitas-hasil">
-            <p><b>Koefisien Daerah Hijau</b></p>
-            <p>:</p>
-            <p>KDH minimal adalah {intensitas.kdh}% atau sebesar {(intensitas.luas*intensitas.kdh*0.01).toFixed(2)} m<sup>2</sup></p>
-          </div>
-          <div className="intensitas-hasil">
-            <p><b>Tinggi Bangunan</b></p>
-            <p>:</p>
-            <p> Tinggi maksimal bangunan adalah {intensitas.tinggi} m </p>
-          </div>
-      </div>
-  </div>
-}
+import configData from "../config.json"
+import SyaratHasilSimulasi from './SyaratHasilSimulasi'
+import KetentuanHasilSimulasi from './KetentuanHasilSimulasi'
+import IntensitasHasilSimulasi from './IntensitasHasilSimulasi'
 
 export default function HasilSimulasi({close,hasil = false }) {
 

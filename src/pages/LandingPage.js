@@ -1,12 +1,91 @@
 import React from 'react'
+import ItemMenu from '../component/LandingPage/ItemMenu'
+import {FaRegMap} from "react-icons/fa"
+import {AiOutlineQuestion} from "react-icons/ai"
+import logoYogya from "../images/Logo_Kota_Yogyakarta.png";
+import { Link } from 'react-router-dom';
 
 function LandingPage() {
   return (
     <div style={{width:"100vw",height:"100vh",display:"flex",justifyContent:"center"}}>
-        <img src='https://koperasi.jogjakota.go.id/resources/img/gallery/20171004141304.jpg'/>
-        <div className='bg-black text-blue-700'>
-            cadsad
+        <div style={{
+          backgroundColor:"rgba(0,0,0,0.5)",
+          width:"100vw",
+          height:"100vh",
+          position:"absolute",
+          display:"flex",
+          flexDirection:"column",
+          justifyContent:"center",
+          alignItems:"center"
+        }}>
+          <div style={{
+            backgroundColor:"white",
+            padding:"25px",
+            borderRadius:"12px",
+            display:"flex"
+          }}>
+            <div>
+              <img src={logoYogya} style={{width:"90px",height:"120px"}}/>
+            </div>
+            <div style={{marginLeft:"20px",fontSize:"20px",display:"flex",flexDirection:"column",justifyContent:"space-evenly"}}>
+              <div style={{fontWeight:"700"}}>
+                DINAS PERTANAHAN DAN TATA RUANG
+              </div>
+              <div>
+                Kundha Niti Mandala sarta Tata Sasana
+              </div>
+              <div>
+                Kota Yogyakarta
+              </div>
+            </div>
+            
+          </div>
+          <div>
+            
+          </div>
+          <div
+            style={{
+              marginTop:"3rem",
+              width:"100%",
+              display:"flex",
+              flexWrap:"wrap",
+              justifyContent:"space-evenly",
+              alignItems:"center",
+              
+            }}
+          >
+            <Link to="/sitaru">
+              <ItemMenu icon={ <FaRegMap color='white' size={35}/>} judul="Sitaru" color="rgb(66, 129, 245)"/>
+            </Link>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Siperta"/>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Sipancang"/>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Silapor"/>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Satu Data"/>
+          </div>
+          <div
+            style={{
+              width:"100%",
+              marginTop:"50px",
+              display:"flex",
+              flexWrap:"wrap",
+              justifyContent:"space-evenly",
+              alignItems:"center"
+            }}
+          >
+
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Joint Studio"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Regulasi"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Layanan"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="IKM dan Aduan"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Panduan"/>
+          </div>
+          
+        
         </div>
+        <img 
+          src='https://koperasi.jogjakota.go.id/resources/img/gallery/20171004141304.jpg' 
+          style={{width:"100vw",backgroundSize:"cover"}}
+        />
     </div>
   )
 }

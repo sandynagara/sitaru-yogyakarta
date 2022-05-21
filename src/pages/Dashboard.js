@@ -1,16 +1,16 @@
 import Peta from "../component/Peta";
 import React, { useState,useEffect } from 'react'
-import Sidebar from "../component/Sidebar";
 import RightSidebar from "../component/RightSidebar";
-import Basemap from "../component/Basemap";
+import Basemap from "../component/Basemap/Basemap";
 import Layer from "../component/Layer";
-import SimulasiHp from "../component/SimulasiHp";
-import LoginRegisterForm from "../component/LoginRegisterForm";
 import Pelaporan from "../component/Pelaporan";
 import Profile from "../component/Profile";
 import configData from "../component/config.json"
 import Panduan from "../component/Panduan";
 import Legenda from "../component/Legenda";
+import LoginRegisterForm from "../component/LoginRegister/LoginRegisterForm";
+import Sidebar from "../component/Sidebar/Sidebar";
+import Simulasi from "../component/Simulasi/Simulasi";
 
 function Dashboard() {
 
@@ -64,7 +64,7 @@ function Dashboard() {
             <Layer open={open} setOpacityBasemap={(e)=>setOpacityBasemap(e)} setOpacityPersil={(e)=>setOpacityPersil(e)} setOpacityRdtr={(e)=>setOpacityRdtr(e)}/>
             <Legenda open={open}/>
             { width && <RightSidebar data={data} setOpen={setOpen}/> }
-            <SimulasiHp open={open} data={data}/>
+            <Simulasi open={open} data={data}/>
             <Peta inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData}/>
             {open === "Login" && <LoginRegisterForm setOpen={setOpen}/>}
             {open === "Panduan" && <Panduan setOpen={setOpen}/>}

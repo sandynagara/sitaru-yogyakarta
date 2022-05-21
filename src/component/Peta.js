@@ -82,7 +82,6 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
         );
         panggil((result) => {
             console.log(result)
-            var latLng = e.latlng
      
             panggil((resultPersil)=>{
                 var koordinat = []
@@ -93,8 +92,6 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
                 result.features[0].properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
                 setData(result.features[0].properties)
             },urlPersil)
-            
-            
         }, urlRDTR);
       },
     });
@@ -135,7 +132,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
   return (
     <div className="peta">
       <MapContainer
-        center={[-7.787178, 110.376075]}
+        center={[-7.801408, 110.3647275]}
         zoom={17}
         style={{ width: "100vw", height: "100vh" }}
         zoomControl={false}

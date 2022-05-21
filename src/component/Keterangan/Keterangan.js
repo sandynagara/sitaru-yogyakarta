@@ -1,19 +1,8 @@
 import React,{useState} from "react";
-import {IoMdArrowDropdown} from 'react-icons/io'
 import "./Keterangan.css";
-
-function ListKeterangan({judul,isi}){
-  return <div className="kode">
-  <p><b>{judul}</b></p>
-  <p className="isi">{isi}</p>
-</div>
-}
+import ListKeterangan from "./ListKeterangan";
 
 function Keterangan({data}) {
-
-  const [active, setActive] = useState(false)
-  
-  console.log(data)
 
   return (
     <div id="keterangan"> 

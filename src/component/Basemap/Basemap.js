@@ -1,12 +1,13 @@
 import React from "react";
 import './Basemap.css'
-import OpenStreetMap from '../images/Basemap/OpenStreetMap.jpg'
-import EsriWorldImagery from '../images/Basemap/EsriWorldImagenery.jpg'
-import EsriToPo from '../images/Basemap/EsriToPo.jpg'
-import OpenToPo from '../images/Basemap/OpenToPo.jpg'
-import StadiaDark from '../images/Basemap/StadiaDark.jpg'
-import GoogleMaps from '../images/Basemap/GoogleMaps.jpg'
-import GoogleStreet from '../images/Basemap/GoogleStreet.jpg'
+import OpenStreetMap from '../../images/Basemap/OpenStreetMap.jpg'
+import EsriWorldImagery from '../../images/Basemap/EsriWorldImagenery.jpg'
+import EsriToPo from '../../images/Basemap/EsriToPo.jpg'
+import OpenToPo from '../../images/Basemap/OpenToPo.jpg'
+import StadiaDark from '../../images/Basemap/StadiaDark.jpg'
+import GoogleMaps from '../../images/Basemap/GoogleMaps.jpg'
+import GoogleStreet from '../../images/Basemap/GoogleStreet.jpg'
+import ItemBasemap from "./ItemBasemap";
 
 const jenisBasemap = [
   {
@@ -46,19 +47,6 @@ const jenisBasemap = [
   },
 ];
 
-function ItemBasemap({item,setInputBasemap,inputBasemap}){
-
-  return(
-    <div className="item-basemap" onClick={()=>setInputBasemap(item.url)}>
-      <div className="judul">
-        <div className="radio" style={inputBasemap===item.url ? {backgroundColor:"#1976D2"} : {}}></div>
-        <p>{item.nama}</p>
-      </div>
-      <img src={item.gambar} alt=""/>
-      
-    </div>
-  )
-}
 
 function Basemap({setInputBasemap ,inputBasemap ,open}) {
   return <div className="basemap-container" style={ open === "Basemap" ? {marginLeft:"50px"} :  {marginLeft:"-200px"}}>
