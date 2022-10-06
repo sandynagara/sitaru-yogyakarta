@@ -20,14 +20,14 @@ function LandingPage() {
         }}>
           <div style={{
             backgroundColor:"white",
-            padding:"25px",
+            padding:"15px",
             borderRadius:"12px",
             display:"flex"
           }}>
             <div>
-              <img src={logoYogya} style={{width:"90px",height:"120px"}}/>
+              <img src={logoYogya} style={{width:"75px",height:"100px"}}/>
             </div>
-            <div style={{marginLeft:"20px",fontSize:"20px",display:"flex",flexDirection:"column",justifyContent:"space-evenly"}}>
+            <div style={{marginLeft:"20px",fontSize:"14px",display:"flex",flexDirection:"column",justifyContent:"space-evenly"}}>
               <div style={{fontWeight:"700"}}>
                 DINAS PERTANAHAN DAN TATA RUANG
               </div>
@@ -54,13 +54,13 @@ function LandingPage() {
               
             }}
           >
-            <Link to="/sitaru">
-              <ItemMenu icon={ <FaRegMap color='white' size={35}/>} judul="Sitaru" color="rgb(66, 129, 245)"/>
+            <Link to="/dashboard">
+              <ItemMenu icon={ <FaRegMap color='white' size={25}/>} judul="Sitaru" color="rgb(66, 129, 245)"/>
             </Link>
-            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Siperta"/>
-            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Sipancang"/>
-            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Silapor"/>
-            <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Satu Data"/>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Siperta"/>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Sipancang"/>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Silapor"/>
+            <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Satu Data"/>
           </div>
           <div
             style={{
@@ -73,11 +73,11 @@ function LandingPage() {
             }}
           >
 
-          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Joint Studio"/>
-          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Regulasi"/>
-          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Layanan"/>
-          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="IKM dan Aduan"/>
-          <ItemMenu icon={ <AiOutlineQuestion color='white' size={35}/>} judul="Panduan"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Joint Studio"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Regulasi"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Layanan"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="IKM dan Aduan"/>
+          <ItemMenu icon={ <AiOutlineQuestion color='white' size={25}/>} judul="Panduan"/>
           </div>
           
         

@@ -16,20 +16,20 @@ function ItemMenu({icon,judul,color="rgb(207,216,220)"}) {
     }}>
       <div style={{
         backgroundColor:color,
-        padding:"25px",
+        padding:"15px",
         borderRadius:9999,
         display:"flex",
         alignItems:"center",
-        margin:"10px",
+        margin:"1px",
         justifyContent:"center"
       }}>
         {icon}
       </div>
       
       <div style={{
-        marginTop:"12px",
+        marginTop:"20px",
         fontWeight:500,
-        fontSize:"16px",
+        fontSize:"12px",
         color:"black"
       }}>
         {judul}

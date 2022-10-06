@@ -24,8 +24,7 @@ function Icon({ icon ,judul ,open, setOpen}) {
           })
           .then(res=>res.json())
           .then(res=>{
-            if(res != "unauthorized"){
-              console.log(res,"res")
+            if(res !== "unauthorized"){
               setOpen("Profile")
             }else{
               setOpen("Login")

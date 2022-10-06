@@ -15,13 +15,12 @@ function Pelaporan({setOpen,data}) {
         const url = configData.SERVER_API + "laporan"
         const jenisLaporanInput = jenisLaporan.current.value
         const keteranganInput = keterangan.current.value
-        const kelurahan = data["WADMKD"]
-        const kecamatan = data["WADMKC"]
-        const zona = data["NAMOBJ"]
-        const kawasan = data["CAGBUD"]
-        const swp = data["KODSWP"]
+        const kelurahan = data["wadmkd"]
+        const kecamatan = data["wadmkc"]
+        const zona = data["namobj"]
+        const kawasan = data["cagbud"]
+        const swp = data["kodswp"]
         const geometry = data["geometry"]
-        console.log(jenisLaporanInput)
         fetch(url,{
             method: 'POST',
             credentials: 'include',
@@ -41,7 +40,6 @@ function Pelaporan({setOpen,data}) {
           })
           .then((respond) => respond.json())
           .then((hasil) =>{
-            console.log(hasil)
             if(hasil.RTN){
                 Swal.fire({
                     icon: 'success',

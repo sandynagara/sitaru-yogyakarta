@@ -1,20 +1,18 @@
-.layer{
+.layer3{
     position: absolute;
-    padding-right: 10px;
-    width: 250px;
     height: 100vh;
     background-color: white;
     z-index: 10001;
+    width: 280px;
     transition: 500ms;
 }
 
 .layer-item{
     background-color: rgb(226, 226, 226);
-    margin-right: 15px;
     padding: 0.5rem;
-    width: 100%;
     display: flex;
     border-radius: 10px;
     margin-bottom: 1rem;
     flex-direction: column;
+    overflow-x: none;
 }

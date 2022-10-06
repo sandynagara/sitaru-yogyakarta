@@ -43,7 +43,6 @@ function LoginForm({setLogin,setOpen}){
                 }
             }).catch((err)=>console.log(err))
         }
-        console.log(password)
     }
 
     return (

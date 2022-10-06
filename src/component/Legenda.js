@@ -100,6 +100,7 @@ const daftarLegenda = [
 function Legenda({open}) {
   return (
     <div className='layer' style={ open === "Legenda" ? {marginLeft:"50px"} :  {marginLeft:"-250px"}}>
+        <div style={{fontWeight:"700",marginBottom:"10px"}}>Legenda</div>
         {daftarLegenda.map((item,index)=>{
             return <div style={{display:"flex",alignItems:"center",marginBottom:"10px"}} key={index}>
                 <div style={{background:`${item.color}`,width:"15px",height:"15px",marginRight:"10px"}}></div>

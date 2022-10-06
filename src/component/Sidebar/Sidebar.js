@@ -5,7 +5,6 @@ import * as Ai from "react-icons/ai";
 import {FaRegMap} from "react-icons/fa"
 import * as Bs from "react-icons/bs";
 import { BiTestTube } from "react-icons/bi";
-import {MdReportGmailerrorred} from "react-icons/md"
 import {Link} from "react-router-dom"
 
 function Sidebar({open,setOpen}) {
@@ -50,13 +49,15 @@ function Sidebar({open,setOpen}) {
           open={open}
           setOpen={setOpen}
           />  
-    
+          
+          {/*    
           <Icon
             icon={<MdReportGmailerrorred style={{ width: "20px", height: "20px" }} /> }
             judul="Lapor"
             open={open}
             setOpen={setOpen}
-          /> 
+          />  
+          */}
     
             <div style={{position: "absolute",bottom:"0"}}>
               <Icon
@@ -65,12 +66,12 @@ function Sidebar({open,setOpen}) {
                 open={open}
                 setOpen={setOpen}
               />
-              <Icon
+              {/* <Icon
                 icon={<Ai.AiOutlineUser style={{ width: "20px", height: "20px" }} /> }
                 judul="Login"
                 open={open}
                 setOpen={setOpen}
-              />
+              /> */}
             </div>
         </div>
       );

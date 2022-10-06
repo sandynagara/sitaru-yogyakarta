@@ -5,9 +5,13 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
     const [intensitas, setIntensitasData] = useState()
     const [hasilIntensitas, setHasilIntensitas] = useState(false)
     const luasBidang = useRef()
+    const buttonIntensitas = useRef()
   
     useEffect(() => {
       setIntensitasData(hasilQuery.simulasi.intensitasBangunan[0])
+      buttonIntensitas.current.disabled=true
+      buttonIntensitas.current.style.backgroundColor = "rgb(180, 210, 248)"
+      buttonIntensitas.current.style.cursor = "auto"
     }, [])
     
     const cekLuasBidangTanah = (luas) => {
@@ -47,6 +51,15 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
       var intensitasLuas = cekLuasBidangTanah(luasBidangTanah)
       intensitasLuas.luas = luasBidangTanah
       setHasilIntensitas(intensitasLuas)
+      if(luasBidangTanah !== ""){
+            buttonIntensitas.current.disabled=false
+            buttonIntensitas.current.style.backgroundColor = "#1983ec"
+            buttonIntensitas.current.style.cursor = "pointer"
+        }else{
+            buttonIntensitas.current.disabled=true
+            buttonIntensitas.current.style.backgroundColor = "rgb(180, 210, 248)"
+            buttonIntensitas.current.style.cursor = "auto"
+        }
     }
   
     const simulasiClick =(e)=>{
@@ -56,7 +69,6 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
       }catch(err){
         var HasilSimulasi = {simulasi:hasilQuery.simulasi.zonasi[0],ketentuan:"",dataZonasi:hasilQuery.dataZonasi,intensitas:hasilIntensitas}
       }
-  
       setHasil(HasilSimulasi)
     }
   
@@ -68,7 +80,7 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
             <input className='input-simulasi'  type="number" ref={luasBidang} onChange={gantiLuasBidangTanah}/>
         </div>
   
-        <button className='simulasi' onClick={simulasiClick}>
+        <button className='simulasi' onClick={simulasiClick} ref={buttonIntensitas}>
               Cek Perizinan
         </button>
         <button className='simulasi batal' onClick={()=>setIntensitas(false)}>

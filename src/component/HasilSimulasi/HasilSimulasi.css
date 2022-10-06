@@ -1,7 +1,7 @@
 .pop-up{    
     top:0;
     left: 0;
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,7 +13,8 @@
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.6);
-    position: absolute;
+    position: fixed;
+   
 }
 
 .hasil-simulasi{
@@ -69,13 +70,15 @@
 
 .hasil-simulasi-ketentuan{
     margin-top: 10px;
-    display: grid;
-    grid-template-columns: auto auto auto;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
 }
 
 
 .hasil-simulasi-ketentuan .syarat{
     text-align: center;
+    width: 100%;
     color: #77aee6;
     padding: 10px;
     cursor: pointer;

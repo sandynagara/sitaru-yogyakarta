@@ -29,7 +29,6 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
   var panggil = (cb, url) => {
     fetch(url,{
         method: 'GET',
-        credentials: 'include'
       })
       .then((respond) => respond.json())
       .then((json) => cb(json))
@@ -75,20 +74,19 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
     map = useMapEvents({
       click(e) { 
         var urlRDTR = getFeatureInfoUrl(
-          configData.SERVER_GEOSERVER+"geoserver/sitaru/wms?",map,e,"RDTR"
+          configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
         );
         var urlPersil = getFeatureInfoUrl(
-          configData.SERVER_GEOSERVER+"geoserver/sitaru/wms?",map,e,"Batas_Persil"
+          configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_347120220607091133"
         );
         panggil((result) => {
-            console.log(result)
-     
             panggil((resultPersil)=>{
                 var koordinat = []
                 resultPersil.features[0].geometry.coordinates[0][0].map((e)=>{
                   koordinat.push([e[1],e[0]])
                 })
                 setSelectedPersil(koordinat)
+                console.log(resultPersil)
                 result.features[0].properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
                 setData(result.features[0].properties)
             },urlPersil)
@@ -102,7 +100,6 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
   var CustomWMSLayer =  (props) => {
     var map = useMap();
       if(first){
-        console.log(first)
         const { url, options, layers } = props;
         const source = WMS.source(url, options);
         var layer= source.getLayer(layers)
@@ -120,9 +117,9 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
   useEffect(() => {
     if(map){
       map.target.eachLayer(function(layer) {
-        if(layer._name==="sitaru:Batas_Persil"){
+        if(layer._name==="Dispertaru:persil_347120220607091133"){
           layer.setOpacity(opacityPersil*0.01)
-        }else if(layer._name==="sitaru:RDTR"){
+        }else if(layer._name==="Dispertaru:rdtr_ar_347120220607112209"){
           layer.setOpacity(opacityRdtr*0.01)
         }
       });
@@ -141,8 +138,8 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
 
         {change ? <TileLayerHandler /> : <TileLayer ref={tileRef} url={basemap} style={{opacity:"0.5"}} maxZoom={22} />}
         <CustomWMSLayer
-          url={configData.SERVER_GEOSERVER+"geoserver/sitaru/wms"}
-          layers={"sitaru:Batas_Persil"}
+          url={configData.SERVER_GEOSERVER+"geoserver/wms"}
+          layers={"Dispertaru:persil_347120220607091133"}
           options={{
             format: "image/png",
             transparent: "true",
@@ -154,8 +151,8 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
           }}
         />
         <CustomWMSLayer
-          url={configData.SERVER_GEOSERVER+"geoserver/sitaru/wms"}
-          layers={"sitaru:RDTR"}
+          url={configData.SERVER_GEOSERVER+"geoserver/wms"}
+          layers={"Dispertaru:rdtr_ar_347120220607112209"}
           options={{
             format: "image/png",
             transparent: "true",

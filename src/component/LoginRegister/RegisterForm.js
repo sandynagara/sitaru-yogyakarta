@@ -19,7 +19,7 @@ function RegisterForm({setLogin,setOpen}){
     const buttonRegister = useRef()
 
     const checkChange = (e) => {
-        if(e.target.name == "Username"){
+        if(e.target.name === "Username"){
             var url = configData.SERVER_API + "user/check/" + e.target.value
             fetch(url)
             .then(res => res.json())
@@ -30,7 +30,7 @@ function RegisterForm({setLogin,setOpen}){
         const namaLengkap = namaLengkapInput.current.value
         const alamat = alamatInput.current.value
         const hp = hpInput.current.value
-        if(checkPassword() && username != "" && password != "" && namaLengkap != "" && alamat != "" && confirmPasswordInput != ""){
+        if(checkPassword() && username !== "" && password !== "" && namaLengkap !== "" && alamat !== "" && confirmPasswordInput !== ""){
             buttonRegister.current.disabled=false
             buttonRegister.current.style.backgroundColor = "#1983ec"
             buttonRegister.current.style.cursor = "pointer"
@@ -53,7 +53,6 @@ function RegisterForm({setLogin,setOpen}){
 
     const submitHandler = (e) => {
         e.preventDefault()
-        console.log(usernameInput)
         const username = e.target["Username"].value
         const password = e.target["Password"].value
         const namaLengkap = e.target["Nama Lengkap"].value

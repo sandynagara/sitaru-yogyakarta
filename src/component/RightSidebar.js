@@ -29,9 +29,10 @@ function RightSidebar({data,setOpen}) {
             <p style={{fontWeight:"500",fontSize:"medium",marginBottom:"1rem"}}>Sistem Informasi Tata Ruang (SITARU)<br/>Kota Yogyakarta</p>
             <div style={{background:"black",width:"90%",height:"2px",marginBottom:"1rem"}}/>
             <p style={{fontWeight:"500",fontSize:"small",marginBottom:"1rem"}}>Dinas Pertanahan dan Tata Ruang <br/> Kota Yogyakarta</p>
-            <p>l. Kenari No.56, Muja Muju, Umbulharjo, Kota Yogyakarta,
+            <p>Jln. Kenari No.56, Muja Muju, Umbulharjo, Kota Yogyakarta,
             Daerah Istimewa Yogyakarta 55165</p>
             <p>Telp. 0274515865, 0274515866</p>
+            <p>No. WA Layanan Online : 0895-2589-8500 </p>
             <p>Email : pertanahantataruang@jogjakota.go.id</p>
             
           </div>

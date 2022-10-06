@@ -2,7 +2,7 @@ import React from 'react'
 import { Document, Page, StyleSheet, Text ,View} from '@react-pdf/renderer';
 
 
-const PDF = ({hasil,user}) =>{
+const PDFLama = ({hasil,user}) =>{
 
 
     const styles = StyleSheet.create({
@@ -49,26 +49,17 @@ const PDF = ({hasil,user}) =>{
     return ( <Document>
         <Page size="A4" style={{paddingTop:35,paddingBottom:65,paddingHorizontal:45}} wrap={false}>
             <Text style={styles.titleFirst}>
-                <b>ADVICE PLANNING (SURAT KETERANGAN RENCANA KOTA)</b>
-            </Text>
-            <Text style={styles.titleSecond}>
-              Untuk Persyaratan permohonan IMB
-            </Text>
-            <Text style={styles.titleSecond}>
-              Nomor:001/AP/SKRK/DPTR/I/2019
+                <b>INFORMASI KETENTUAN TATA RUANG</b>
             </Text>
             <Text style={styles.text}>
                Dasar Hukum
             </Text>
-            <div style={{marginLeft:"20"}}>
+            <div style={{marginLeft:"20",border:"solid 2px black"}}>
                 <Text style={styles.text}>
-                    1.Peraturan Daerah Nomor 2 Tahun 2010 tentang Rencana Tata Ruang wilayah Kota Yogyakarta
+                    1.Peraturan Daerah Nomor 2 Tahun 2021 tentang Rencana Tata Ruang Wilayah Kota Yogyakarta Tahun 2021-2041
                 </Text>
                 <Text style={styles.text}>
-                    2.Peraturan Daerah Nomor 2 Tahun 2012 tentang Bangunan Gedung
-                </Text>
-                <Text style={styles.text}>
-                    3.Peraturan Daerah Nomor 1 Tahun 2015 tentang Rencana Detail Ruang Kota dan Peraturan Zonasi Kota
+                    2.Peraturan Walikota Nomor 118 Tahun 2021 tentang Rencana Detail Tata Ruang Kota Yogyakarta Tahun 2021-2041
                 </Text>
             </div>
            
@@ -308,4 +299,4 @@ const PDF = ({hasil,user}) =>{
 
 }
 
-export default PDF
+export default PDFLama

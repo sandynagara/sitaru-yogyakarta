@@ -4,7 +4,6 @@ import './Layer.css'
 function Layer({open,setOpacityBasemap,setOpacityPersil,setOpacityRdtr}) {
     return (
         <div className='layer' style={ open === "Layer" ? {marginLeft:"50px"} :  {marginLeft:"-250px"}}>
-            
             <div className='layer-item'>
                 <p style={{marginBottom:"10px"}}>Basemap</p>
                 <input type="range" onChange={(e)=>setOpacityBasemap(e.target.value)}/>

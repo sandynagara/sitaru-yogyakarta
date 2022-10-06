@@ -24,7 +24,6 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
   
     useEffect(() => {
       var url = configData.SERVER_API+"Jeniskegiatan"
-      console.log(url)
       panggil(hasil=>{
         kegiatan.current.value=hasil.kegiatan[0]["sub kegiatan"]
         setKeteranganKegiatan(hasil.kegiatan[0])
@@ -49,15 +48,17 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
   
     const simulasiClick = (e) => {
       e.preventDefault()
-      const zona = data.NAMOBJ
+      const zona = data.namobj
       const subZona=data.nilai_kolo.split("_")[1]
-      const swp = data.KODSWP
-      const kawasan = data.CAGBUD
+      const swp = data.kodswp
+      const kawasan = data.cagbud
+      const remark = data.remark
       var dataZonasi = {
         swp:swp,
         zona:zona,
         subZona:subZona,
-        kawasan:kawasan
+        kawasan:kawasan,
+        remark:remark
       }
       var url = configData.SERVER_API+"izin/"
       fetch(url,{
@@ -70,17 +71,17 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
           swp: swp,
           subZona: subZona,
           kawasan:kawasan.toLowerCase(),
-          kegiatan:kegiatan.current.value
+          kegiatan:kegiatan.current.value,
+          remark:remark
         }),
       })
       .then((respond) => respond.json())
       .then((hasil) =>{
-        if(hasil.zonasi[0]["izin"] == "X"){
+        console.log(hasil)
+        if(hasil.zonasi[0]["izin"] === "X"){
           setHasil({simulasi:hasil.zonasi[0],dataZonasi:dataZonasi})
         }else{
-          console.log({simulasi:hasil,dataZonasi:dataZonasi})
           setIntensitas(true)
-          
           setHasilQuery({simulasi:hasil,dataZonasi:dataZonasi})
         }
       })

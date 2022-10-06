@@ -6,11 +6,11 @@ import Layer from "../component/Layer";
 import Pelaporan from "../component/Pelaporan";
 import Profile from "../component/Profile";
 import configData from "../component/config.json"
-import Panduan from "../component/Panduan";
 import Legenda from "../component/Legenda";
 import LoginRegisterForm from "../component/LoginRegister/LoginRegisterForm";
 import Sidebar from "../component/Sidebar/Sidebar";
-import Simulasi from "../component/Simulasi/Simulasi";
+import Simulasi from "../component/Simulasi/SimulasiHp";
+import Panduan from "../component/Panduan/Panduan";
 
 function Dashboard() {
 
@@ -23,8 +23,6 @@ function Dashboard() {
     const [data, setData] = useState(false)
     const [user, setUser] = useState(false)
 
-    window.addEventListener('resize', handleScroll, { passive: true });
-
     const handleScroll = () => {
       const position = document.documentElement.clientWidth;
       if(position<400){
@@ -34,6 +32,10 @@ function Dashboard() {
       }
     };
 
+    window.addEventListener('resize', handleScroll, { passive: true });
+
+    
+
     useEffect(() => {
       const url = configData.SERVER_API + "user"
       fetch(url,{
@@ -42,7 +44,6 @@ function Dashboard() {
       })
       .then(res=>res.json())
       .then(res=>{
-        console.log(res)
         setUser(res)
       }).catch(err=>console.log(err))
     }, [])

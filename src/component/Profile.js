@@ -1,7 +1,6 @@
 import React, { useState,useEffect,useRef } from 'react'
 import "./Profile.css"
-import {AiOutlineUser,AiTwotoneDelete} from "react-icons/ai"
-import * as Md from "react-icons/md";
+import {AiTwotoneDelete} from "react-icons/ai"
 import * as WMS from "leaflet.wms";
 import configData from "./config.json"
 import { MapContainer, TileLayer,useMap,GeoJSON} from "react-leaflet";
@@ -46,7 +45,6 @@ function Pelaporan(){
     .then(res=>res.json())
     .then(res=>{
       if(res != "unauthorized"){
-        console.log(res.data) 
         res.data.features.map((feature,index)=>{
           var date = new Date(feature.properties.tanggal);
           res.data.features[index].properties.date = date.toISOString().substring(0, 10)
@@ -80,8 +78,8 @@ function Pelaporan(){
             laporanPersilSelected.push(feature)
           }
         })
-        console.log(laporanPersilSelected,laporanPersilSelected.length)
-        if(laporanPersilSelected.length == 1){
+
+        if(laporanPersilSelected.length === 1){
           const url = configData.SERVER_API + "user/pelapor/" + feature.properties.pelapor
           fetch(url,{
             method:"GET",
@@ -108,7 +106,6 @@ function Pelaporan(){
         })
         .then(res=>res.json())
         .then(res=>{
-          console.log(res)
           feature.properties.namaPelapor=res.namaLengkap  
           setSelectedPersil([feature])
         })
@@ -126,7 +123,6 @@ function Pelaporan(){
   }
 
   const hapusLaporan = (feature) => {
-    console.log(feature)
     Swal.fire({
       title: 'Apa anda yakin ingin menghapusnya?',
       showDenyButton: true,
@@ -149,7 +145,6 @@ function Pelaporan(){
         })
         .then(res=>res.json())
         .then(res=>{
-          console.log(res)
           if(res.RTN){
             Swal.fire('Laporan berhasil dihapus', '', 'success')
           }else{
@@ -189,7 +184,7 @@ function Pelaporan(){
     </MapContainer>
     <div className='keterangan-laporan'>
     
-            {selectedPersil ? selectedPersil.length == 1 ? <div className='isi-laporan'>
+            {selectedPersil ? selectedPersil.length === 1 ? <div className='isi-laporan'>
               <div className='item' style={{margin:"0px 0px"}}>
                   <p><b>Pelapor</b></p>
                   <p>{selectedPersil[0].properties.namaPelapor }</p>
@@ -237,7 +232,6 @@ function DataProfile({setOpen}){
     then(res=>res.json()).
     then(res=>{
       setDataUser(res)
-      console.log(res)
     }).
     catch(err=>console.log(err))
   }, [])
@@ -310,10 +304,10 @@ function Profile({setOpen, user}) {
       
         <div className='fitur'>
           <div className='daftar-fitur'>
-            <div className='fitur-choice' onClick={()=>setFiturSelected("Data Profile")} style={fiturSelected == "Data Profile" ? {color:"#0075eb",borderColor:"#0075eb"}: {color:"#383838",borderColor:"#383838"}}>
+            <div className='fitur-choice' onClick={()=>setFiturSelected("Data Profile")} style={fiturSelected === "Data Profile" ? {color:"#0075eb",borderColor:"#0075eb"}: {color:"#383838",borderColor:"#383838"}}>
               <p>Data Profile</p>
             </div>
-            <div className='fitur-choice' onClick={()=>setFiturSelected("Pelaporan")} style={fiturSelected =="Pelaporan" ? {color:"#0075eb",borderColor:"#0075eb"}: {color:"#383838",borderColor:"#383838"}}>
+            <div className='fitur-choice' onClick={()=>setFiturSelected("Pelaporan")} style={fiturSelected === "Pelaporan" ? {color:"#0075eb",borderColor:"#0075eb"}: {color:"#383838",borderColor:"#383838"}}>
               <p>Pelaporan</p>
             </div>
           </div>
