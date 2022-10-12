@@ -4,16 +4,8 @@ import icon from '../../images/Menu/icon_sitaru.svg'
 
 function ItemMenu({icon,judul,color="rgb(207,216,220)"}) {
   return (
-    <div style={{
-      backgroundColor:"white",
-      padding:"1.5rem 2rem",
-      borderRadius:"15px",
-      display:"flex",
-      alignItems:"center",
-      flexDirection:"column",
-      cursor:"pointer",
-      margin:"10px"
-    }}>
+    <div className='bg-white p-10'
+    >
       <div style={{
         backgroundColor:color,
         padding:"15px",

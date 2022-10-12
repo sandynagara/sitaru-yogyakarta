@@ -135,7 +135,6 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
         zoomControl={false}
         whenReady={(e)=>setMap(e)}
       >
-
         {change ? <TileLayerHandler /> : <TileLayer ref={tileRef} url={basemap} style={{opacity:"0.5"}} maxZoom={22} />}
         <CustomWMSLayer
           url={configData.SERVER_GEOSERVER+"geoserver/wms"}
