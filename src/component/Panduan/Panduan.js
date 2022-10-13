@@ -23,7 +23,7 @@ function Panduan({setOpen}) {
           <div style={{
             backgroundColor:"#0075eb",
             width:"100%",
-            height:"30px",
+   
             display:"flex",
             alignItems:"center",
             padding:"15px 0px"
@@ -36,10 +36,10 @@ function Panduan({setOpen}) {
               fontSize:"18px",
               display:"flex",
               width:"100%",
-              justifyContent:"space-between"
+              justifyContent:"space-between",
             }}>
               Panduan
-              <AiOutlineClose onClick={()=>{setOpen(false)}} style={{cursor:"pointer", width:"20px",height:"20px",backgroundColor:"rgba(255,255,255,0.3)",padding:"4px",borderRadius:"100%"}}/>
+              <AiOutlineClose onClick={()=>{setOpen(false)}} style={{cursor:"pointer", width:"25px",height:"25px",backgroundColor:"rgba(255,255,255,0.3)",padding:"4px",borderRadius:"100%"}}/>
             </div>
           </div>
           <div style={{

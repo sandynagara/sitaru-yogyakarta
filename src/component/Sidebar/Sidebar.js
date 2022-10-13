@@ -10,7 +10,7 @@ import {Link} from "react-router-dom"
 function Sidebar({open,setOpen}) {
   
     return (
-        <div className="navbar-peta">
+        <div className="navbar-peta h-screen">
     
           <Link to="/">
             <Icon

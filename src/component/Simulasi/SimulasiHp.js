@@ -15,7 +15,7 @@ function Simulasi({open,data}) {
     }, [data])
   
     return (
-        <div className='simulasi simulasiHp' style={ open === "Simulasi" ? {marginLeft:"50px"} :  {marginLeft:"-250px"}}>
+        <div className='simulasi simulasiHp h-screen' style={ open === "Simulasi" ? {marginLeft:"50px"} :  {marginLeft:"-250px"}}>
           
           {data ? <div>
             {!intensitas ? <PilihJenisKegiatan data={data} setIntensitas={setIntensitas} setHasilQuery={setHasilQuery} setHasil={setHasil}/>

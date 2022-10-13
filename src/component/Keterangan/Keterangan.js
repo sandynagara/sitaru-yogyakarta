@@ -4,8 +4,6 @@ import ListKeterangan from "./ListKeterangan";
 
 function Keterangan({data}) {
 
-  console.log(data,"data")
-
   return (
     <div id="keterangan"> 
       <div className="list">

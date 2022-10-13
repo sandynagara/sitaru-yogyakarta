@@ -38,7 +38,7 @@ function RightSidebar({data,setOpen}) {
           </div>
         </div>}
         
-        {data && <div className="pelaporan">
+        {data && <div className="bg-sky-600 hover:bg-sky-700 text-sm mx-2 mt-[-10px] text-center py-2 rounded-md text-white cursor-pointer">
           <button onClick={()=>setOpen("Simulasi")}>
             Simulasi
           </button>

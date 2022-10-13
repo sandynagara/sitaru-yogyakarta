@@ -42,11 +42,11 @@ export default function HasilSimulasi({close,hasil = false }) {
   }, [])
   
   return (
-    <div className='pop-up'>
+    <div className='pop-up'> 
         <div className='hasil-simulasi'>
           <div className="hasil-simulasi-header">
               <b>Hasil Simulasi</b>
-              <AiOutlineClose onClick={()=>{close(false)}} style={{cursor:"pointer", width:"20px",height:"20px",backgroundColor:"rgba(255,255,255,0.3)",padding:"4px",borderRadius:"100%"}}/>
+              <AiOutlineClose onClick={()=>{close(false)}} style={{cursor:"pointer", width:"25px",height:"25px",backgroundColor:"rgba(255,255,255,0.3)",padding:"4px",borderRadius:"100%"}}/>
           </div>
           {hasil && <div className='hasil-simulasi-izin' style={hasil.simulasi.izin != "Tidak diizinkan" ? {height:"500px"} : {}}>
               <p>Pembangunan untuk kegiatan dan pada zona berikut :</p>
@@ -83,7 +83,7 @@ export default function HasilSimulasi({close,hasil = false }) {
             {hasil.simulasi.izin !== "Tidak diizinkan" && user &&
               <div style={{backgroundColor:"white",padding:"0px 20px 15px 20px"}}>
                 <PDFDownloadLink document={<PDFBaru hasil={hasil} user={user}/>} fileName="INFORMASI KETENTUAN TATA RUANG">
-                  <button className='cetak-simulasi'>
+                  <button className='bg-sky-600 hover:bg-sky-700 mt-3 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-md text-white cursor-pointer'>
                     Cetak
                   </button>
                 </PDFDownloadLink>

@@ -91,11 +91,11 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
     }
     
     return(
-      <div>
+      <div className='text-md'>
       <form>
       <p>Pilih <b>Jenis Kegiatan</b></p>
-      <div style={{marginTop:"10px",marginBottom:"10px"}}>
-      <input className='input-simulasi' placeholder='Jenis Kegiatan' ref={jenisKegiatan} onChange={changeListJenisKegiatan}/>
+      <div style={{marginTop:"10px",marginBottom:"10px"}} className="text-md">
+      <input className='px-2 py-2 text-sm w-full rounded-md focus:bg-gray-700 focus:text-white border-2 border-gray-700' placeholder='Jenis Kegiatan' ref={jenisKegiatan} onChange={changeListJenisKegiatan}/>
       <div className='list-choice'>
       {listJenisKegiatan && 
         listJenisKegiatan.map((e)=>{
@@ -117,7 +117,7 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
   <p>Pilih <b>Kegiatan</b></p>
   <div style={{marginTop:"10px",marginBottom:"10px"}}>
       <div style={{display:'flex',alignItems:"center"}}>
-        <input className='input-simulasi' ref={kegiatan} onChange={kegiatanChange}/>
+        <input className='px-2 py-2 w-full text-sm rounded-md focus:bg-gray-700 focus:text-white border-[2px] border-gray-700' ref={kegiatan} onChange={kegiatanChange}/>
       </div>
       <div className='list-choice'>
           {listKegiatan && 
@@ -134,11 +134,12 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
         </div>
   </div>
   
-  <button className='simulasi' onClick={simulasiClick}>
+  <div className='bg-sky-600 hover:bg-sky-700 mt-3 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' onClick={simulasiClick}>
     Simulasi
-  </button>
-      </form>
-  {keteranganKegiatan && <div className='keterangan-intensitas'>
+  </div>
+  </form>
+
+  {keteranganKegiatan && <div className='mt-2 bg-sky-300 p-3 rounded-md'>
     <div style={{fontSize:"15px" ,marginBottom:"5px"}}>
       <b>{keteranganKegiatan["sub kegiatan"]}</b>
     </div>

@@ -73,20 +73,20 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
     }
   
     return (
-      <div style={{marginTop:"10px",marginBottom:"10px"}} className="hitung-intensitas">
+      <div style={{marginTop:"5px",marginBottom:"10px"}} className="">
        
         <p>Masukkan <b>Luas Bidang (m<sup>2</sup>)</b> </p>
-        <div className="izin-hitung" >
-            <input className='input-simulasi'  type="number" ref={luasBidang} onChange={gantiLuasBidangTanah}/>
+        <div className="w-full" >
+            <input className='px-2 py-2 mt-2 w-full rounded-md focus:bg-gray-700 focus:text-white border-2 border-gray-700'  type="number" ref={luasBidang} onChange={gantiLuasBidangTanah}/>
         </div>
   
-        <button className='simulasi' onClick={simulasiClick} ref={buttonIntensitas}>
+        <div className='bg-sky-600 hover:bg-sky-700 mt-3 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' onClick={simulasiClick} ref={buttonIntensitas}>
               Cek Perizinan
-        </button>
-        <button className='simulasi batal' onClick={()=>setIntensitas(false)}>
+        </div>
+        <div className='bg-red-600 hover:bg-red-700 mt-2 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' onClick={()=>setIntensitas(false)}>
               Batal
-        </button>
-        {hasilIntensitas && <div className='keterangan-intensitas'>
+        </div>
+        {hasilIntensitas && <div className='mt-2 bg-sky-300 p-3 rounded-md'>
           <div >
             <b>Informasi Intensitas :</b>
           </div>
