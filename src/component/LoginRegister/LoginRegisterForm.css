@@ -51,8 +51,7 @@
     border-width: 0px;
     background-color: #1983ec;
     color: white;
-    font-weight: bold;
-    padding: 15px;
+    padding: 10px;
 }
 
 .login-container button:hover{
@@ -77,12 +76,7 @@ a:-webkit-any-link{
     text-decoration: none;
 }
 
-.logo-input{
-    color: gray;
-    position: absolute;
-    margin-top: 13px;
-    margin-left: 5px;
-}
+
 
 .register-link{
     margin-top: 7px;

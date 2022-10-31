@@ -28,6 +28,7 @@ function LoginForm({setLogin,setOpen}){
             .then(hasil=>{
                 if(hasil.RTN){
                     setOpen(false)
+                    setLogin(true)
                     Swal.fire({
                         icon: 'success',
                         title:'Anda berhasil login',
@@ -48,18 +49,18 @@ function LoginForm({setLogin,setOpen}){
     return (
         <div className="login-container">
             <div style={{width:"100%",display:"flex",padding:0,minWidth:"100%",justifyContent:"justify-between",alignItems:"center"}}>
-                <h2 style={{width:"100%"}}>Login</h2>
-                <AiOutlineClose style={{cursor:"pointer"}} size={22} color="red" onClick={()=>setOpen(true)}/>
+                <h2 style={{width:"100%"}} className="font-bold">Login</h2>
+                <AiOutlineClose style={{cursor:"pointer"}} size={22} color="red" onClick={()=>setOpen(false)}/>
             </div>
             <form onSubmit={(e)=> submitHandler(e)}>
                 <InputLoginRegister tipe="text" label="Username" logo={<AiOutlineUser/>}/>
                 <InputLoginRegister tipe="password" label="Password" logo={<AiOutlineLock/>}/>
-                <button type="submit">Login </button>
+                <button type="submit" className='p-2'>Login </button>
             </form>
-            <div className='register-link'>
+            {/* <div className='register-link'>
                 <p>Belum punya akun?</p>
                 <p className='to-register' onClick={()=>setLogin(false)}>Register</p>
-            </div>
+            </div> */}
         </div>
     )
 } 

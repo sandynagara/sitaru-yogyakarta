@@ -3,7 +3,7 @@ import {AiOutlineQuestion} from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2"
 
-function ItemMenu({icon,judul,keterangan="Belum diisi",active=false,link="/"}) {
+function ItemMenu({icon,judul,keterangan="Belum diisi",active=false,link="/",customAction=false}) {
 
   const navigate = useNavigate()
 
@@ -27,7 +27,14 @@ function ItemMenu({icon,judul,keterangan="Belum diisi",active=false,link="/"}) {
       </div>
     
         <div className='text-center cursor-pointer w-64 border-2 rounded-xl mt-[-40px] pt-[40px] pb-5 border-gray-200 p-2 hover:shadow-lg hover:shadow-gray-300'
-          onClick={()=>{movePage()}}
+          onClick={()=>{
+            if(customAction){
+              customAction()
+            }else{
+              movePage()
+            }
+          }
+          }
         >
           <div className='font-bold text-sky-700 text-lg' style={active?{}:{color:"rgb(220 38 38)"}}>
             {judul}
@@ -36,7 +43,6 @@ function ItemMenu({icon,judul,keterangan="Belum diisi",active=false,link="/"}) {
             {keterangan}
           </div>
         </div>
-      
     </div>
   )
 }
