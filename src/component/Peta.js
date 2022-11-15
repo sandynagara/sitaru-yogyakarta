@@ -86,7 +86,6 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
                   koordinat.push([e[1],e[0]])
                 })
                 setSelectedPersil(koordinat)
-                console.log(resultPersil)
                 result.features[0].properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
                 setData(result.features[0].properties)
             },urlPersil)

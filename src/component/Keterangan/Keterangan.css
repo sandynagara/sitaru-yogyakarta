@@ -11,12 +11,12 @@
 
 #keterangan .dropdown p{
     margin: 0;
-    font-size: 14px;
+    font-size: 14px; 
 }
 
 #keterangan .list{
     padding: 0px 10px 0px 10px;
-    max-height: 83vh;
+    max-height: 86vh;
     overflow: scroll;
 }
 

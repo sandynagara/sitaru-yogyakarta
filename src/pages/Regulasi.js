@@ -6,7 +6,6 @@ import configData from "../component/config.json"
 import OpenPdf from '../component/PDF/OpenPdf'
 import { useMediaQuery } from 'react-responsive'
 import LoginForm from '../component/LoginRegister/LoginForm'
-import UploadPeta from '../component/Form/UploadPeta'
 import {Link} from "react-router-dom"
 import UploadRegulasi from '../component/Form/UploadRegulasi'
 
@@ -35,8 +34,8 @@ function Regulasi() {
       })
       .then((respond) => respond.json())
       .then((hasil) =>{
-        setDaftarRegulasi(hasil)
         setDaftarRegulasiAwal(hasil)
+        setDaftarRegulasi(hasil)
       })
       .catch((err)=>{
         console.log(err,"err")
@@ -57,7 +56,7 @@ function Regulasi() {
   
 
   const downloadFile = (idFile,nama="No name") => {
-    var url = configData.SERVER_API+"peta/"+idFile
+    var url = configData.SERVER_API+"regulasi/"+idFile
     fetch(url).then(res=>res.blob()).then((res)=>{
       var data = new Blob([res], {type: 'application/pdf'});
       var csvURL = window.URL.createObjectURL(data);
@@ -95,9 +94,15 @@ function Regulasi() {
             Swal.fire(
               'Deleted!',
               res["MSG"],
-              'success'
+              'error'
             )
           }
+        }).catch(err=>{
+          Swal.fire(
+            'Deleted!',
+            err,
+            'error'
+          )
         })
       }
     })
@@ -120,13 +125,12 @@ function Regulasi() {
     setDaftarRegulasi(filtered)
   }
 
-  const ItemPeta = ({data}) => {
-    return <div className='flex w-full text-black lg:py-3 px-3 border-b-2 border-gray-300 hover:bg-gray-200 bg-white border-solid items-center justify-between lg:grid lg:grid-cols-6'
-    >
+  const ItemRegulasi = ({data}) => {
+    return <div className='flex w-full text-black lg:py-3 px-3 border-b-2 border-gray-300 hover:bg-gray-200 bg-white border-solid items-center justify-between lg:grid lg:grid-cols-6'>
     <div
       className='w-full  py-3 lg:py-0 lg:px-0 lg:col-span-3'
       onClick={()=>{
-        var url = configData.SERVER_API+"peta/"+data["namaId"]
+        var url = configData.SERVER_API+"regulasi/"+data["namaId"]
         if(!isDesktopOrLaptop){
           setPdf({url:url,nama:data["nama"]})
         }
@@ -166,36 +170,48 @@ function Regulasi() {
   </div>
   }
 
+  const logOut = () => {
+    const url = configData.SERVER_API + 'logout'
+    fetch(url,{
+      method:"GET",
+    }).then(res=>res.json()).then(res=>{
+      if(res["RTN"]){
+        setLogin(false)
+      }
+    })
+  }
+
   return (
-    <div className='h-screen bg-slate-800 lg:p-10'>
-      <div className='py-3 px-3 text-white flex items-center justify-between font-medium bg-slate-800'>
+    <div className='h-screen bg-gray-300 lg:py-5 lg:px-10'>
+      <div className='py-3 px-3 text-black flex items-center justify-between font-medium '>
         <div className='flex items-center'>
           <Link to="/">
-            <AiOutlineHome size={20} className='text-slate-800 w-8 h-8 bg-white p-1 mr-2 cursor-pointer rounded-full'/>
+            <div className='flex items-center bg-white px-3 rounded-md h-full'>
+              <AiOutlineHome size={19} className='text-black py-1 w-9 h-8  cursor-pointer rounded-full'/>
+              Home
+            </div>
+            
           </Link>
-          <BiMapAlt className='w-8 h-8 mr-1 rounded-full text-white p-1'/>
-          Regulasi
+          {/* <BiMapAlt className='w-8 h-8 mr-1 rounded-full text-black p-1'/>
+          Library Peta */}
         </div>
         <div className='flex'>
           {isDesktopOrLaptop &&
             <input 
-            className=' px-2 py-1 mx-2 rounded-md text-black' 
+            className=' px-3 py-2 mx-2 rounded-lg   text-sm' 
             placeholder='Cari Regulasi'
             onChange={(e)=>cariRegulasi(e.target.value)}
             />
           }
           {login ?
-            <div className='flex'>
+            <div className='flex text-white'>
               <div
-                className='flex text-sm items-center cursor-pointer bg-sky-600 hover:bg-sky-700 rounded-sm px-5 py-1 mr-2' 
+                className='flex text-sm items-center cursor-pointer rounded-md bg-sky-600 hover:bg-sky-700 px-5 py-1 mr-2' 
                 onClick={()=>setUploadOpen(true)}>
                   {isDesktopOrLaptop ? "Upload Data" : <AiOutlineUpload size={20}/> }
               </div>
-              <div className='flex text-sm items-center cursor-pointer bg-red-600 hover:bg-red-700 rounded-sm px-5 py-1' 
-              onClick={()=>{
-                document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                setLogin(false)
-              }}>
+              <div className='flex text-sm items-center cursor-pointer bg-red-600 hover:bg-red-700 rounded-md px-5 py-1' 
+              onClick={logOut}>
                 {isDesktopOrLaptop ? "Logout" : <AiOutlineLogout size={20}/> }
               </div>
             </div>
@@ -205,7 +221,7 @@ function Regulasi() {
                 Login
                 <AiOutlineLogin className='w-8 h-8 mr-1 rounded-full text-white p-1'/>
               </div> */}
-              <div className='flex  text-sm items-center cursor-pointer bg-sky-600 hover:bg-sky-700 rounded-sm px-5 py-1 mr-2' onClick={()=>setOpen(true)}>
+              <div className='flex h-full text-sm items-center cursor-pointer rounded-md bg-sky-600 hover:bg-sky-700 px-5 py-1 mr-2 text-white' onClick={()=>setOpen(true)}>
                 Login
               </div>
             </div>
@@ -218,14 +234,17 @@ function Regulasi() {
         <div className='w-full flex flex-col'>
           <input 
           className=' p-2 mb-2 mx-2 rounded-md' 
-          placeholder='Cari Peta'
+          placeholder='Cari Regulasi'
           onChange={(e)=>cariRegulasi(e.target.value)}
           />
         </div>
       }
-      <div className=' rounded-lg bg-slate-500 text-white mx-2'>
-        {isDesktopOrLaptop ? 
-          <div className='py-3 px-3  lg:grid lg:grid-cols-6 font-semibold'>
+      <div className=' rounded-lg bg-white text-black mx-2'>
+        <div className='py-3 px-3 font-semibold text-xl border-b-2 border-solid border-black lg:border-b-0'>
+          Daftar Regulasi
+        </div>
+        {isDesktopOrLaptop &&
+          <div className='py-2 px-3  lg:grid lg:grid-cols-6 font-medium border-b-2 border-solid border-black'>
           <div className='col-span-3'>
             Nama Regulasi
           </div>
@@ -238,14 +257,11 @@ function Regulasi() {
           <div>
             Action
           </div>
-        </div> :
-            <div className='py-3 px-3 '>
-            File
-          </div> 
+        </div>
         }
-        <div className='bg-white max-h-[calc(100vh_-_180px)]  overflow-y-scroll'>
+        <div className='bg-white max-h-[calc(100vh_-_180px)] lg:max-h-[calc(100vh_-_200px)]  overflow-y-scroll scroll'>
           {daftarRegulasi && daftarRegulasi.map((data,index)=>{
-            return <ItemPeta data={data} key={index}/>
+            return <ItemRegulasi data={data} key={index}/>
           })}
         </div>
       </div>

@@ -77,7 +77,6 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
       })
       .then((respond) => respond.json())
       .then((hasil) =>{
-        console.log(hasil)
         if(hasil.zonasi[0]["izin"] === "X"){
           setHasil({simulasi:hasil.zonasi[0],dataZonasi:dataZonasi})
         }else{

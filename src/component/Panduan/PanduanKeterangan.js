@@ -9,7 +9,7 @@ function PanduanKeterangan() {
             maxHeight:"600px",
             overflowY:"scroll"
             }}
-        >Sistem Informasi Tata Ruang (SITARU) merupakan sistem informasi yang menyajikan informasi tata ruang di Kota Yogyakarta berdasarkan ketentuan yang telah diatur pada Perda Kota Yogyakarta Nomor 2 Tahun 2021 tentang Rencana Tata Ruang Wilayah (RTRW) Kota Yogyakarta Tahun 2021-2041 dan Peraturan Walikota Yogyakarta Nomor 118 Tahun 2021 tentang Rencana Detail Tata Ruang (RDTR) Kota Yogyakarta Tahun 2021-2041
+        >Gatra Matra Jogja merupakan sistem informasi yang menyajikan informasi tata ruang di Kota Yogyakarta berdasarkan ketentuan yang telah diatur pada Perda Kota Yogyakarta Nomor 2 Tahun 2021 tentang Rencana Tata Ruang Wilayah (RTRW) Kota Yogyakarta Tahun 2021-2041 dan Peraturan Walikota Yogyakarta Nomor 118 Tahun 2021 tentang Rencana Detail Tata Ruang (RDTR) Kota Yogyakarta Tahun 2021-2041
         </div>
       )
 }

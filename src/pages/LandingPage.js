@@ -9,6 +9,7 @@ import { Link as LinkTo } from 'react-router-dom'
 import { Link, animateScroll as scroll } from "react-scroll";
 import Footer from '../component/Footer'
 import Layanan from '../component/Layanan'
+import logoGatraMatra from "../images/logo_gatra.png"
 
 function LandingPage() {
 
@@ -22,12 +23,13 @@ function LandingPage() {
         className='absolute z-[-1] left-0 top-0'
           src='https://wallpaperaccess.com/full/1129027.jpg' 
           style={{width:"100vw",backgroundSize:"cover",height:"100vh"}}
+          alt='background'
         />
         <div className='md:w-3/5 flex flex-col h-full justify-center'>
           {/* <div className='text-[30px] md:text-[50px] font-bold text-white'>
             GATRA MATRA JOGJA
           </div> */}
-          <img src='/logo_gatra.png' className='h-[130px] sm:h-[180px] sm:w-[570px] bg-cover'/>
+          <img src={logoGatraMatra} className='h-[130px] sm:h-[180px] sm:w-[570px] bg-cover' alt='logo gatra matra'/>
           <div className='text-sm md:text-md md:text-xl text-yellow-600 mt-[-15px] font-semibold'>
           (Gapura Aksesibilitas Terintegrasi 
 Pemanfaatan Tata Ruang Kota Yogyakarta)
@@ -60,7 +62,7 @@ Kota Yogyakarta Tahun 2021-2041.
          
         </div>
         <div className='flex justify-center items-center w-2/5'>
-          <img src={SitaruLaptop} className="md:w-[300px] w-0  md:h-[170px]"/>
+          <img src={SitaruLaptop} className="md:w-[300px] w-0  md:h-[170px]" alt='gatra matra laptop'/>
         </div>
         
       </div>

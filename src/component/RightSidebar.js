@@ -20,13 +20,15 @@ function RightSidebar({data,setOpen}) {
       >
         {data && <div className="judul">
           {/* <img src={logo} alt="" /> */}
-          Sistem Informasi Tata Ruang <br/> Kota Yogyakarta
+          Gatra Matra Jogja
         </div>} 
-        {data ? <Keterangan data={data}/> : 
+        {data ? 
+        <Keterangan data={data}/> 
+          : 
         <div className="display-info">
-          <img src={logo}/>
-          <div style={{display:"flex",flexDirection:"column",alignItems:"center"}}>
-            <p style={{fontWeight:"500",fontSize:"medium",marginBottom:"1rem"}}>Gatra Matra Jogja</p>
+          <img src={logo}  alt='logo gatra matra jogja'/>
+          <div className="flex flex-col items-center">
+            <p className=" font-bold text-lg mb-2">Gatra Matra Jogja</p>
             <div style={{background:"black",width:"90%",height:"2px",marginBottom:"1rem"}}/>
             <p style={{fontWeight:"500",fontSize:"small",marginBottom:"1rem"}}>Dinas Pertanahan dan Tata Ruang <br/> Kota Yogyakarta</p>
             <p>Jln. Kenari No.56, Muja Muju, Umbulharjo, Kota Yogyakarta,
@@ -37,8 +39,10 @@ function RightSidebar({data,setOpen}) {
           </div>
         </div>}
         
-        {data && <div className="bg-sky-600 hover:bg-sky-700 text-sm mx-2 mt-[-10px] text-center py-2 rounded-md text-white cursor-pointer">
-          <button onClick={()=>setOpen("Simulasi")}>
+        {data && <div className="bg-sky-600 hover:bg-sky-700 text-sm mx-2 mt-[-10px] text-center py-2 rounded-md text-white cursor-pointer"
+          onClick={()=>setOpen("Simulasi")}
+        >
+          <button >
             Simulasi
           </button>
         </div>}

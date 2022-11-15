@@ -15,14 +15,15 @@ function LoginForm({setLogin,setOpen}){
             alert("Password tidak boleh kosong")
         }else{
             const url = configData.SERVER_API + "login"
-            fetch(url,{method:"POST", headers: {
+            fetch(url,{method:"POST", 
+                headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
               },body: JSON.stringify({
                 username: username,
                 password: password
               }),
-              credentials: 'include'
+              credentials: 'include',
             })
             .then(res=>res.json())
             .then(hasil=>{

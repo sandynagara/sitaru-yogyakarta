@@ -3,7 +3,9 @@ import StarRatings from 'react-star-ratings';
 import Loading from "../images/Loading.svg"
 import {AiOutlineClose} from "react-icons/ai"
 import configData from "../component/config.json"
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
+import Swal from "sweetalert2"
+import { useCookies } from 'react-cookie';
 
 function SurveyKepuasan({setOpenRating}) {
 
@@ -11,14 +13,17 @@ function SurveyKepuasan({setOpenRating}) {
     const [isLoading, setIsLoading] = useState(false)
     const [survey, setSurvey] = useState(false)
 
+    const [cookies, setCookie, removeCookie] = useCookies(['survey']);
+
     useEffect(() => {
-        const survey = Cookies.get('survey')
+        const survey = cookies["survey"]
         if(!survey){
             setSurvey(true)
         }else{
             const url =  configData.SERVER_API + "rating"
             fetch(url,{
-                method:"GET"
+                method:"GET",
+                credentials: 'same-origin',
             }).then(res=>res.json()).then((res)=>{
                 if(res["RTN"]){
                     setRating(res["rating"])
@@ -31,6 +36,7 @@ function SurveyKepuasan({setOpenRating}) {
 
     const beriRating = () => {
         setIsLoading(true)
+        setCookie("survey",true,{secure:true,httpOnly:true})
         const url =  configData.SERVER_API + "rating"
         fetch(url,{
             method:"PATCH", 
@@ -38,13 +44,20 @@ function SurveyKepuasan({setOpenRating}) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               },
-            credentials: 'include',
+            credentials: 'same-origin',
             body:JSON.stringify({
                 rating: rating
             })
         }).then(res=>res.json()).then((res)=>{
             setSurvey(true)
             setIsLoading(false)
+            setOpenRating(false)
+            Swal.fire({
+                icon: 'success',
+                title:'Rating berhasil diinput',
+                timer: 2000,
+                }
+            )
         }).catch(err=>{
             setIsLoading(false)
         })
@@ -84,7 +97,7 @@ function SurveyKepuasan({setOpenRating}) {
                     beriRating()
                 }}
                 >
-                    {isLoading ? <img src={Loading} className="w-5 h-5"/> : "Beri Rating"}
+                    {isLoading ? <img src={Loading} className="w-5 h-5" alt='loading'/> : "Beri Rating"}
                 </div>
             }
             

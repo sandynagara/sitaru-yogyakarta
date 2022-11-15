@@ -7,7 +7,7 @@ function ItemBasemap({item,setInputBasemap,inputBasemap}){
           <div className="radio" style={inputBasemap===item.url ? {backgroundColor:"#1976D2"} : {}}></div>
           <p>{item.nama}</p>
         </div>
-        <img src={item.gambar} alt=""/>
+        <img src={item.gambar} alt={`basemap ${item.nama}`}/>
         
       </div>
     )

@@ -3,6 +3,6 @@
     "SERVER_GEOSERVER": "https://geoportal.jogjakota.go.id/",
     "SERVER_API_Develop_2": "http://localhost:5000/api/",
     "SERVER_GEOSERVER_Develop_2": "http://localhost:8080/",
-    "SERVER_API_2": "https://www.ppids-ugm.com/sitaru/api/",
-    "SERVER_GEOSERVER_2": "https://www.ppids-ugm.com/"
+    "SERVER_API_2": "https://ppids-ugm.com/sitaru/api/",
+    "SERVER_GEOSERVER_2": "https://ppids-ugm.com/"
 }

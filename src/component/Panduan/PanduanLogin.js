@@ -16,9 +16,9 @@ function PanduanLogin() {
             }}
         >   
             Menu login & register digunakan sebagai tempat untuk pengguna melakukan login dan membuat akun. dan mempunyai tampilan sebagai berikut:
-            <img src={login} />
+            <img src={login}  alt='gambar basemap'/>
             Pada tampilan di atas, pengguna perlu masukkan username dan password. Jika pengguna belum memilki akun maka pengguna dapat membuat akun dengan menklik tulisan register dan akan muncul tampilan berikut:
-            <img src={register} />
+            <img src={register}  alt='gambar basemap' />
             Pada tampilan tersebut pengguna perlu memasukkan informasi berupa: nama lengkap, username, alamat, nomor Handphone (opsional), dan password setelah itu pengguna mengetikkan password yang sama pada kolom confirm password untuk memastikan pengguna tidak salah memasukkan password. Setelah klik register dan akun pun telah berhasil dibuat.
         </div>
       )

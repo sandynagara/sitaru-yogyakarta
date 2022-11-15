@@ -58,10 +58,10 @@ function UploadRegulasi({setUploadOpen,setBerubah,berubah}) {
                 onChange={(e)=>setNama(e.target.value)}
             />
             <div className='mb-2'>
-                File Regulasi (*pdf) :
+                File Regulasi (*pdf & *maksimal 10 MB) :
             </div>
             
-            <input className="block w-full text-sm text-gray-900 bg-gray-50 rounded-r-lg border py-2 border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" onChange={(e)=>setFile(e.target.files[0])}/>
+            <input className="block w-full text-sm text-gray-900 bg-gray-50 rounded-r-lg border py-2 border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" accept="application/pdf" onChange={(e)=>setFile(e.target.files[0])}/>
             <div 
                 className={` p-2 mt-3 rounded-md flex justify-center text-white text-center ${nama !== "" && file ? "bg-sky-600 hover:bg-sky-700  cursor-pointer" : "bg-gray-500 "}`}
                 onClick={()=>{
@@ -70,7 +70,7 @@ function UploadRegulasi({setUploadOpen,setBerubah,berubah}) {
                     }
                 }}
             >   
-                {isLoading ? <img src={Loading} className="w-5 h-5"/> : "Unggah"}
+                {isLoading ? <img src={Loading} className="w-5 h-5" alt='loading'/> : "Unggah"}
                 
             </div>
         </div>

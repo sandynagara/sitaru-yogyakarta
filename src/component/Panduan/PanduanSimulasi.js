@@ -19,13 +19,13 @@ function PanduanSimulasi() {
     >   
 
         Menu Simulasi digunakan untuk melakukan simulasi terhadap persil bidang tanah dimana menu ini pengguna perlu memilih persil tertentu kemudian membuka menu simulasi dan akan muncul tampilan seperti berikut:
-        <img src={pilihan} />
+        <img src={pilihan}  alt='gambar basemap'/>
         Disana pengguna dapat memilih kegiatan yang ada beserta keterangan terkait kegiatan tersebut, jika sudah maka pengguna perlu memasukkan luas persil yang dipilih sebelumnya
-        <img src={intensitas}/>
+        <img src={intensitas}  alt='gambar basemap'/>
         Pada tampilan tersebut ketika pengguna memasukkan luas bidang maka akan muncul informasi terkait intensitas sesuai dengan luas yang dimasukkan, lalu ketika pengguna menklik tombol “Cek Perizinan” maka akan muncul hasil simulasi terkait izin diperbolehkan atau tidak kegiatan tersebut dilakukan dan syarat-syarat yang menyertai kegiatan tersebut.
-        <img src={hasil}/>
+        <img src={hasil}  alt='gambar basemap'/>
         Setelah itu pengguna dapat mencetak surat informasi ketentuan tata ruang berdasarkan hasil simulasi yang telah dilakukan dengan menekan tombol “Cetak”.
-        <img src={surat}/>
+        <img src={surat}  alt='gambar basemap'/>
     </div>
   )
 }
