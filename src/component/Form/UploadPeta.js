@@ -17,6 +17,7 @@ function UploadPeta({setUploadOpen,setBerubah,berubah}) {
         var data = new FormData()
         data.append('peta', file)
         data.append('nama', nama)
+        
         fetch(url,{
             method:"POST",
             credentials:"include",

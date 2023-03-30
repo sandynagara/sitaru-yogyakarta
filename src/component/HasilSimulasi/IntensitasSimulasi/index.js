@@ -1,8 +1,9 @@
 import React from 'react'
+import "./IntensitasSimulasi.scss"
 
 function IntensitasHasilSimulasi({intensitas}) {
   
-    return <div className='syarat-hasil-simulasi'>
+    return <div>
       <p style={{margin:"10px 10px"}}>Untuk luas tanah seluas {intensitas.luas} m<sup>2</sup> maka aturannya sebagai berikut:</p>
       <div>
           <div className="intensitas-hasil">

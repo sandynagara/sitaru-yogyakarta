@@ -4,11 +4,31 @@
     overflow-y: scroll;
     background-color: white;
     position: absolute;
-    padding: 5px 5px;
     left: 0;
-    z-index: 10001;
+    z-index: 998;
     transition: 500ms;
 }
+
+.basemap-container::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+/* Track */
+.basemap-container::-webkit-scrollbar-track {
+    position: absolute;
+    background: #f1f1f1;
+}
+
+/* Handle */
+.basemap-container::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.basemap-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 
 .item-basemap{
     position: relative;

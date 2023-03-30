@@ -1,32 +1,12 @@
-.pop-up{    
-    top:0;
-    left: 0;
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-}
-
-.black-layer{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    position: fixed;
-   
-}
-
 .hasil-simulasi{
     z-index: 20;
 }
 
 .hasil-simulasi-izin{
-    width: 550px;
+    width: 40vw;
     background-color: white;
-    z-index: 999999999990;
+    z-index: 999999;
     padding: 10px 20px;
-    max-height: 450px;
     overflow-y: scroll;
 }
 
@@ -63,13 +43,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0075eb;
-    padding:15px 30px 15px 30px;
-    color: white;
+    padding:15px 30px 15px 20px;
+    border-radius: 5px 5px 0px 0px;
+    font-size: 16px;
+    color: #1983ec;
+    background-color: white;
+    border-bottom: 2px solid gray;
 }
 
 .hasil-simulasi-ketentuan{
-    margin-top: 10px;
     display: flex;
     width: 100%;
     justify-content: space-around;
@@ -91,20 +73,8 @@
     color: #0075eb;
 }
 
-.syarat-hasil-simulasi-list{
-    padding: 10px;
-}
-
-.intensitas-hasil{
-    padding: 8px 10px;
-    display: grid;
-    grid-template-columns: 40% 5% 55%;
-}
 
 .cetak-simulasi{
-    margin-top: 5px;
-    width: 100%;
-    padding: 12px 20px;
     background-color: #1983ec;
     color: white;
     border-radius: 5px;

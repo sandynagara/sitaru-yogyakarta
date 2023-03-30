@@ -1,8 +1,8 @@
 import React,{useState,useEffect,useRef} from 'react'
-
-function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
+import turf from "turf"
+function HitungIntensitas({setIntensitas,setHasil,hasilQuery,data}) {
   
-    const [intensitas, setIntensitasData] = useState()
+    const [intensitas, setIntensitasData] = useState(false)
     const [hasilIntensitas, setHasilIntensitas] = useState(false)
     const luasBidang = useRef()
     const buttonIntensitas = useRef()
@@ -12,7 +12,15 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
       buttonIntensitas.current.disabled=true
       buttonIntensitas.current.style.backgroundColor = "rgb(180, 210, 248)"
       buttonIntensitas.current.style.cursor = "auto"
+      var polygon = turf.polygon([data.geometry]);
+      var area = turf.area(polygon);
+      luasBidang.current.value = area.toFixed(2)
     }, [])
+
+    useEffect(() => {
+      if(intensitas) gantiLuasBidangTanah()
+    }, [intensitas])
+    
     
     const cekLuasBidangTanah = (luas) => {
       var intensitasLuas = {}
@@ -63,7 +71,6 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
     }
   
     const simulasiClick =(e)=>{
-      e.preventDefault()
       try{
         var HasilSimulasi = {simulasi:hasilQuery.simulasi.zonasi[0],ketentuan:hasilQuery.simulasi.ketentuan[0],dataZonasi:hasilQuery.dataZonasi,intensitas:hasilIntensitas}
       }catch(err){
@@ -74,19 +81,23 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery}) {
   
     return (
       <div style={{marginTop:"5px",marginBottom:"10px"}} className="">
-       
-        <p>Masukkan <b>Luas Bidang (m<sup>2</sup>)</b> </p>
+        <p className='text-sm'>Masukkan  <b>Luas Bidang (m<sup>2</sup>)</b> </p>
         <div className="w-full" >
-            <input className='px-2 py-2 mt-2 w-full rounded-md focus:bg-gray-700 focus:text-white border-2 border-gray-700'  type="number" ref={luasBidang} onChange={gantiLuasBidangTanah}/>
+            <input className='px-2 py-2 mt-2 w-full rounded-md focus:bg-gray-700 focus:text-white border-2 border-gray-700' 
+            type="number" 
+            ref={luasBidang} 
+            onChange={gantiLuasBidangTanah}/>
         </div>
   
-        <div className='bg-sky-600 hover:bg-sky-700 mt-3 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' onClick={simulasiClick} ref={buttonIntensitas}>
+        <div className='bg-sky-600 hover:bg-sky-700 mt-3 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' 
+              onClick={simulasiClick} ref={buttonIntensitas}>
               Cek Perizinan
         </div>
-        <div className='bg-red-600 hover:bg-red-700 mt-2 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' onClick={()=>setIntensitas(false)}>
+        <div className='bg-red-600 hover:bg-red-700 mt-2 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' 
+              onClick={()=>setIntensitas(false)}>
               Batal
         </div>
-        {hasilIntensitas && <div className='mt-2 bg-sky-300 p-3 rounded-md'>
+        {hasilIntensitas && <div className='mt-2 bg-[#004992] p-3 rounded-md text-white'>
           <div >
             <b>Informasi Intensitas :</b>
           </div>

@@ -4,16 +4,17 @@ import "./Panduan.css"
 import PanduanBasemap from './PanduanBasemap'
 import PanduanKeterangan from './PanduanKeterangan'
 import PanduanLayer from './PanduanLayer'
-import PanduanLogin from './PanduanLogin'
 import PanduanSimulasi from './PanduanSimulasi'
 import {AiOutlineClose} from "react-icons/ai"
+import { Modal } from '@mui/material'
 
-function Panduan({setOpen}) {
+function Panduan({setOpen,open}) {
 
   const [pilih, setPilih] = useState("Keterangan")
 
   return (
-    <div className='pop-up'>
+    <Modal open={true}>
+      <div className='pop-up'>
         <div style={{
           backgroundColor:"white",
           zIndex:99,
@@ -63,8 +64,9 @@ function Panduan({setOpen}) {
               {pilih === "Basemap" && <PanduanBasemap/>}
           </div>
         </div>
-        <div className='black-layer' onClick={()=>setOpen(false)}></div>
-    </div>
+        </div>
+    </Modal>
+
   )
 }
 

@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import "./KetentuanSimulasi.scss"
 
 function KetentuanHasilSimulasi({ketentuan}) {
   
@@ -12,6 +13,9 @@ function KetentuanHasilSimulasi({ketentuan}) {
   
     return <div>
       {ketentuanSimulasi && ketentuanSimulasi.map((ketentuan,index)=>{
+          if(ketentuan == ""){
+            return <div/>
+          }
           return(
             <div className="syarat-hasil-simulasi-list">
               {index+1}. {ketentuan}

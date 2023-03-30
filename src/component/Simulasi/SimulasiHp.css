@@ -6,14 +6,14 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 20px 10px;
-    z-index: 999;
+    padding: 10px 10px;
+    z-index: 997;
     transition: 500ms;
 }
 
 
 /* width */
-    .hitung-intensitas::-webkit-scrollbar {
+.hitung-intensitas::-webkit-scrollbar {
     width: 10px;
   }
   
@@ -36,9 +36,6 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
 	-webkit-appearance: none;
 }
-
-
-
 
 button.simulasi{
     z-index: 0;
@@ -103,13 +100,6 @@ p{
     cursor: pointer;
 }
 
-.hitung-intensitas{
-    position: absolute;
-    top: 0;
-    height: 100vh;
-    background-color: white;
-    overflow-y: scroll;
-}
 
 .hitung-intensitas p{
     font-size: 14px;

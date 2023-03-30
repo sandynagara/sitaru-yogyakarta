@@ -99,11 +99,8 @@ function SurveyKepuasan({setOpenRating}) {
                 >
                     {isLoading ? <img src={Loading} className="w-5 h-5" alt='loading'/> : "Beri Rating"}
                 </div>
-            }
-            
-                
+            }         
         </div>
-        
     </div>
   )
 }

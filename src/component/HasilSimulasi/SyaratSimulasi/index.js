@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import "./SyaratSimulasi.scss"
 
 function SyaratHasilSimulasi({syarat}) {
   
@@ -11,7 +12,7 @@ function SyaratHasilSimulasi({syarat}) {
     }, [])
     
     return (
-      <div className='syarat-hasil-simulasi'>
+      <>
         {syaratSimulasi && syaratSimulasi.map((syarat,index)=>{
           return(
             <div className="syarat-hasil-simulasi-list">
@@ -19,7 +20,7 @@ function SyaratHasilSimulasi({syarat}) {
             </div>
           )
         })}
-      </div>
+      </>
     )
 }
 

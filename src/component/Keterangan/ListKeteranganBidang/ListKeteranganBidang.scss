@@ -16,7 +16,10 @@
 
 #keterangan .list{
     padding: 0px 10px 0px 10px;
-    max-height: 86vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 15px;
     overflow: scroll;
 }
 
@@ -38,20 +41,4 @@
   /* Handle on hover */
   .list::-webkit-scrollbar-thumb:hover {
     background: rgba(20, 20, 20, 1);
-}
-
-.kode{ 
-    margin: 12px 0px;
-    padding: 10px;
-    border: 1px solid rgb(102, 102, 102);
-    border-radius: 5px;
-}
-
-.kode p{
-    margin: 0px 0px;
-    font-size: 15px;
-}
-
-.kode p.isi{
-    margin-top: 5px;
 }

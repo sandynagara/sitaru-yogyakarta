@@ -43,10 +43,12 @@ function PetaLibrary() {
   }, [berubah])
 
   useEffect(() => {
-    var url = configData.SERVER_API+"check"
+    var url = configData.SERVER_API+"user/check"
+    
     fetch(url,{
       credentials:'include'
     }).then(res=>res.json()).then(res=>{
+      console.log(res,"res");
       if(res != "unauthorized"){
         setLogin(true)
       }
@@ -139,7 +141,10 @@ function PetaLibrary() {
     {isDesktopOrLaptop && <div className='flex'>
       <AiFillEye size={23} className="mr-2 text-slate-600 cursor-pointer" onClick={()=>{
         var url = configData.SERVER_API+"peta/"+data["namaId"]
-        setPdf({url:url,nama:data["nama"]})
+        var w = window.open("", '_blank');
+        if(w.document) { 
+          w.document.write('<html><head><title>'+data["nama"]+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
+        }
       }}/>
       <AiOutlineDownload size={23} onClick={()=>downloadFile(data["namaId"],data["nama"])} className="cursor-pointer mr-2"/>
       {login && <AiFillDelete size={23} color="red" onClick={()=>deleteFile(data["namaId"])} className="cursor-pointer"/>}
@@ -258,10 +263,8 @@ function PetaLibrary() {
           })}
         </div>
       </div>
-      {pdf && <OpenPdf pdf={pdf} setPdf={setPdf}/>}
-      {open && <div className='fixed bg-black bg-opacity-60 top-0 w-screen h-screen items-center flex justify-center'>
-        <LoginForm setOpen={setOpen} setLogin={setLogin}/>
-      </div> }
+      {/* {pdf && <OpenPdf pdf={pdf} setPdf={setPdf}/>} */}
+      <LoginForm setOpen={setOpen} setLogin={setLogin} open={open}/>
       {uploadOpen && <UploadPeta setUploadOpen={setUploadOpen} setBerubah={setBerubah} berubah={berubah}/>}
     </div>
   )

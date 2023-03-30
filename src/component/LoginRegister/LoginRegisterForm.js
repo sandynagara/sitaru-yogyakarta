@@ -8,9 +8,8 @@ function LoginRegisterForm({setOpen}) {
     const [login, setLogin] = useState(true)
 
     return (
-        <div className='pop-up'>
+        <div>
             {login ? <LoginForm setLogin={setLogin} setOpen={setOpen}/> : <RegisterForm setOpen={setOpen} setLogin={setLogin}/> } 
-            <div className='black-layer' onClick={()=>setOpen(false)}></div>
         </div>
     )
 }

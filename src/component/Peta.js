@@ -6,7 +6,7 @@ import L from "leaflet";
 import configData from "./config.json";
 import * as WMS from "leaflet.wms";
 
-function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }) {
+function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,center,setCenter}) {
   const [basemap, setBasemap] = useState(
     "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
   );
@@ -71,14 +71,14 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
 
   var GetFeatureInfoUrlHandle = () =>{
     var map = useMap();
-    map = useMapEvents({
-      click(e) { 
+    map = useMapEvents({click(e) { 
         var urlRDTR = getFeatureInfoUrl(
           configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
         );
         var urlPersil = getFeatureInfoUrl(
           configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_347120220607091133"
         );
+
         panggil((result) => {
             panggil((resultPersil)=>{
                 var koordinat = []
@@ -98,13 +98,12 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
   
   var CustomWMSLayer =  (props) => {
     var map = useMap();
-      if(first){
-        const { url, options, layers } = props;
-        const source = WMS.source(url, options);
-        var layer= source.getLayer(layers)
-        layer.addTo(map);
-        setFirst(false);
-      }
+    if (!first) return null
+    const { url, options, layers } = props;
+    const source = WMS.source(url, options);
+    var layer= source.getLayer(layers)
+    layer.addTo(map);
+    setFirst(false);
     return null;
   }
 
@@ -112,6 +111,13 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
     return <Polygon positions={selectedPersil} pathOptions={{ color: 'yellow' }} />
   }
 
+  const ChangeCenterMap = () => {
+    var map = useMap();
+    if(!center) return null
+    setCenter(false)
+    map.setView(center)
+    return null
+  }
   
   useEffect(() => {
     if(map){
@@ -164,7 +170,8 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData }
         <FeatureGroup>
           {selectedPersil && <SelectedLayerHandler/> }
         </FeatureGroup>
-        
+
+        <ChangeCenterMap/>
         <GetFeatureInfoUrlHandle/>
       </MapContainer>
     </div>

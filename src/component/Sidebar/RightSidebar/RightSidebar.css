@@ -18,9 +18,8 @@
     height: 100%;
     background-color: white;
     overflow: hidden;
+    position: relative;
 }
-
-
 
 .sidebar-container .judul{
     width: 320px;
@@ -75,20 +74,3 @@
     background-color: rgb(8, 92, 160);
 }
 
-.sidebar-container .display-info{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    font-size: small;
-    padding: 2px;
-}
-
-.sidebar-container .display-info img{
-    width: 70px;
-    height: 100px;
-    margin-bottom: 1rem;
-}

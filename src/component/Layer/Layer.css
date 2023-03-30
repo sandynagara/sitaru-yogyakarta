@@ -7,15 +7,16 @@
     top: 0;
     left: 0;
     padding: 20px 10px;
-    z-index: 999;
+    z-index: 997;
     transition: 500ms;
 }
 
 .layer-item{
-    background-color: rgb(226, 226, 226);
+    background-color: #ffffff;
+    border: 1px gray solid;
     padding: 0.5rem;
     display: flex;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 1rem;
     flex-direction: column;
 

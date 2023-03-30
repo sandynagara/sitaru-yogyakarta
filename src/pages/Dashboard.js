@@ -1,16 +1,18 @@
 import Peta from "../component/Peta";
 import React, { useState,useEffect } from 'react'
-import RightSidebar from "../component/RightSidebar";
-import Basemap from "../component/Basemap/Basemap";
+import RightSidebar from "../component/Sidebar/RightSidebar";
+import Basemap from "../component/Basemap/ListBasemap";
 import Layer from "../component/Layer";
 import Pelaporan from "../component/Pelaporan";
 import Profile from "../component/Profile";
 import configData from "../component/config.json"
 import Legenda from "../component/Legenda";
 import LoginRegisterForm from "../component/LoginRegister/LoginRegisterForm";
-import Sidebar from "../component/Sidebar/Sidebar";
+import Sidebar from "../component/Sidebar/LeftSidebar";
 import Simulasi from "../component/Simulasi/SimulasiHp";
 import Panduan from "../component/Panduan/Panduan";
+import SearchAddress from "../component/SearchAddress";
+import ToolAddressContainer from "../component/ToolAddress/ToolAddressContainer";
 
 function Dashboard() {
 
@@ -22,6 +24,7 @@ function Dashboard() {
     const [width, setWidth] = useState(false)
     const [data, setData] = useState(false)
     const [user, setUser] = useState(false)
+    const [center, setCenter] = useState(false)
 
     const handleScroll = () => {
       const position = document.documentElement.clientWidth;
@@ -33,8 +36,6 @@ function Dashboard() {
     };
 
     window.addEventListener('resize', handleScroll, { passive: true });
-
-    
 
     useEffect(() => {
       const url = configData.SERVER_API + "user"
@@ -50,12 +51,12 @@ function Dashboard() {
 
 
     useEffect(() => {
-    const position = document.documentElement.clientWidth;
-    if(position<400){
-        setWidth(false);
-    }else{
-        setWidth(true);
-    }
+      const position = document.documentElement.clientWidth;
+      if(position<400){
+          setWidth(false);
+      }else{
+          setWidth(true);
+      }
     }, [])
 
     return (
@@ -66,9 +67,11 @@ function Dashboard() {
             <Legenda open={open}/>
             { width && <RightSidebar data={data} setOpen={setOpen}/> }
             <Simulasi open={open} data={data}/>
-            <Peta inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData}/>
+            <Peta center={center} setCenter={setCenter} inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData}/>
+            {/* <SearchAddress open={open} setOpen={setOpen} setCenter={setCenter}/> */}
+            <ToolAddressContainer setCenter={setCenter} open={open}/>
             {open === "Login" && <LoginRegisterForm setOpen={setOpen}/>}
-            {open === "Panduan" && <Panduan setOpen={setOpen}/>}
+            {open === "Panduan" && <Panduan open={open} setOpen={setOpen}/>}
             {open === "Lapor" && <Pelaporan setOpen={setOpen} data={data} />} 
             {open === "Profile" && <Profile setOpen={setOpen} user={user} setUser={setUser} />} 
         </div>

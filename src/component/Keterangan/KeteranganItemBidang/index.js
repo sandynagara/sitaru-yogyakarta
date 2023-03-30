@@ -1,10 +1,11 @@
 import React from 'react'
+import "./KeteranganItemBidang.scss"
 
-function ListKeterangan({judul,isi}){
+function KeteranganItemBidang({judul,isi}){
     return <div className="kode">
     <p><b>{judul}</b></p>
     <p className="isi">{isi}</p>
   </div>
 }
 
-export default ListKeterangan
+export default KeteranganItemBidang

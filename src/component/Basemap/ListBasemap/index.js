@@ -1,13 +1,13 @@
 import React from "react";
-import './Basemap.css'
-import OpenStreetMap from '../../images/Basemap/OpenStreetMap.jpg'
-import EsriWorldImagery from '../../images/Basemap/EsriWorldImagenery.jpg'
-import EsriToPo from '../../images/Basemap/EsriToPo.jpg'
-import OpenToPo from '../../images/Basemap/OpenToPo.jpg'
-import StadiaDark from '../../images/Basemap/StadiaDark.jpg'
-import GoogleMaps from '../../images/Basemap/GoogleMaps.jpg'
-import GoogleStreet from '../../images/Basemap/GoogleStreet.jpg'
-import ItemBasemap from "./ItemBasemap";
+import './Basemap.scss'
+import OpenStreetMap from '../../../images/Basemap/OpenStreetMap.jpg'
+import EsriWorldImagery from '../../../images/Basemap/EsriWorldImagenery.jpg'
+import EsriToPo from '../../../images/Basemap/EsriToPo.jpg'
+import OpenToPo from '../../../images/Basemap/OpenToPo.jpg'
+import StadiaDark from '../../../images/Basemap/StadiaDark.jpg'
+import GoogleMaps from '../../../images/Basemap/GoogleMaps.jpg'
+import GoogleStreet from '../../../images/Basemap/GoogleStreet.jpg'
+import ItemBasemap from "../ItemBasemap";
 
 const jenisBasemap = [
   {

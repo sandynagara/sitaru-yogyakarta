@@ -73,8 +73,8 @@ function Pelaporan({setOpen,data}) {
                 <div className='jenis-laporan'>
                     <p>Jenis Laporan</p>
                     <select ref={jenisLaporan}>
-                        {jenisPelaporan.map((hasil)=>{
-                            return <option value={hasil}>{hasil}</option>
+                        {jenisPelaporan.map((hasil,index)=>{
+                            return <option value={hasil} key={index}></option>
                         })}
                     </select>
                 </div>
