@@ -51,7 +51,7 @@ export default function HasilSimulasi({close,hasil = false,openModal }) {
               <AiOutlineClose onClick={()=>{close(false)}} style={{cursor:"pointer", width:"25px",height:"25px",backgroundColor:"rgba(255,255,255,0.3)",padding:"4px",borderRadius:"100%"}}/>
           </div>
           {hasil && 
-          <div className='hasil-simulasi-izin' style={hasil.simulasi.izin != "Tidak diizinkan" ? {height:"450px"} : {}}>
+          <div className='w-[90vw] p-2 scroll scroll-m-0 overflow-y-scroll overflow-x-hidden bg-white md:w-[40vw] md:px-[20px] md:py-[10px]' style={hasil.simulasi.izin != "Tidak diizinkan" ? {maxHeight:"70vh"} : {}}>
               <p>Pembangunan untuk kegiatan dan pada zona berikut :</p>
               <div className='perizinan'>
                 <p className='list'>Kegiatan </p>

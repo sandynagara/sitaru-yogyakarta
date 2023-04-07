@@ -60,11 +60,12 @@ function SearchAddress({setCenter,setListAddress,listAddress}) {
             defaultValue=""
             placeholder='Alamat'
             size="small"
+            inputProps={{style: {fontSize: "0.875rem"}}}
             value={searchTerm}
-            className='w-[300px] text-sm bg-white'
+            className='w-[260px] text-xs p-0 bg-white'
             onChange={(e)=>setSearchTerm(e.target.value)}
         />
-        <div className='bg-white max-h-[500px] w-[300px] flex flex-col'>
+        <div className='bg-white max-h-[500px] w-[260px] flex flex-col'>
             {listAddress && listAddress.map((value,index)=>{
                 return <div className='p-2 text-sm overflow-hidden cursor-pointer border-gray-200 border-solid border-[1px] hover:bg-sky-100' 
                     key={index}

@@ -7,72 +7,78 @@ import * as Bs from "react-icons/bs";
 import { RiTestTubeFill } from "react-icons/ri";
 import {Link} from "react-router-dom"
 
-function Sidebar({open,setOpen}) {
+function Sidebar({open,setOpen,width}) {
+
+    const styleIcon = {width: "20px", height: "20px"}
+
+    const listItmeSidebar = [
+      {
+        to:"/",
+        title:"Home",
+        icon:<Ai.AiFillHome style={styleIcon}/>,
+        responsive:false
+      },
+      {
+        to:false,
+        title:"Layer",
+        icon:<Bs.BsFillLayersFill style={styleIcon}/>,
+        responsive:false
+      },
+      {
+        to:false,
+        title:"Legenda",
+        icon:<FaMap style={styleIcon}/>,
+        responsive:false
+      },
+      {
+        to:false,
+        title:"Basemap",
+        icon:<FaGlobe style={styleIcon}/>,
+        responsive:false
+      },
+      {
+        to:false,
+        title:"Simulasi",
+        icon:<RiTestTubeFill style={styleIcon}/>,
+        responsive:false
+      },
+      {
+        to:false,
+        title:"Keterangan",
+        icon:<Ai.AiFillInfoCircle style={styleIcon} />,
+        responsive:true
+      },
+    ]
   
     return (
         <div className="navbar-peta h-screen">
-    
-          <Link to="/">
+          {
+            listItmeSidebar.map((item,index)=>{
+
+              if(width && item.responsive){
+                return 
+              }
+
+              return (
+                <Link to={item.to}>
+                  <Icon
+                    icon={item.icon}
+                    judul={item.title}
+                    open={open}
+                    setOpen={setOpen}
+                  />
+                </Link>
+              )
+            })
+          }
+          <div style={{position: "absolute",bottom:"0"}}>
             <Icon
-              icon={<Ai.AiFillHome style={{ width: "20px", height: "20px" }} /> }
-              judul="Home"
+              icon={<Ai.AiOutlineQuestion style={styleIcon} /> }
+              judul="Panduan"
               open={open}
               setOpen={setOpen}
             />
-          </Link>
-          
-          <Icon
-            icon={<Bs.BsFillLayersFill style={{ width: "20px", height: "20px" }} /> }
-            judul="Layer"
-            open={open}
-            setOpen={setOpen}
-          />
-    
-          <Icon
-            icon={<FaMap style={{ width: "20px", height: "20px" }} /> }
-            judul="Legenda"
-            open={open}
-            setOpen={setOpen}
-          />
-    
-          <Icon
-            icon={<FaGlobe style={{ width: "20px", height: "20px" }} /> }
-            judul="Basemap"
-            open={open}
-            setOpen={setOpen}
-          />  
-    
-     
-          <Icon
-            icon={<RiTestTubeFill style={{ width: "20px", height: "20px" }} /> }
-            judul="Simulasi"
-            open={open}
-            setOpen={setOpen}
-          />  
-          
-          {/*    
-          <Icon
-            icon={<MdReportGmailerrorred style={{ width: "20px", height: "20px" }} /> }
-            judul="Lapor"
-            open={open}
-            setOpen={setOpen}
-          />  
-          */}
-    
-            <div style={{position: "absolute",bottom:"0"}}>
-              <Icon
-                icon={<Ai.AiOutlineQuestion style={{ width: "20px", height: "20px" }} /> }
-                judul="Panduan"
-                open={open}
-                setOpen={setOpen}
-              />
-              {/* <Icon
-                icon={<Ai.AiOutlineUser style={{ width: "20px", height: "20px" }} /> }
-                judul="Login"
-                open={open}
-                setOpen={setOpen}
-              /> */}
-            </div>
+          </div>
         </div>
       );
 }

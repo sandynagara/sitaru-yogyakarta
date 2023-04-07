@@ -13,6 +13,7 @@ import Simulasi from "../component/Simulasi/SimulasiHp";
 import Panduan from "../component/Panduan/Panduan";
 import SearchAddress from "../component/SearchAddress";
 import ToolAddressContainer from "../component/ToolAddress/ToolAddressContainer";
+import KeteranganContainerLeft from "../component/Keterangan/KeteranganContainerLeft";
 
 function Dashboard() {
 
@@ -52,7 +53,7 @@ function Dashboard() {
 
     useEffect(() => {
       const position = document.documentElement.clientWidth;
-      if(position<400){
+      if(position<640){
           setWidth(false);
       }else{
           setWidth(true);
@@ -65,6 +66,7 @@ function Dashboard() {
             <Basemap open={open} setInputBasemap={(e) => setBasemap(e)} inputBasemap={basemap}/>
             <Layer open={open} setOpacityBasemap={(e)=>setOpacityBasemap(e)} setOpacityPersil={(e)=>setOpacityPersil(e)} setOpacityRdtr={(e)=>setOpacityRdtr(e)}/>
             <Legenda open={open}/>
+            <KeteranganContainerLeft data={data} open={open}/>
             { width && <RightSidebar data={data} setOpen={setOpen}/> }
             <Simulasi open={open} data={data}/>
             <Peta center={center} setCenter={setCenter} inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData}/>

@@ -13,18 +13,28 @@ function ListTool({on,setOn,setListAddress}) {
         setListAddress(false)
     }
 
+    const ListToolItem = [
+        {
+            toolbar:"geocoding",
+            icon:<AiOutlineSearch color='#1976D2' size={20}/>
+        },
+        {
+            toolbar:"koordinat",
+            icon:<GiPositionMarker color='#1976D2' size={20}/>
+        },
+    ]
+
   return (
     <div className='flex flex-col gap-2'>
-        <div className='rounded-md flex justify-center items-center bg-white w-9 h-10 cursor-pointer hover:bg-gray-200'
-            onClick={()=>handleToggleAddress("geocoding")}
-        >
-            <AiOutlineSearch color='#1976D2' size={20}/>
-        </div>
-        <div className='rounded-md flex justify-center items-center bg-white w-9 h-10 cursor-pointer hover:bg-gray-200'
-            onClick={()=>handleToggleAddress("koordinat")}
-        >
-            <GiPositionMarker color='#1976D2' size={20}/>
-        </div>
+        {ListToolItem.map((item,index)=>{
+            return (
+                <div key={index} className='rounded-md flex justify-center items-center bg-white w-9 h-9 cursor-pointer hover:bg-gray-200'
+                        onClick={()=>handleToggleAddress(item["toolbar"])}
+                >
+                    {item["icon"]}
+                </div>
+            )
+        })}
     </div>
  
   )
