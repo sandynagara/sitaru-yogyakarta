@@ -13,7 +13,7 @@ function KeteranganSitaru() {
         <p>Jln. Kenari No.56, Muja Muju, Umbulharjo, Kota Yogyakarta,
         Daerah Istimewa Yogyakarta 55165</p>
         <p>Telp. 0274515865, 0274515866</p>
-        <p>No. WA Layanan Online : 0895-2589-8500 </p>
+        <p>No. WA Layanan Online : 0811-2735-100</p>
         <p>Email : pertanahantataruang@jogjakota.go.id</p>
         </div>
     </div>

@@ -2,11 +2,12 @@ import React,{useState,useEffect} from 'react'
 import {AiOutlineSearch} from "react-icons/ai"
 import {GiPositionMarker} from 'react-icons/gi'
 
-function ListTool({on,setOn,setListAddress}) {
+function ListTool({on,setOn,setListAddress,setCenterMarker}) {
 
     const handleToggleAddress = (value) => {
         if(on == value){
             setOn(false)
+            setCenterMarker(false)
             return
         }
         setOn(value)
@@ -17,11 +18,11 @@ function ListTool({on,setOn,setListAddress}) {
         {
             toolbar:"geocoding",
             icon:<AiOutlineSearch color='#1976D2' size={20}/>
-        },
-        {
-            toolbar:"koordinat",
-            icon:<GiPositionMarker color='#1976D2' size={20}/>
-        },
+        }
+        // {
+        //     toolbar:"koordinat",
+        //     icon:<GiPositionMarker color='#1976D2' size={20}/>
+        // },
     ]
 
   return (

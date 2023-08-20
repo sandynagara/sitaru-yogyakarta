@@ -60,7 +60,7 @@ function Sidebar({open,setOpen,width}) {
               }
 
               return (
-                <Link to={item.to}>
+                <Link to={item.to} key={index}>
                   <Icon
                     icon={item.icon}
                     judul={item.title}

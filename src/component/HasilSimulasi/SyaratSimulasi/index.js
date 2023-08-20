@@ -15,7 +15,7 @@ function SyaratHasilSimulasi({syarat}) {
       <>
         {syaratSimulasi && syaratSimulasi.map((syarat,index)=>{
           return(
-            <div className="syarat-hasil-simulasi-list">
+            <div className="syarat-hasil-simulasi-list" key={index}>
               {index+1}. {syarat}
             </div>
           )

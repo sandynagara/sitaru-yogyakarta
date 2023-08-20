@@ -38,7 +38,6 @@ function SearchAddress({setCenter,setListAddress,listAddress}) {
             }else{
                 setListAddress(response.data)
             }
-            console.log(response.data);
         } catch (error) {
             console.error(error);
         }

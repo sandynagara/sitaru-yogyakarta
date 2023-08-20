@@ -1,29 +1,25 @@
-import { MapContainer, TileLayer,useMap,useMapEvents,FeatureGroup,Polygon} from "react-leaflet";
+import { MapContainer, TileLayer,useMap,useMapEvents,FeatureGroup,Polygon,Marker, WMSTileLayer} from "react-leaflet";
 import React, { useState, useEffect,useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import "./Peta.css";
 import L from "leaflet";
 import configData from "./config.json";
 import * as WMS from "leaflet.wms";
+import iconMarker from 'leaflet/dist/images/marker-icon.png'
+import ScreenShootMap from "./ScreenShootMap";
 
-function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,center,setCenter}) {
-  const [basemap, setBasemap] = useState(
-    "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
-  );
-  const [change, setChange] = useState(true);
+function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,center,setCenter,centerMarker,setCenterMarker}) {
   const [map, setMap] = useState(false)
-  const tileRef = useRef();
-  const [first, setFirst] = useState(true)
   const [selectedPersil, setSelectedPersil] = useState(false);
 
-  const TileLayerHandler = () => {
-    setChange(false);
-    return <TileLayer ref={tileRef} url={basemap} maxZoom={22} />;
-  };
+  const refBasemap = useRef(null)
+  const refRdtr = useRef(null)
+  const refPersil = useRef(null)
 
   useEffect(() => {
-    setChange(true);
-    setBasemap(inputBasemap);
+    if (refBasemap.current) {
+      refBasemap.current.setUrl(inputBasemap);
+    }
   }, [inputBasemap]);
 
   var panggil = (cb, url) => {
@@ -37,14 +33,25 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
       });
   };
 
-  useEffect(() => {
-      if(map){
-        tileRef.current
-        .getContainer()
-        .style.setProperty("filter", `opacity(${opacityBasemap}%)`);
-      }
-  }, [opacityBasemap])
+  const changeOpacity = () => {
+    refBasemap.current
+      .getContainer()
+      .style.setProperty("filter", `opacity(${opacityBasemap}%)`);
+    
+    refRdtr.current
+      .getContainer()
+      .style.setProperty("filter", `opacity(${opacityRdtr}%)`);
 
+    refPersil.current
+      .getContainer()
+      .style.setProperty("filter", `opacity(${opacityPersil}%)`);
+  }
+
+  useEffect(() => {
+      if(!map) return
+      changeOpacity()
+  }, [opacityBasemap,opacityRdtr,opacityPersil,map])
+  
   var getFeatureInfoUrl = (url, map, e,layer) => {
     // Construct a GetFeatureInfo request URL given a point
     var size = map.getSize(),
@@ -76,18 +83,23 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
           configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
         );
         var urlPersil = getFeatureInfoUrl(
-          configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_347120220607091133"
+          "https://ppids-ugm.com/geoserver/gsb/wms?",map,e,"gsb:gsb_kota_yogyakarta"
         );
 
         panggil((result) => {
             panggil((resultPersil)=>{
-                var koordinat = []
-                resultPersil.features[0].geometry.coordinates[0][0].map((e)=>{
-                  koordinat.push([e[1],e[0]])
+                if(resultPersil["features"].length == 0) return
+                var koordinat = resultPersil.features[0].geometry.coordinates[0][0].map((e)=>{
+                  return [e[1],e[0]]
                 })
                 setSelectedPersil(koordinat)
-                result.features[0].properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
-                setData(result.features[0].properties)
+
+                let properties = result.features[0].properties
+                properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
+                properties.gsb = resultPersil.features[0].properties["GSB"]
+                properties.remarkGsb = resultPersil.features[0].properties["REMARK"]
+
+                setData(properties)
             },urlPersil)
         }, urlRDTR);
       },
@@ -95,17 +107,10 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
     return null
   }
 
-  
-  var CustomWMSLayer =  (props) => {
-    var map = useMap();
-    if (!first) return null
-    const { url, options, layers } = props;
-    const source = WMS.source(url, options);
-    var layer= source.getLayer(layers)
-    layer.addTo(map);
-    setFirst(false);
-    return null;
-  }
+  const icon = L.icon({ 
+    iconUrl: iconMarker, 
+    iconAnchor:[15, 30]
+  });
 
   const SelectedLayerHandler = () => {
     return <Polygon positions={selectedPersil} pathOptions={{ color: 'yellow' }} />
@@ -115,24 +120,29 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
     var map = useMap();
     if(!center) return null
     setCenter(false)
+    setCenterMarker(center)
     map.setView(center)
-    return null
+    return  null
   }
-  
-  useEffect(() => {
-    if(map){
-      map.target.eachLayer(function(layer) {
-        if(layer._name==="Dispertaru:persil_347120220607091133"){
-          layer.setOpacity(opacityPersil*0.01)
-        }else if(layer._name==="Dispertaru:rdtr_ar_347120220607112209"){
-          layer.setOpacity(opacityRdtr*0.01)
-        }
-      });
-    }
-  }, [opacityPersil,opacityRdtr])
+
+  const mapProps = {
+    service: 'WMS',
+    request: 'GetMap',
+    version: '1.1.0',
+    format: 'image/png',
+    transparent: true,
+    maxZoom: 18,
+  }
+
+  const basemapsProps = {
+    tiled: true,
+    maxZoom: 18,
+    zIndex: 1
+  }
 
   return (
     <div className="peta">
+      <ScreenShootMap selectedPersil={selectedPersil}/>
       <MapContainer
         center={[-7.801408, 110.3647275]}
         zoom={17}
@@ -140,40 +150,31 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
         zoomControl={false}
         whenReady={(e)=>setMap(e)}
       >
-        {change ? <TileLayerHandler /> : <TileLayer ref={tileRef} url={basemap} style={{opacity:"0.5"}} maxZoom={22} />}
-        <CustomWMSLayer
-          url={configData.SERVER_GEOSERVER+"geoserver/wms"}
-          layers={"Dispertaru:persil_347120220607091133"}
-          options={{
-            format: "image/png",
-            transparent: "true",
-            tiled: "true",
-            info_format: "application/json",
-            identify: false,
-            maxZoom: 22,
-            opacity:0.5
-          }}
+    
+        <TileLayer {...basemapsProps} url={inputBasemap}  ref={refBasemap}/>
+
+        <WMSTileLayer
+          url="https://ppids-ugm.com/geoserver/gsb/wms"
+          layers="gsb:gsb_kota_yogyakarta"
+          {...mapProps}
+          ref={refPersil}
         />
-        <CustomWMSLayer
+
+        <WMSTileLayer
           url={configData.SERVER_GEOSERVER+"geoserver/wms"}
           layers={"Dispertaru:rdtr_ar_347120220607112209"}
-          options={{
-            format: "image/png",
-            transparent: "true",
-            tiled: "true",
-            info_format: "application/json",
-            identify: false,
-            maxZoom: 22,
-            opacity:0.5
-          }}
+          {...mapProps}
+          ref={refRdtr}
         />
+  
         <FeatureGroup>
           {selectedPersil && <SelectedLayerHandler/> }
         </FeatureGroup>
-
+        {centerMarker && <Marker position={centerMarker} icon={icon}/>}
         <ChangeCenterMap/>
         <GetFeatureInfoUrlHandle/>
       </MapContainer>
+     
     </div>
   );
 }

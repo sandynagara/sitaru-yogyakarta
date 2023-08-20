@@ -2,6 +2,7 @@ import React from 'react'
 import {AiOutlineClose} from "react-icons/ai"
 import ItemMenu from './LandingPage/ItemMenu'
 import {GrDocumentConfig,GrDocumentTest} from "react-icons/gr"
+import { Link } from 'react-router-dom'
 
 function Layanan({setLayananOpen}) {
   return (
@@ -12,12 +13,15 @@ function Layanan({setLayananOpen}) {
                 Layanan
             </div>
             <div className='lg:flex'>
-                <ItemMenu judul={"Layanan IKTR"} 
+            <Link to="permohonan">
+              <ItemMenu judul={"Layanan IKTR"} 
                 keterangan={"Permohonan Informasi Kesesuaian Tata Ruang"}
-                customAction={()=>{window.open("https://docs.google.com/forms/d/1LPMOOlF3B7bF0v6ReLwfS1saVlubsH1J09qCrANMkfI/viewform?edit_requested=true", '_blank', 'noopener,noreferrer');}}
+                customAction={()=>{}}
                 active={true}
                 icon={<GrDocumentConfig size={50}/>}
-                />
+              />
+            </Link>
+              
                 <ItemMenu judul={"Layanan KKPR"} 
                 keterangan={"Sistem perizinan online DPMPTSP"}
                 customAction={()=>{window.open("https://perizinanonline.jogjakota.go.id/layanan/landing/", '_blank', 'noopener,noreferrer');}}

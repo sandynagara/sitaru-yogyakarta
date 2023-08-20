@@ -11,9 +11,9 @@ import LoginRegisterForm from "../component/LoginRegister/LoginRegisterForm";
 import Sidebar from "../component/Sidebar/LeftSidebar";
 import Simulasi from "../component/Simulasi/SimulasiHp";
 import Panduan from "../component/Panduan/Panduan";
-import SearchAddress from "../component/SearchAddress";
 import ToolAddressContainer from "../component/ToolAddress/ToolAddressContainer";
 import KeteranganContainerLeft from "../component/Keterangan/KeteranganContainerLeft";
+import ModalDisclaimer from "../component/ModalDisclaimer";
 
 function Dashboard() {
 
@@ -26,6 +26,7 @@ function Dashboard() {
     const [data, setData] = useState(false)
     const [user, setUser] = useState(false)
     const [center, setCenter] = useState(false)
+    const [centerMarker, setCenterMarker] = useState(false);
 
     const handleScroll = () => {
       const position = document.documentElement.clientWidth;
@@ -61,22 +62,22 @@ function Dashboard() {
     }, [])
 
     return (
-        <div >
-            <Sidebar open={open}  setOpen={setOpen} width={width}/>
-            <Basemap open={open} setInputBasemap={(e) => setBasemap(e)} inputBasemap={basemap}/>
-            <Layer open={open} setOpacityBasemap={(e)=>setOpacityBasemap(e)} setOpacityPersil={(e)=>setOpacityPersil(e)} setOpacityRdtr={(e)=>setOpacityRdtr(e)}/>
-            <Legenda open={open}/>
-            <KeteranganContainerLeft data={data} open={open}/>
-            { width && <RightSidebar data={data} setOpen={setOpen}/> }
-            <Simulasi open={open} data={data}/>
-            <Peta center={center} setCenter={setCenter} inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData}/>
-            {/* <SearchAddress open={open} setOpen={setOpen} setCenter={setCenter}/> */}
-            <ToolAddressContainer setCenter={setCenter} open={open}/>
-            {open === "Login" && <LoginRegisterForm setOpen={setOpen}/>}
-            {open === "Panduan" && <Panduan open={open} setOpen={setOpen}/>}
-            {open === "Lapor" && <Pelaporan setOpen={setOpen} data={data} />} 
-            {open === "Profile" && <Profile setOpen={setOpen} user={user} setUser={setUser} />} 
-        </div>
+      <div >
+          <Sidebar open={open}  setOpen={setOpen} width={width}/>
+          <Basemap open={open} setInputBasemap={(e) => setBasemap(e)} inputBasemap={basemap}/>
+          <Layer open={open} setOpacityBasemap={(e)=>setOpacityBasemap(e)} setOpacityPersil={(e)=>setOpacityPersil(e)} setOpacityRdtr={(e)=>setOpacityRdtr(e)}/>
+          <Legenda open={open}/>
+          <KeteranganContainerLeft data={data} open={open}/>
+          { width && <RightSidebar data={data} setOpen={setOpen}/> }
+          <Simulasi open={open} data={data}/>
+          <Peta center={center} setCenter={setCenter} inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData} centerMarker={centerMarker} setCenterMarker={setCenterMarker}/>
+          <ToolAddressContainer setCenter={setCenter} open={open} setCenterMarker={setCenterMarker}/>
+          {open === "Login" && <LoginRegisterForm setOpen={setOpen}/>}
+          {open === "Panduan" && <Panduan open={open} setOpen={setOpen}/>}
+          {open === "Lapor" && <Pelaporan setOpen={setOpen} data={data} />} 
+          {open === "Profile" && <Profile setOpen={setOpen} user={user} setUser={setUser} />} 
+          <ModalDisclaimer/>
+      </div>
     )
 }
 

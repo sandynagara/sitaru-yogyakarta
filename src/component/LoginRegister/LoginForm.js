@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import  {AiOutlineUser ,AiOutlineLock,AiOutlineClose} from 'react-icons/ai'
 import configData from "../config.json"
 import Swal from 'sweetalert2'
@@ -6,10 +6,12 @@ import Modal from '@mui/material/Modal';
 import InputLoginRegister from './InputLoginRegister'
 
 function LoginForm({setLogin,setOpen,open}){
-    var submitHandler = (event) =>{
+
+    const [username, setusername] = useState("")
+    const [password, setPassword] = useState("")
+
+    const submitHandler = (event) =>{
         event.preventDefault();
-        var username = event.target.Username.value
-        var password = event.target.Password.value
         if(username === ""){
             alert("Username tidak boleh kosong")
         }else if(password === ""){
@@ -28,7 +30,6 @@ function LoginForm({setLogin,setOpen,open}){
             })
             .then(res=>res.json())
             .then(hasil=>{
-                console.log();
                 if(hasil.RTN){
                     setOpen(false)
                     setLogin(true)
@@ -60,8 +61,8 @@ function LoginForm({setLogin,setOpen,open}){
                         <AiOutlineClose style={{cursor:"pointer"}} size={22} color="red" onClick={()=>setOpen(false)}/>
                     </div>
                     <form onSubmit={(e)=> submitHandler(e)}>
-                        <InputLoginRegister tipe="text" label="Username" logo={<AiOutlineUser/>}/>
-                        <InputLoginRegister tipe="password" label="Password" logo={<AiOutlineLock/>}/>
+                        <InputLoginRegister onChange={(e)=>setusername(e.target.value)} tipe="text" label="Username" logo={<AiOutlineUser/>}/>
+                        <InputLoginRegister onChange={(e)=>setPassword(e.target.value)} tipe="password" label="Password" logo={<AiOutlineLock/>}/>
                         <button type="submit" className='p-2'>Login </button>
                     </form>
                     {/* <div className='register-link'>

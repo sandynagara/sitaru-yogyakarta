@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React from "react";
 import "./ListKeteranganBidang.scss";
 import KeteranganItem from "../KeteranganItemBidang";
 
@@ -8,10 +8,11 @@ function ListKeteranganBidang({data}) {
     <div id="keterangan"> 
       <div className="p-2 font-bold">
           Keterangan Bidang
+          
       </div>
       <div className="list">
         <KeteranganItem judul="Kelurahan" isi={data["wadmkd"]}/>
-        <KeteranganItem judul="Kecamatan" isi={data["wadmkc"]}/>
+        <KeteranganItem judul="Kemantren" isi={data["wadmkc"].replace("Kecamatan","Kemantren")}/>
         <KeteranganItem judul="Zona" isi={data["namobj"]}/>
         <KeteranganItem judul="Kawasan" isi={data["cagbud"]}/>
         <KeteranganItem judul="SWP" isi={data["kodswp"]}/>

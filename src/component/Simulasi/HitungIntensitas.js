@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useRef} from 'react'
 import turf from "turf"
-function HitungIntensitas({setIntensitas,setHasil,hasilQuery,data}) {
+function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
   
     const [intensitas, setIntensitasData] = useState(false)
     const [hasilIntensitas, setHasilIntensitas] = useState(false)
@@ -14,16 +14,16 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery,data}) {
       buttonIntensitas.current.style.cursor = "auto"
       var polygon = turf.polygon([data.geometry]);
       var area = turf.area(polygon);
-      luasBidang.current.value = area.toFixed(2)
+      luasBidang.current.value = area.toFixed(0)
     }, [])
 
     useEffect(() => {
       if(intensitas) gantiLuasBidangTanah()
     }, [intensitas])
     
-    
     const cekLuasBidangTanah = (luas) => {
       var intensitasLuas = {}
+      intensitasLuas.luas = luas
       if(luas<101){
         intensitasLuas.kdb = intensitas.kdb40
         intensitasLuas.kdh = intensitas.kdh40
@@ -57,7 +57,6 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery,data}) {
     const gantiLuasBidangTanah = () => {
       const luasBidangTanah = luasBidang.current.value
       var intensitasLuas = cekLuasBidangTanah(luasBidangTanah)
-      intensitasLuas.luas = luasBidangTanah
       setHasilIntensitas(intensitasLuas)
       if(luasBidangTanah !== ""){
             buttonIntensitas.current.disabled=false
@@ -71,11 +70,14 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery,data}) {
     }
   
     const simulasiClick =(e)=>{
-      try{
-        var HasilSimulasi = {simulasi:hasilQuery.simulasi.zonasi[0],ketentuan:hasilQuery.simulasi.ketentuan[0],dataZonasi:hasilQuery.dataZonasi,intensitas:hasilIntensitas}
-      }catch(err){
-        var HasilSimulasi = {simulasi:hasilQuery.simulasi.zonasi[0],ketentuan:"",dataZonasi:hasilQuery.dataZonasi,intensitas:hasilIntensitas}
-      }
+      if(luasBidang.current.value == "") return
+      console.log(hasilQuery,"hasilQuery");
+      var HasilSimulasi = {
+        simulasi: hasilQuery.simulasi.zonasi[0],
+        ketentuan: hasilQuery.simulasi?.ketentuan[0]? hasilQuery.simulasi.ketentuan[0] : "",
+        dataZonasi: hasilQuery.dataZonasi,
+        intensitas: hasilIntensitas
+      };
       setHasil(HasilSimulasi)
     }
   
@@ -83,7 +85,7 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery,data}) {
       <div style={{marginTop:"5px",marginBottom:"10px"}} className="">
         <p className='text-sm'>Masukkan  <b>Luas Bidang (m<sup>2</sup>)</b> </p>
         <div className="w-full" >
-            <input className='px-2 py-2 mt-2 w-full rounded-md focus:bg-gray-700 focus:text-white border-2 border-gray-700' 
+            <input className='px-2 py-2 mt-2 w-full rounded-md border-[2px] border-gray-700' 
             type="number" 
             ref={luasBidang} 
             onChange={gantiLuasBidangTanah}/>
@@ -94,7 +96,7 @@ function HitungIntensitas({setIntensitas,setHasil,hasilQuery,data}) {
               Cek Perizinan
         </div>
         <div className='bg-red-600 hover:bg-red-700 mt-2 w-full mx-2 ml-[-1px] text-center py-2 rounded-md text-sm text-white cursor-pointer' 
-              onClick={()=>setIntensitas(false)}>
+              onClick={()=>setMode("kegiatan")}>
               Batal
         </div>
         {hasilIntensitas && <div className='mt-2 bg-[#004992] p-3 rounded-md text-white'>

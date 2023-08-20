@@ -223,7 +223,7 @@ const PDFLama = ({hasil,user}) =>{
                 <View style={{paddingLeft:10,display:"flex",flexDirection:"column"}}>
                     {hasil.simulasi.syarat.split(";").map((syarat,index)=>{
                         return(
-                            <View style={{display:"flex",flexDirection:"row"}}>
+                            <View style={{display:"flex",flexDirection:"row"}} key={index}>
                                 <Text style={[styles.text]}>
                                     {(String.fromCharCode(65+index)).toLowerCase()} 
                                 </Text>

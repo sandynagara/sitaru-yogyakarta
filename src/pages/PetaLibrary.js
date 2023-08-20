@@ -1,9 +1,7 @@
 import React,{useEffect,useState} from 'react'
-import {BiMapAlt} from 'react-icons/bi'
 import {AiFillInfoCircle,AiFillDelete,AiFillEye,AiOutlineDownload,AiOutlineHome,AiOutlineUpload,AiOutlineLogout} from "react-icons/ai"
 import Swal from "sweetalert2"
 import configData from "../component/config.json"
-import OpenPdf from '../component/PDF/OpenPdf'
 import { useMediaQuery } from 'react-responsive'
 import LoginForm from '../component/LoginRegister/LoginForm'
 import UploadPeta from '../component/Form/UploadPeta'
@@ -119,6 +117,30 @@ function PetaLibrary() {
     setDaftarPeta(filtered)
   }
 
+  const infoMobileEvent = (data) => {
+    Swal.fire({
+      title: '<strong>Info</u></strong>',
+      icon: 'info',
+      html:
+        `<div>
+          <div>Tanggal : ${data["tanggal"]}  </div> 
+          <div>Ukuran : ${formatBytes(data["ukuran"])}  </div>
+        </div>`,
+      showCloseButton: true,
+      focusConfirm: false,
+      confirmButtonText:
+        '<i class="fa fa-thumbs-up"></i> Close!',
+    })
+  }
+
+  const openPdf = (data) => {
+    var url = configData.SERVER_API+"peta/"+data["namaId"]
+    var w = window.open("", '_blank');
+    if(w.document) { 
+      w.document.write('<html><head><title>'+data["nama"]+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
+    }
+  }
+
   const ItemPeta = ({data}) => {
     return <div className='flex w-full text-black lg:py-3 px-3 border-b-2 border-gray-300 hover:bg-gray-200 bg-white border-solid items-center justify-between lg:grid lg:grid-cols-6'>
     <div
@@ -126,44 +148,24 @@ function PetaLibrary() {
       onClick={()=>{
         var url = configData.SERVER_API+"peta/"+data["namaId"]
         if(!isDesktopOrLaptop){
-          setPdf({url:url,nama:data["nama"]})
+          openPdf(data)
         }
       }}
     >
       {data["nama"]}
     </div>
-    {isDesktopOrLaptop && <div>
-      {data["tanggal"]}
-    </div>}
-    {isDesktopOrLaptop && <div>
-      {formatBytes(data["ukuran"]) }
-    </div>}
-    {isDesktopOrLaptop && <div className='flex'>
-      <AiFillEye size={23} className="mr-2 text-slate-600 cursor-pointer" onClick={()=>{
-        var url = configData.SERVER_API+"peta/"+data["namaId"]
-        var w = window.open("", '_blank');
-        if(w.document) { 
-          w.document.write('<html><head><title>'+data["nama"]+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
-        }
-      }}/>
-      <AiOutlineDownload size={23} onClick={()=>downloadFile(data["namaId"],data["nama"])} className="cursor-pointer mr-2"/>
-      {login && <AiFillDelete size={23} color="red" onClick={()=>deleteFile(data["namaId"])} className="cursor-pointer"/>}
-    </div>}
-    {!isDesktopOrLaptop && <AiFillInfoCircle size={25} color="gray" className='cursor-pointer' onClick={()=>{
-      Swal.fire({
-        title: '<strong>Info</u></strong>',
-        icon: 'info',
-        html:
-          `<div>
-            <div>Tanggal : ${data["tanggal"]}  </div> 
-            <div>Ukuran : ${formatBytes(data["ukuran"])}  </div>
-          </div>`,
-        showCloseButton: true,
-        focusConfirm: false,
-        confirmButtonText:
-          '<i class="fa fa-thumbs-up"></i> Close!',
-      })
-    }}/>}
+
+    {isDesktopOrLaptop && <div>{data["tanggal"]} </div>}
+    {isDesktopOrLaptop && <div> {formatBytes(data["ukuran"])} </div> }
+    {isDesktopOrLaptop && 
+      <div className='flex'>
+        <AiFillEye size={23} className="mr-2 text-slate-600 cursor-pointer" onClick={()=>openPdf(data)}/>
+        <AiOutlineDownload size={23} onClick={()=>downloadFile(data["namaId"],data["nama"])} className="cursor-pointer mr-2"/>
+        {login && <AiFillDelete size={23} color="red" onClick={()=>deleteFile(data["namaId"])} className="cursor-pointer"/>}
+      </div>
+    }
+
+    {!isDesktopOrLaptop && <AiFillInfoCircle size={25} color="gray" className='cursor-pointer' onClick={()=>{infoMobileEvent(data)}}/>}
   </div>
   }
 
@@ -209,11 +211,7 @@ function PetaLibrary() {
                   {isDesktopOrLaptop ? "Upload Data" : <AiOutlineUpload size={20}/> }
               </div>
               <div className='flex text-sm items-center cursor-pointer bg-red-600 hover:bg-red-700 rounded-md px-5 py-1' 
-              onClick={()=>{
-                logOut()
-                // document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-              
-              }}>
+              onClick={()=>{logOut()}}>
                 {isDesktopOrLaptop ? "Logout" : <AiOutlineLogout size={20}/> }
               </div>
             </div>
@@ -243,18 +241,18 @@ function PetaLibrary() {
         </div>
         {isDesktopOrLaptop &&
           <div className='py-2 px-3  lg:grid lg:grid-cols-6 font-medium border-b-2 border-solid border-black'>
-          <div className='col-span-3'>
-            Nama Peta
-          </div>
-          <div>
-            Tanggal diunggah
-          </div>
-          <div>
-            Ukuran
-          </div>
-          <div>
-            Action
-          </div>
+            <div className='col-span-3'>
+              Nama Peta
+            </div>
+            <div>
+              Tanggal diunggah
+            </div>
+            <div>
+              Ukuran
+            </div>
+            <div>
+              Action
+            </div>
         </div>
         }
         <div className='bg-white max-h-[calc(100vh_-_180px)] lg:max-h-[calc(100vh_-_200px)]  overflow-y-scroll scroll'>

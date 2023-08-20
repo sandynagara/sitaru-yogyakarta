@@ -1,15 +1,15 @@
 import React,{useState,useEffect,useRef} from 'react'
 import configData from "../config.json"
-import axios from 'axios'
-function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
-    const jenisKegiatan = useRef()
+import screenshootContext from '../Context/ScreenshootContext';
+import { useContext } from 'react';
+function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
+
     const kegiatan = useRef()
-  
-    const [listJenisKegiatan, setListJenisKegiatan] = useState(false);
     const [listKegiatan, setListKegiatan] = useState(false);
-    const [daftar, setDaftar] = useState(false);
     const [keteranganKegiatan,setKeteranganKegiatan] = useState(false)
-  
+
+    const { takePhoto,setTakePhoto,setScreenshoot } = useContext(screenshootContext);
+
     var panggil = (cb, url) => {
     fetch(url,{
         method: 'GET',
@@ -21,14 +21,12 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
         console.log(err,"err")
       });
     };
-  
+
     useEffect(() => {
       var url = configData.SERVER_API+"jeniskegiatan"
       panggil(hasil=>{
         kegiatan.current.value=hasil.kegiatan[0]["sub kegiatan"]
         setKeteranganKegiatan(hasil.kegiatan[0])
-        hasil.JenisKegiatan.push("Semua")
-        setDaftar(hasil)
       },url)
     }, []);
   
@@ -40,12 +38,17 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
     }
   
     const simulasiClick = async () => {
+      setTakePhoto(!takePhoto);
+      setScreenshoot(false)
       const zona = data.namobj
       const subZona=data.nilai_kolo.split("_")[1]
       const swp = data.kodswp
       const kawasan = data.cagbud
       const remark = data.remark
       const tpz = data.tpz_00
+
+      const gsb = data.gsb
+      const remarkGsb = data.remarkGsb
       var dataZonasi = {
         swp:swp,
         zona:zona,
@@ -71,11 +74,19 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
       })
       .then((respond) => respond.json())
       .then((hasil) =>{
+        console.log(hasil,"hasil");
         if(hasil.zonasi[0]["izin"] === "X"){
           setHasil({simulasi:hasil.zonasi[0],dataZonasi:dataZonasi})
         }else{
-          setIntensitas(true)
-          setHasilQuery({simulasi:hasil,dataZonasi:dataZonasi})
+          setMode("intensitas")
+          setHasilQuery({
+          simulasi:hasil,
+          dataZonasi:{
+            ...dataZonasi,
+            gsb:gsb,
+            remarkGsb:remarkGsb
+          }
+        })
         }
       })
       .catch((err)=>{
@@ -89,11 +100,12 @@ function PilihJenisKegiatan({data,setIntensitas,setHasilQuery,setHasil}) {
         <div className='text-sm'>Pilih <b>Kegiatan</b></div>
         <div className="my-[10px]">
             <div className="flex items-center">
-              <input className='px-2 py-2 w-full text-sm rounded-md focus:bg-gray-700 focus:text-white border-[2px] border-gray-700' ref={kegiatan} onChange={kegiatanChange}/>
+              <input className='px-2 py-2 w-full text-sm rounded-md  border-[2px] border-gray-700' ref={kegiatan} onChange={kegiatanChange}/>
             </div>
             <div className='list-choice'>
-                {listKegiatan && listKegiatan.map((e)=>{
+                {listKegiatan && listKegiatan.map((e,index)=>{
                   return <div className="choice" 
+                    key={index}
                     onClick={()=>{setListKegiatan(false);
                     kegiatan.current.value=e['sub kegiatan']
                       setKeteranganKegiatan(e)

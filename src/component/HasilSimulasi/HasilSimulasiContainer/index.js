@@ -1,113 +1,120 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import "./HasilSimulasi.scss"
 import {AiOutlineClose} from "react-icons/ai"
-import {PDFDownloadLink} from "@react-pdf/renderer"
 import configData from "../../config.json"
 import SyaratHasilSimulasi from '../SyaratSimulasi'
 import KetentuanHasilSimulasi from '../KetentuanSimulasi'
 import IntensitasHasilSimulasi from '../IntensitasSimulasi'
-import PDFBaru from '../../PDF/PDFBaru'
+import PdfWithoutKop from '../../PDF/PdfWithoutKop'
 import Modal from '@mui/material/Modal';
+import { useNavigate } from 'react-router-dom'
+import { PDFDownloadLink } from '@react-pdf/renderer'
+import ScreenshootContext from '../../Context/ScreenshootContext'
+import GSBSimulasi from '../GSBSimulasi'
 
-export default function HasilSimulasi({close,hasil = false,openModal }) {
+export default function HasilSimulasi({close,hasil = false }) {
+
+  const {setResult,screenshoot} = useContext(ScreenshootContext);
 
   const [pilihSyarat, setPilihSyarat] = useState("")
   const [user, setUser] = useState(false)
-
-  useEffect(() => {
-      if(!hasil) return
-      const url = configData.SERVER_API + "user"
-      fetch(url,{method:"GET",credentials:"include"}).
-      then(res=>res.json()).
-      then(res=>setUser(res)).
-      catch(err=>console.log(err))
-    }, [])
+  const [isLogin, setIsLogin] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if(!hasil) return
-    if(hasil.simulasi.izin === "I"){
-      hasil.simulasi.izin = "Diizinkan"
-    }else if(hasil.simulasi.izin === "B"){
-      hasil.simulasi.izin = "Bersyarat tertentu"
-    }else if(hasil.simulasi.izin === "X"){
-      hasil.simulasi.izin = "Tidak diizinkan"
-    }else if(hasil.simulasi.izin === "TB"){
-      hasil.simulasi.izin = "Terbatas dan bersyarat tertentu"
-    }else if(hasil.simulasi.izin === "T"){
-      hasil.simulasi.izin = "Terbatas"
-    }
+    const url = configData.SERVER_API + "user"
+    fetch(url,{method:"GET",credentials:"include"}).
+    then(res=>res.json()).
+    then(res=>setUser(res)).
+    catch(err=>console.log(err))
 
-    if(hasil.simulasi.izin !== "X"){
-      setPilihSyarat("intensitas")
-    }
   }, [])
-  
-  return (
-    <Modal open={hasil}>
-        <div className=' absolute h-screen w-screen flex justify-center items-center'>
-        <div className='hasil-simulasi'>
-          <div className="hasil-simulasi-header">
-              <b>Hasil Simulasi</b>
-              <AiOutlineClose onClick={()=>{close(false)}} style={{cursor:"pointer", width:"25px",height:"25px",backgroundColor:"rgba(255,255,255,0.3)",padding:"4px",borderRadius:"100%"}}/>
-          </div>
-          {hasil && 
-          <div className='w-[90vw] p-2 scroll scroll-m-0 overflow-y-scroll overflow-x-hidden bg-white md:w-[40vw] md:px-[20px] md:py-[10px]' style={hasil.simulasi.izin != "Tidak diizinkan" ? {maxHeight:"70vh"} : {}}>
-              <p>Pembangunan untuk kegiatan dan pada zona berikut :</p>
-              <div className='perizinan'>
-                <p className='list'>Kegiatan </p>
-                <p className='list'>: {hasil.simulasi.kegiatan}</p>
-                <p className='list'>SWP </p>
-                <p className='list'>: {hasil.dataZonasi.swp}</p>
-                <p className='list'>Kawasan Khusus</p>
-                <p className='list'>: {hasil.dataZonasi.kawasan}</p>
-                <p className='list'>Zona </p>
-                <p className='list'>: {hasil.simulasi.zona}</p>
-                <p className='list'>Sub Zona </p>
-                <p className='list'>: {hasil.simulasi.subzona} ({hasil.dataZonasi.zona})</p>
-                <p className='list'>Izin </p>
-                <p className='list'>: <b>{hasil.simulasi?.izin}</b></p>
-                {/* {hasil.simulasi.izin !== "Tidak diizinkan" && user && 
-                  <>
-                    <p className='list flex items-center'>Cetak Dokumen</p>
-                    <p className='list flex items-center'>: 
-                      <div className="bg-white mt-2">
-                        <PDFDownloadLink document={<PDFBaru hasil={hasil} user={user}/>} fileName="INFORMASI KETENTUAN TATA RUANG">
-                          <button className='bg-white border-sky-500 border-2 border-solid w-full text-sky-500 hover:bg-sky-500 px-5 ml-1 text-center text-sm rounded-sm hover:text-white cursor-pointer'>
-                            Download
-                          </button>
-                        </PDFDownloadLink>
-                      </div>
-                    </p>
-                  </>
-                 
-                } */}
-              </div>
-              {hasil.simulasi.izin && hasil.simulasi?.izin !== "Tidak diizinkan" && 
-                <div className='syarat-simulasi'>
-                    <div className='hasil-simulasi-ketentuan'>
-                      <div className='syarat' style={ pilihSyarat == "intensitas" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("intensitas")}}>Intensitas</div>
-                      { hasil.simulasi.syarat !== "" && <div className='syarat' style={ pilihSyarat == "syarat zonasi" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("syarat zonasi")}}>Syarat zonasi</div>} 
-                      { hasil.dataZonasi.kawasan !== "Tidak Ada" && <div className='syarat' style={ pilihSyarat == "ketentuan" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("ketentuan")}} >Ketentuan khusus</div>}
-                    </div>
-                    {pilihSyarat === "intensitas" && <IntensitasHasilSimulasi intensitas={hasil.intensitas}/>}
-                    {pilihSyarat === "syarat zonasi" && <SyaratHasilSimulasi syarat={hasil.simulasi.syarat}/>} 
-                    {pilihSyarat === "ketentuan" && <KetentuanHasilSimulasi ketentuan={hasil.ketentuan.gaya}/>}
-                </div>
-              }
-              {
-                hasil.simulasi.izin !== "Tidak diizinkan" && user &&
-                <div className="bg-white mt-2">
-                  <PDFDownloadLink document={<PDFBaru hasil={hasil} user={user}/>} fileName="INFORMASI KETENTUAN TATA RUANG">
-                    <button className='bg-white border-sky-500 border-2 w-full border-solid text-sky-500 hover:bg-sky-500 px-5 mx-4 ml-[-1px] text-center py-1  rounded-sm hover:text-white cursor-pointer'>
-                      Cetak
-                    </button>
-                  </PDFDownloadLink>
-                </div>
-              }
-            </div>} 
-            
 
-        </div>
+  const listIzin = {
+    "I":"Diizinkan",
+    "B":"Bersyarat tertentu",
+    "X":"Tidak diizinkan",
+    "TB":"Terbatas dan bersyarat tertentu",
+    "T":"Terbatas",
+  }
+
+  useEffect(() => {
+    if(!hasil) return
+    console.log(hasil);
+    hasil.simulasi.izin = listIzin[hasil.simulasi.izin]
+    setResult(hasil)
+    if(hasil.simulasi.izin !== "X"){setPilihSyarat("intensitas")}
+
+    const url = configData.SERVER_API+"user/check"
+    fetch(url,{
+      credentials:'include'
+    }).then(res=>res.json()).then(res=>{
+      if(res != "unauthorized"){
+        setIsLogin(true)
+      }
+    }).catch(err=>console.log(err))
+
+  }, [])
+
+  return (
+    <Modal open={hasil ? true : false}>
+        <div className=' absolute h-screen w-screen flex justify-center items-center'>
+          <div className='hasil-simulasi'>
+            <div className="hasil-simulasi-header">
+                <b>Hasil Simulasi</b>
+                <AiOutlineClose onClick={()=>{close(false)}} className=' w-[25px] h-[25px] bg-white p-[4px] cursor-pointer text-red-800'/>
+            </div>
+            {hasil && 
+            <div className='w-[90vw] p-2 flex flex-col scroll scroll-m-0 overflow-y-scroll overflow-x-hidden gap-2 bg-white md:w-[60vw] md:px-[20px] md:py-[10px]' style={hasil.simulasi.izin != "Tidak diizinkan" ? {maxHeight:"70vh"} : {}}>
+                <p>Pembangunan untuk kegiatan dan pada zona berikut :</p>
+                <div className='perizinan'>
+                  <p className='list'>Kegiatan </p>
+                  <p className='list'>: {hasil.simulasi.kegiatan}</p>
+                  <p className='list'>SWP </p>
+                  <p className='list'>: {hasil.dataZonasi.swp}</p>
+                  <p className='list'>Kawasan Khusus</p>
+                  <p className='list'>: {hasil.dataZonasi.kawasan}</p>
+                  <p className='list'>Zona </p>
+                  <p className='list'>: {hasil.simulasi.zona}</p>
+                  <p className='list'>Sub Zona</p>
+                  <p className='list'>: {hasil.simulasi.subzona} ({hasil.dataZonasi.zona})</p>
+                  <p className='list'>Izin </p>
+                  <p className='list'>: <b>{hasil.simulasi?.izin}</b></p>
+                </div>
+                {
+                  hasil.simulasi.izin && hasil.simulasi?.izin !== "Tidak diizinkan" && 
+                  <div className='syarat-simulasi'>
+                      <div className='hasil-simulasi-ketentuan'>
+                        <div className='syarat' style={ pilihSyarat == "intensitas" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("intensitas")}}>Intensitas</div>
+                        <div className='syarat' style={ pilihSyarat == "GSB" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("GSB")}}>GSB</div>
+                        { hasil.simulasi.syarat !== "" && <div className='syarat' style={ pilihSyarat == "syarat zonasi" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("syarat zonasi")}}>Syarat zonasi</div>} 
+                        { hasil.dataZonasi.kawasan !== "Tidak Ada" && <div className='syarat' style={ pilihSyarat == "ketentuan" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("ketentuan")}} >Ketentuan khusus</div>}
+                      </div>
+                      {pilihSyarat === "intensitas" && <IntensitasHasilSimulasi intensitas={hasil.intensitas}/>}
+                      {pilihSyarat === "GSB" && <GSBSimulasi gsb={hasil.dataZonasi.gsb} remark={hasil.dataZonasi.remarkGsb}/>}
+                      {pilihSyarat === "syarat zonasi" && <SyaratHasilSimulasi syarat={hasil.simulasi.syarat}/>} 
+                      {pilihSyarat === "ketentuan" && <KetentuanHasilSimulasi ketentuan={hasil.ketentuan.gaya}/>}
+                  </div>
+                }
+
+                {
+                  hasil.simulasi.izin !== "Tidak diizinkan" && screenshoot &&
+                  <div className="bg-white flex flex-col gap-2">
+                    <PDFDownloadLink document={<PdfWithoutKop hasil={hasil} screenshoot={screenshoot}/>} fileName="INFORMASI KETENTUAN TATA RUANG">
+                      <button  className=' bg-sky-600  border-2 w-full border-solid text-white hover:bg-sky-700 px-5 mx-4 ml-[-1px] text-center py-2  rounded-md hover:text-white cursor-pointer'>
+                        Print
+                      </button>
+                    </PDFDownloadLink>
+                    {isLogin &&  
+                      <button onClick={()=>navigate("/dashboard/pdf")} className=' bg-sky-600  border-2 w-full border-solid text-white hover:bg-sky-700 px-5 mx-4 ml-[-1px] text-center py-2  rounded-md hover:text-white cursor-pointer'>
+                          Print (With Kop)
+                      </button>
+                    }
+                  </div>
+                }
+              </div>} 
+          </div>
         </div>
         </Modal>
   )

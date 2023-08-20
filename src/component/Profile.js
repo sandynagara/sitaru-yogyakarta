@@ -210,7 +210,7 @@ function Pelaporan(){
               <div className='isi-laporan'>
                 {selectedPersil.map((feature,index)=>{
                 var properties = feature.properties
-                return  <ItemPelaporan daftarSelected={daftarSelected} properties={properties} feature={feature} index={index}/>
+                return  <ItemPelaporan daftarSelected={daftarSelected} properties={properties} feature={feature} key={index}/>
               })}
               </div>
               

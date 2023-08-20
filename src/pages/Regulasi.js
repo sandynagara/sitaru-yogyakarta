@@ -1,13 +1,12 @@
 import React,{useEffect,useState} from 'react'
-import {BiMapAlt} from 'react-icons/bi'
-import {AiFillInfoCircle,AiFillDelete,AiFillEye,AiOutlineDownload,AiOutlineHome,AiOutlineUpload,AiOutlineLogout} from "react-icons/ai"
+import {AiFillInfoCircle,AiFillDelete,AiFillEye,AiOutlineHome,AiOutlineUpload,AiOutlineLogout} from "react-icons/ai"
 import Swal from "sweetalert2"
 import configData from "../component/config.json"
-import OpenPdf from '../component/PDF/OpenPdf'
 import { useMediaQuery } from 'react-responsive'
 import LoginForm from '../component/LoginRegister/LoginForm'
 import {Link} from "react-router-dom"
 import UploadRegulasi from '../component/Form/UploadRegulasi'
+import {FiDownload} from "react-icons/fi"
 
 function Regulasi() {
   const [daftarRegulasiAwal, setDaftarRegulasiAwal] = useState(false)
@@ -125,6 +124,14 @@ function Regulasi() {
     setDaftarRegulasi(filtered)
   }
 
+  const openPdf = (data) => {
+    var url = configData.SERVER_API+"regulasi/"+data["namaId"]
+    var w = window.open("", '_blank');
+    if(w.document) { 
+      w.document.write('<html><head><title>'+data["nama"]+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
+    }
+  }
+
   const ItemRegulasi = ({data}) => {
     return <div className='flex w-full text-black lg:py-3 px-3 border-b-2 border-gray-300 hover:bg-gray-200 bg-white border-solid items-center justify-between lg:grid lg:grid-cols-6'>
     <div
@@ -145,15 +152,9 @@ function Regulasi() {
       {formatBytes(data["ukuran"]) }
     </div>}
     {isDesktopOrLaptop && <div className='flex'>
-      <AiFillEye size={23} className="mr-2 text-slate-600 cursor-pointer" onClick={()=>{
-        var url = configData.SERVER_API+"regulasi/"+data["namaId"]
-        var w = window.open("", '_blank');
-        if(w.document) { 
-          w.document.write('<html><head><title>'+data["nama"]+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
-        }
-      }}/>
-      <AiOutlineDownload size={23} onClick={()=>downloadFile(data["namaId"],data["nama"])} className="cursor-pointer mr-2"/>
-      {login && <AiFillDelete size={23} color="red" onClick={()=>deleteFile(data["namaId"])} className="cursor-pointer"/>}
+      <AiFillEye size={23} className="mr-2 text-slate-600 cursor-pointer" onClick={()=>{openPdf(data)}}/>
+      <FiDownload size={20} onClick={()=>downloadFile(data["namaId"],data["nama"])} className="cursor-pointer mr-2"/>
+      {login && <AiFillDelete size={20} color="red" onClick={()=>deleteFile(data["namaId"])} className="cursor-pointer"/>}
     </div>}
     {!isDesktopOrLaptop && <AiFillInfoCircle size={25} color="gray" className='cursor-pointer' onClick={()=>{
       Swal.fire({
