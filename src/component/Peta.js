@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import "./Peta.css";
 import L from "leaflet";
 import configData from "./config.json";
-import * as WMS from "leaflet.wms";
 import iconMarker from 'leaflet/dist/images/marker-icon.png'
 import ScreenShootMap from "./ScreenShootMap";
 
@@ -53,6 +52,16 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
   }, [opacityBasemap,opacityRdtr,opacityPersil,map])
   
   var getFeatureInfoUrl = (url, map, e,layer) => {
+    console.log( L.Proj);
+
+    var crs = new L.Proj.CRS('EPSG:32749', // define the CRS
+    '+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs', // define the proj4 definition
+    { 
+      transformation:  L.Transformation (1, 0, -1, 0),
+      scale: function (zoom) {
+        return Math.pow (2, zoom);
+      }
+    });
     // Construct a GetFeatureInfo request URL given a point
     var size = map.getSize(),
       params = {
@@ -71,6 +80,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
         info_format: "application/json",
         X: Math.round(e.containerPoint.x),
         Y: Math.round(e.containerPoint.y),
+        crs:crs
       };
 
     return url + L.Util.getParamString(params, url, true);
@@ -83,7 +93,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
           configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
         );
         var urlPersil = getFeatureInfoUrl(
-          "https://ppids-ugm.com/geoserver/gsb/wms?",map,e,"gsb:gsb_kota_yogyakarta"
+          configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_gsb_revisi_347120231124140756"
         );
 
         panggil((result) => {
@@ -93,7 +103,6 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
                   return [e[1],e[0]]
                 })
                 setSelectedPersil(koordinat)
-
                 let properties = result.features[0].properties
                 properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
                 properties.gsb = resultPersil.features[0].properties["GSB"]
@@ -154,8 +163,8 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
         <TileLayer {...basemapsProps} url={inputBasemap}  ref={refBasemap}/>
 
         <WMSTileLayer
-          url="https://ppids-ugm.com/geoserver/gsb/wms"
-          layers="gsb:gsb_kota_yogyakarta"
+          url="https://ppids-ugm.com/geoserver/ppids/wms"
+          layers="ppids:persil_gsb_revisi"
           {...mapProps}
           ref={refPersil}
         />

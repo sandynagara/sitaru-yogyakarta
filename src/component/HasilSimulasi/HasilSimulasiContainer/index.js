@@ -41,10 +41,8 @@ export default function HasilSimulasi({close,hasil = false }) {
 
   useEffect(() => {
     if(!hasil) return
-    console.log(hasil);
-    hasil.simulasi.izin = listIzin[hasil.simulasi.izin]
     setResult(hasil)
-    if(hasil.simulasi.izin !== "X"){setPilihSyarat("intensitas")}
+    if(hasil.simulasi.izin !== "X") setPilihSyarat("intensitas")
 
     const url = configData.SERVER_API+"user/check"
     fetch(url,{
@@ -80,16 +78,16 @@ export default function HasilSimulasi({close,hasil = false }) {
                   <p className='list'>Sub Zona</p>
                   <p className='list'>: {hasil.simulasi.subzona} ({hasil.dataZonasi.zona})</p>
                   <p className='list'>Izin </p>
-                  <p className='list'>: <b>{hasil.simulasi?.izin}</b></p>
+                  <p className='list'>: <b>{listIzin[hasil.simulasi.izin]}</b></p>
                 </div>
                 {
-                  hasil.simulasi.izin && hasil.simulasi?.izin !== "Tidak diizinkan" && 
+                  listIzin[hasil.simulasi.izin] !== "Tidak diizinkan" && 
                   <div className='syarat-simulasi'>
                       <div className='hasil-simulasi-ketentuan'>
-                        <div className='syarat' style={ pilihSyarat == "intensitas" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("intensitas")}}>Intensitas</div>
-                        <div className='syarat' style={ pilihSyarat == "GSB" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("GSB")}}>GSB</div>
-                        { hasil.simulasi.syarat !== "" && <div className='syarat' style={ pilihSyarat == "syarat zonasi" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("syarat zonasi")}}>Syarat zonasi</div>} 
-                        { hasil.dataZonasi.kawasan !== "Tidak Ada" && <div className='syarat' style={ pilihSyarat == "ketentuan" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("ketentuan")}} >Ketentuan khusus</div>}
+                        <div className='syarat flex items-center justify-center' style={ pilihSyarat == "intensitas" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("intensitas")}}>Intensitas</div>
+                        <div className='syarat flex items-center justify-center' style={ pilihSyarat == "GSB" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("GSB")}}>GSB</div>
+                        { hasil.simulasi.syarat !== "" && <div className='syarat flex items-center justify-center' style={ pilihSyarat == "syarat zonasi" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("syarat zonasi")}}>Syarat zonasi</div>} 
+                        { hasil.dataZonasi.kawasan !== "Tidak Ada" && <div className='syarat flex items-center justify-center' style={ pilihSyarat == "ketentuan" ? {color:"#0075eb",borderColor:"#0075eb"} : {}} onClick={()=>{setPilihSyarat("ketentuan")}} >Ketentuan khusus</div>}
                       </div>
                       {pilihSyarat === "intensitas" && <IntensitasHasilSimulasi intensitas={hasil.intensitas}/>}
                       {pilihSyarat === "GSB" && <GSBSimulasi gsb={hasil.dataZonasi.gsb} remark={hasil.dataZonasi.remarkGsb}/>}
@@ -99,7 +97,7 @@ export default function HasilSimulasi({close,hasil = false }) {
                 }
 
                 {
-                  hasil.simulasi.izin !== "Tidak diizinkan" && screenshoot &&
+                  listIzin[hasil.simulasi.izin] !== "Tidak diizinkan" && screenshoot &&
                   <div className="bg-white flex flex-col gap-2">
                     <PDFDownloadLink document={<PdfWithoutKop hasil={hasil} screenshoot={screenshoot}/>} fileName="INFORMASI KETENTUAN TATA RUANG">
                       <button  className=' bg-sky-600  border-2 w-full border-solid text-white hover:bg-sky-700 px-5 mx-4 ml-[-1px] text-center py-2  rounded-md hover:text-white cursor-pointer'>

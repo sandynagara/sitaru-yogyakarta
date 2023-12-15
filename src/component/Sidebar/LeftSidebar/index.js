@@ -1,11 +1,12 @@
 import React from 'react'
-import Icon from '../IconSidebar';
+import IconSidebar from '../IconSidebar';
 import "./Sidebar.css";
 import * as Ai from "react-icons/ai";
 import {FaMap,FaGlobe} from "react-icons/fa"
 import * as Bs from "react-icons/bs";
 import { RiTestTubeFill } from "react-icons/ri";
 import {Link} from "react-router-dom"
+import logo from "../../../images/Logo_Kota_Yogyakarta.png";
 
 function Sidebar({open,setOpen,width}) {
 
@@ -51,7 +52,11 @@ function Sidebar({open,setOpen,width}) {
     ]
   
     return (
-        <div className="navbar-peta h-screen">
+        <div className="navbar-peta h-screen py-2 pl-2 gap-4">
+          {/* <div className='flex p-2 items-center gap-4 justify-center text-white font-semibold'>
+            <img src={logo} className='w-8 bg-contain'/>
+          </div> */}
+         
           {
             listItmeSidebar.map((item,index)=>{
 
@@ -61,7 +66,7 @@ function Sidebar({open,setOpen,width}) {
 
               return (
                 <Link to={item.to} key={index}>
-                  <Icon
+                  <IconSidebar
                     icon={item.icon}
                     judul={item.title}
                     open={open}
@@ -72,7 +77,7 @@ function Sidebar({open,setOpen,width}) {
             })
           }
           <div style={{position: "absolute",bottom:"0"}}>
-            <Icon
+            <IconSidebar
               icon={<Ai.AiOutlineQuestion style={styleIcon} /> }
               judul="Panduan"
               open={open}

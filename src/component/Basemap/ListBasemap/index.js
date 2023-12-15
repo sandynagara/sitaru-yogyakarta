@@ -49,7 +49,7 @@ const jenisBasemap = [
 
 
 function Basemap({setInputBasemap ,inputBasemap ,open}) {
-  return <div className="basemap-container" style={ open === "Basemap" ? {marginLeft:"50px"} :  {marginLeft:"-200px"}}>
+  return <div className={`basemap-container ${open === "Basemap" ? "ml-[64px] md:ml-[194px]" : "ml-[-250px]"}`}>
     {jenisBasemap.map((e)=>{
       return <ItemBasemap key={e.url} item = {e} setInputBasemap={setInputBasemap} inputBasemap={inputBasemap}/>
     })}

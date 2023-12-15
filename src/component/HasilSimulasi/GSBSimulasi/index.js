@@ -3,8 +3,8 @@ import gsbLogo from "../../../images/gsb.png"
 
 function GSBSimulasi({gsb,remark}) {
 
-    const [listGsb, setListGsb] = useState(gsb.split(","))
-    const [listRemark, setListRemark] = useState(remark.split(","))
+    const listGsb = gsb.split(",")
+    const listRemark = remark.split(",")
 
     const gsbJalanLingkungan  = [
         "a. Untuk lebar jalan eksisting kurang dari sama dengan 2 m = 1-k-1",
@@ -13,7 +13,7 @@ function GSBSimulasi({gsb,remark}) {
     ]
 
     const listKeteranganGsb  = [
-        "(a) merupakanangka GSB paling rendah pada area sisi 1",
+        "(a) merupakan angka GSB paling rendah pada area sisi 1",
         "(b) merupakan angka GSB paling rendah pada area sisi 2",
         "k merupakan kondisi lebar ruang milik jalan"
     ]
@@ -30,8 +30,8 @@ function GSBSimulasi({gsb,remark}) {
                     <div>:</div>
                     <div>
                         {namaGsb ==  "GSB Jalan Lingkungan" ?
-                            gsbJalanLingkungan.map((gsb)=>{
-                                return <div>{gsb}</div>
+                            gsbJalanLingkungan.map((gsb,index)=>{
+                                return <div key={index}>{gsb}</div>
                             }) : gsb
                         }
                     </div>

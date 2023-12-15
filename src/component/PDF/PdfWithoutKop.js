@@ -234,7 +234,7 @@ function PdfWithoutKop({hasil,screenshoot}) {
                             gsb = gsb.trimStart()
                             var namaGsb = gsb == "GSB Jalan Lingkungan" ? "GSB Jalan Lingkungan" : remark[index].trimStart()
                             return(
-                                <View style={{display:"flex",flexDirection:"row"}}>
+                                <View style={{display:"flex",flexDirection:"row"}} key={index}>
                                     <Text style={[styles.text,{width:"48%",paddingLeft:10}]}>
                                         {(String.fromCharCode(65+index)).toLowerCase()}. {namaGsb}
                                     </Text>
@@ -243,8 +243,8 @@ function PdfWithoutKop({hasil,screenshoot}) {
                                     </Text>
                                     <View style={{width:"50%",display:'flex',flexDirection:"column"}}>
                                         {namaGsb ==  "GSB Jalan Lingkungan" ?
-                                            gsbJalanLingkungan.map((gsb)=>{
-                                                return <Text style={[styles.text]}>{gsb}</Text>
+                                            gsbJalanLingkungan.map((gsb,index)=>{
+                                                return <Text key={index} style={[styles.text]}>{gsb}</Text>
                                             }) : 
                                             <Text style={[styles.text,{width:"50%"}]}>{gsb}</Text>
                                         }

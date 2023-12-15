@@ -74,11 +74,11 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
       })
       .then((respond) => respond.json())
       .then((hasil) =>{
-        console.log(hasil,"hasil");
+        console.log(hasil);
         if(hasil.zonasi[0]["izin"] === "X"){
           setHasil({simulasi:hasil.zonasi[0],dataZonasi:dataZonasi})
         }else{
-          setMode("intensitas")
+          
           setHasilQuery({
           simulasi:hasil,
           dataZonasi:{
@@ -86,7 +86,8 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
             gsb:gsb,
             remarkGsb:remarkGsb
           }
-        })
+         })
+         setMode("intensitas")
         }
       })
       .catch((err)=>{
@@ -122,7 +123,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
         </div>
       </form>
 
-        {keteranganKegiatan && <div className='mt-2 bg-[#004992] p-3 rounded-md text-white'>
+        {keteranganKegiatan && <div className='mt-2 bg-[#1E2E4A] p-3 rounded-md text-white'>
           <div style={{fontSize:"15px" ,marginBottom:"5px"}}>
             <b>{keteranganKegiatan["sub kegiatan"]}</b>
           </div>

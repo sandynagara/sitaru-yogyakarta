@@ -46,7 +46,6 @@ function PetaLibrary() {
     fetch(url,{
       credentials:'include'
     }).then(res=>res.json()).then(res=>{
-      console.log(res,"res");
       if(res != "unauthorized"){
         setLogin(true)
       }

@@ -155,7 +155,6 @@ function PdfKop({hasil,screenshoot}) {
                     </Text>
                 </View>
                 {listDataPemohon.map((dataPemohon,index)=>{
-                    console.log(dataPemohon,"dataPemohon")
                     return <View key={index} style={{display:"flex",flexDirection:"row"}}>
                         <Text style={[styles.text,{width:"5%"}]}>
                             {index+1}. 

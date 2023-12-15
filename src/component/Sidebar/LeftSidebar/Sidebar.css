@@ -1,12 +1,10 @@
 .navbar-peta{
-    width: 50px;
     height: 100vh;
-    background-color: #004992;
+    background-color: #1E2E4A;
     display: flex;
     flex-direction: column;
     position: absolute;
     z-index: 999;
-
 }
 
 
@@ -17,7 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #00CDBF;
     transition: 500ms;
 }
 
@@ -26,13 +24,13 @@
     font-size: 12px;
     border-radius: 5px;
     padding: 5px 5px;
-    background-color: #004992;
-    color: white;
+    background-color: #1E2E4A;
+    color: #00CDBF;
     font-weight: 500;
 }
 
 .menu-logo:hover{
     background-color: rgb(255, 255, 255);
-    color: #004992;
+    color: #00CDBF;
     cursor: pointer;
 }

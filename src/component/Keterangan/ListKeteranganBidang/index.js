@@ -14,7 +14,7 @@ function ListKeteranganBidang({data}) {
         <KeteranganItem judul="Kelurahan" isi={data["wadmkd"]}/>
         <KeteranganItem judul="Kemantren" isi={data["wadmkc"].replace("Kecamatan","Kemantren")}/>
         <KeteranganItem judul="Zona" isi={data["namobj"]}/>
-        <KeteranganItem judul="Kawasan" isi={data["cagbud"]}/>
+        <KeteranganItem judul="Kawasan" isi={data["remark"] === null ? data["cagbud"] : data["remark"]}/>
         <KeteranganItem judul="SWP" isi={data["kodswp"]}/>
         <KeteranganItem judul="Kode Zona" isi={data["nilai_kolo"].split("_")[1].split("-")[0]}/>
         <KeteranganItem judul="Kode sub Zona" isi={data["nilai_kolo"].split("_")[1]}/>

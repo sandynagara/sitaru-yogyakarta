@@ -69,12 +69,12 @@ function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
         }
     }
   
-    const simulasiClick =(e)=>{
+    const simulasiClick =()=>{
       if(luasBidang.current.value == "") return
-      console.log(hasilQuery,"hasilQuery");
-      var HasilSimulasi = {
+      console.log(hasilQuery.simulasi);
+      const HasilSimulasi = {
         simulasi: hasilQuery.simulasi.zonasi[0],
-        ketentuan: hasilQuery.simulasi?.ketentuan[0]? hasilQuery.simulasi.ketentuan[0] : "",
+        ketentuan: hasilQuery.simulasi?.ketentuan ? hasilQuery.simulasi.ketentuan[0] : "",
         dataZonasi: hasilQuery.dataZonasi,
         intensitas: hasilIntensitas
       };
@@ -99,7 +99,7 @@ function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
               onClick={()=>setMode("kegiatan")}>
               Batal
         </div>
-        {hasilIntensitas && <div className='mt-2 bg-[#004992] p-3 rounded-md text-white'>
+        {hasilIntensitas && <div className='mt-2 bg-[#1E2E4A] p-3 rounded-md text-white'>
           <div >
             <b>Informasi Intensitas :</b>
           </div>

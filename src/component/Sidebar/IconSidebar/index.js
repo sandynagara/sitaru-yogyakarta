@@ -4,14 +4,6 @@ import configData from "../../config.json"
 function Icon({ icon ,judul ,open, setOpen}) {
     const [hover ,setHover] = useState(false)
 
-    const changeOpenSidebar = () => {
-        var style
-        if (open === judul) {
-            style = {borderRadius : "5px 0px 0px 5px" ,padding:"10px 12px 10px 10px" ,backgroundColor:"white",color:"#1976D2"}
-        }
-        return style
-    }
-
     const gantiTombol = () =>{
       if(open === judul){
         setOpen(false)
@@ -37,9 +29,10 @@ function Icon({ icon ,judul ,open, setOpen}) {
     }
 
   return (
-    <div style={{display:"flex" ,alignItems:"center"}}>
-      <div className={"menu-logo"} style={changeOpenSidebar()} onMouseEnter={() => {setHover(true)}} onMouseLeave={()=>{setHover(false)}} onClick={gantiTombol}>{icon}</div>
-      {hover && <div className="menu-name">{judul}</div> }
+    <div onClick={gantiTombol} style={{display:"flex" ,alignItems:"center",borderRadius:"1rem 0 0 1rem"}} className={`pl-3 font-semibold pr-6 md:pr-[60px] py-3 gap-4 ${open === judul ? "bg-white text-[#1E2E4A]" : "text-white hover:bg-[#263247]"}`}>
+      <div className={""} onMouseEnter={() => {setHover(true)}} onMouseLeave={()=>{setHover(false)}} >{icon}</div>
+      <div className={`text-sm w-20 hidden md:flex ${open === judul && ' font-semibold'}`}>{judul}</div>
+      {/* {hover && <div className="menu-name">{judul}</div> } */}
     </div>
   );
 }

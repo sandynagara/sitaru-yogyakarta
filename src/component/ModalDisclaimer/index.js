@@ -12,7 +12,7 @@ function ModalDisclaimer() {
         "Data yang disajikan pada Sistem Informasi Gatra Matra merupakan data terbaru sesuai dengan ketentuan yang berlaku saat ini (Peraturan Walikota Yogyakarta Nomor 118 Tahun 2021 Tentang Rencana Detail Tata Ruang Kota Yogyakarta Tahun 2021 – 2041). Meskipun demikian, informasi pada sistem informasi Gatra Matra bukan merupakan rujukan utama untuk kegiatan penataan ruang tanpa keputusan tertulis dari Dinas Pertanahan dan Tata Ruang (Kundha Niti Mandala Sarta Tata Sasana) Kota Yogyakarta",
         "Kelengkapan data yang disajikan sesuai dengan produk hukum yang berlaku",
         "Dinas Pertanahan dan Tata Ruang (Kundha Niti Mandala Sarta Tata Sasana) Kota Yogyakarta tidak bertanggungjawab atas segala kesalahan atau kerugian yang timbul karena tindakan terkait dengan penggunaan data dan informasi yang disajikan pada situs ini",
-        "Apabila terdapat perbedaan antara data pada infromasi di sistem informasi Gatra Matr aini dengan informasi resmi, maka dikembalikan kepada hukum yang berlaku."
+        "Apabila terdapat perbedaan antara data pada infromasi di Sistem Informasi Gatra Matra ini dengan informasi resmi, maka dikembalikan kepada hukum yang berlaku."
     ]
 
     useEffect(() => {

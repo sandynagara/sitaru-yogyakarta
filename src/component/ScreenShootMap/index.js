@@ -82,11 +82,11 @@ function ScreenShootMap({selectedPersil=false}) {
     }
 
   return (
-    <div className='flex absolute top-0 z-0'>
+    <div className='flex top-0 z-[-2] ml-[-1500px] relative'>
         <MapContainer
             center={[-7.801408, 110.3647275]}
             zoom={17}
-            style={{ width: "500px", height: "300px" }}
+            style={{ width: "300px", height: "180px",position:"absolute",top:0,left:0 }}
             zoomControl={false}
         >   
             <TileLayer
@@ -100,7 +100,7 @@ function ScreenShootMap({selectedPersil=false}) {
         <MapContainer
             center={[-7.801408, 110.3647275]}
             zoom={17}
-            style={{ width: "500px", height: "300px" }}
+            style={{ width: "300px", height: "180px",position:"absolute",top:0,left:0}}
             zoomControl={false}
         >   
             <WMSTileLayer

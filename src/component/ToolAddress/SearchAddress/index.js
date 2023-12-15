@@ -74,7 +74,6 @@ function SearchAddress({setCenter,setListAddress,listAddress}) {
                 </div>
             })}
         </div>
-           
     </div>   
   )
 }
