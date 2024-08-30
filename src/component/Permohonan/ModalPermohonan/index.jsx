@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import Modal from '@mui/material/Modal';
 import {AiOutlineClose,AiFillFile} from "react-icons/ai"
-import configData from "../../config.json"
+
 import ModalShowImage from '../ModalShowImage';
 
 function ModalPermohonan({open,setOpen,data=false}) {
@@ -32,7 +32,7 @@ function ModalPermohonan({open,setOpen,data=false}) {
     }
 
     const openFile = (path,name,type) => {
-        let url = `${configData.SERVER_API}permohonan/${path}`
+        let url = `${process.env.REACT_APP_BASE_URL}permohonan/${path}`
         if(type === "image"){
             setOpenImage(true)
             setImageData({url:url,name:name})

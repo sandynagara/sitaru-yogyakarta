@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import configData from "../../config.json"
+
 
 function Icon({ icon ,judul ,open, setOpen}) {
     const [hover ,setHover] = useState(false)
@@ -9,7 +9,7 @@ function Icon({ icon ,judul ,open, setOpen}) {
         setOpen(false)
       }else{
         if(judul==="Login"){
-          const url = configData.SERVER_API + "user/check"
+          const url = process.env.REACT_APP_BASE_URL + "user/check"
           fetch(url,{
             method:"GET",
             credentials:"include"

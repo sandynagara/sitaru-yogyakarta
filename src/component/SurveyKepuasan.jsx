@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import StarRatings from 'react-star-ratings';
 import Loading from "../images/Loading.svg"
 import {AiOutlineClose} from "react-icons/ai"
-import configData from "../component/config.json"
+
 // import Cookies from 'js-cookie'
 import Swal from "sweetalert2"
 import { useCookies } from 'react-cookie';
@@ -19,7 +19,7 @@ function SurveyKepuasan({setOpenRating}) {
     useEffect(() => {
         const survey = cookies["survey"]
         if(!survey) return setSurvey(true)
-        const url =  configData.SERVER_API + "rating"
+        const url =  process.env.REACT_APP_BASE_URL + "rating"
         fetch(url,{
             method:"GET",
             credentials: 'same-origin',
@@ -36,7 +36,7 @@ function SurveyKepuasan({setOpenRating}) {
     const beriRating = () => {
         setIsLoading(true)
         setCookie("survey",true)
-        const url =  configData.SERVER_API + "rating"
+        const url =  process.env.REACT_APP_BASE_URL + "rating"
         fetch(url,{
             method:"PATCH", 
             headers: {

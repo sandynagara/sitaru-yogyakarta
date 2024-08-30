@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import configData from "../../config.json"
+
 import { useState } from 'react'
 import {AiFillInfoCircle,AiFillEye,AiFillFilePdf} from "react-icons/ai"
 import ModalPermohonan from '../ModalPermohonan'
@@ -16,7 +16,7 @@ function ListPermohonan() {
     const [totalPage, setTotalPage] = useState(5)
 
     useEffect(async() => {
-      const url = `${configData.SERVER_API}/permohonan?page=${page}&limit=10`
+      const url = `${process.env.REACT_APP_BASE_URL}/permohonan?page=${page}&limit=10`
       try{
         const response = await fetch(url,{
             method:"GET",
@@ -42,7 +42,7 @@ function ListPermohonan() {
     }
 
     const openFile = (path,name,type) => {
-        let url = `${configData.SERVER_API}permohonan/${path}`
+        let url = `${process.env.REACT_APP_BASE_URL}permohonan/${path}`
         if(type === "image"){
             setOpenImage(true)
             setImageData({url:url,name:name})

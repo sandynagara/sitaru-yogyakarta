@@ -2,7 +2,7 @@ import React, { useState,useEffect,useRef } from 'react'
 import "./Profile.css"
 import {AiTwotoneDelete} from "react-icons/ai"
 import * as WMS from "leaflet.wms";
-import configData from "./config.json"
+
 import { MapContainer, TileLayer,useMap,GeoJSON} from "react-leaflet";
 import L from "leaflet";
 import Swal from "sweetalert2"
@@ -38,7 +38,7 @@ function Pelaporan(){
   const tileRef = useRef();
 
   useEffect(() => {
-    const urlLaporan = configData.SERVER_API + "laporan"
+    const urlLaporan = process.env.REACT_APP_BASE_URL + "laporan"
     fetch(urlLaporan,{
       method: 'GET',
       credentials: 'include'})
@@ -80,7 +80,7 @@ function Pelaporan(){
         })
 
         if(laporanPersilSelected.length === 1){
-          const url = configData.SERVER_API + "user/pelapor/" + feature.properties.pelapor
+          const url = process.env.REACT_APP_BASE_URL + "user/pelapor/" + feature.properties.pelapor
           fetch(url,{
             method:"GET",
             credentials:"include"
@@ -99,7 +99,7 @@ function Pelaporan(){
   }
 
   const daftarSelected = (feature) => {
-    const url = configData.SERVER_API + "user/pelapor/" + feature.properties.pelapor
+    const url = process.env.REACT_APP_BASE_URL + "user/pelapor/" + feature.properties.pelapor
         fetch(url,{
           method:"GET",
           credentials:"include"
@@ -132,7 +132,7 @@ function Pelaporan(){
     }).then((result) => {
       
       if (result.isConfirmed) {
-        const url = configData.SERVER_API + "laporan"
+        const url = process.env.REACT_APP_BASE_URL + "laporan"
         fetch(url,{
           method:"DELETE",
           credentials:"include",
@@ -167,7 +167,7 @@ function Pelaporan(){
     >
       <TileLayer ref={tileRef} url="https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}" style={{opacity:"0.5"}} maxZoom={22} />
       <CustomWMSLayer
-          url={configData.SERVER_GEOSERVER+"geoserver/sitaru/wms"}
+          url={process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/sitaru/wms"}
           layers={"sitaru:Batas_Persil"}
           options={{
             format: "image/png",
@@ -227,7 +227,7 @@ function DataProfile({setOpen}){
   const [dataUser, setDataUser] = useState(false)
 
   useEffect(() => {
-    const url = configData.SERVER_API + "user"
+    const url = process.env.REACT_APP_BASE_URL + "user"
     fetch(url,{method:"GET",credentials:"include"}).
     then(res=>res.json()).
     then(res=>{

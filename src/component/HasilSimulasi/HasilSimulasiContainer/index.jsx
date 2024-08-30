@@ -1,7 +1,7 @@
 import React,{useEffect,useState,useContext} from 'react'
 import "./HasilSimulasi.scss"
 import {AiOutlineClose} from "react-icons/ai"
-import configData from "../../config.json"
+
 import SyaratHasilSimulasi from '../SyaratSimulasi'
 import KetentuanHasilSimulasi from '../KetentuanSimulasi'
 import IntensitasHasilSimulasi from '../IntensitasSimulasi'
@@ -23,7 +23,7 @@ export default function HasilSimulasi({close,hasil = false }) {
 
   useEffect(() => {
     if(!hasil) return
-    const url = configData.SERVER_API + "user"
+    const url = process.env.REACT_APP_BASE_URL + "user"
     fetch(url,{method:"GET",credentials:"include"}).
     then(res=>res.json()).
     then(res=>setUser(res)).
@@ -44,7 +44,7 @@ export default function HasilSimulasi({close,hasil = false }) {
     setResult(hasil)
     if(hasil.simulasi.izin !== "X") setPilihSyarat("intensitas")
 
-    const url = configData.SERVER_API+"user/check"
+    const url = process.env.REACT_APP_BASE_URL+"user/check"
     fetch(url,{
       credentials:'include'
     }).then(res=>res.json()).then(res=>{

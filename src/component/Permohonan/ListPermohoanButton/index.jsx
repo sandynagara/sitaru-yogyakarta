@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {FaClipboardList} from "react-icons/fa"
-import configData from "../../config.json"
+
 import LoginForm from '../../LoginRegister/LoginForm'
 import {AiOutlineForm} from "react-icons/ai"
 
@@ -21,7 +21,7 @@ function ListPermohonanButton({setMode,mode}) {
         }
 
         try{
-          var url = configData.SERVER_API+"user/check"
+          var url = process.env.REACT_APP_BASE_URL+"user/check"
           let response = await fetch(url,{credentials:'include'})
           response = await response.json()
           if(response !== "unauthorized"){

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import configData from "../../config.json"
+
 import TextField from '@mui/material/TextField';
 import axios from "axios";
 
@@ -30,7 +30,7 @@ function SearchAddress({setCenter,setListAddress,listAddress}) {
             return
         }
 
-        const url = configData.SERVER_API+"geocoding/"+debouncedSearchTerm;
+        const url = process.env.REACT_APP_BASE_URL+"geocoding/"+debouncedSearchTerm;
         try {
             const response = await axios.get(url);
             if(response.data.length == 0){

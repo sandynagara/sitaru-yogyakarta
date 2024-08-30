@@ -3,7 +3,7 @@ import React, { useState, useEffect,useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import "./Peta.css";
 import L from "leaflet";
-import configData from "./config.json";
+
 import iconMarker from 'leaflet/dist/images/marker-icon.png'
 import ScreenShootMap from "./ScreenShootMap";
 
@@ -90,10 +90,10 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
     var map = useMap();
     map = useMapEvents({click(e) { 
         var urlRDTR = getFeatureInfoUrl(
-          configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
+          process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
         );
         var urlPersil = getFeatureInfoUrl(
-          configData.SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_gsb_revisi_347120231124140756"
+          process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_gsb_revisi_347120231124140756"
         );
 
         panggil((result) => {
@@ -170,7 +170,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
         />
 
         <WMSTileLayer
-          url={configData.SERVER_GEOSERVER+"geoserver/wms"}
+          url={process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms"}
           layers={"Dispertaru:rdtr_ar_347120220607112209"}
           {...mapProps}
           ref={refRdtr}

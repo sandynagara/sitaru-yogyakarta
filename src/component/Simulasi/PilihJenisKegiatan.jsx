@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react'
-import configData from "../config.json"
+
 import screenshootContext from '../Context/ScreenshootContext';
 import { useContext } from 'react';
 function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
@@ -23,7 +23,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
     };
 
     useEffect(() => {
-      var url = configData.SERVER_API+"jeniskegiatan"
+      var url = process.env.REACT_APP_BASE_URL+"jeniskegiatan"
       panggil(hasil=>{
         kegiatan.current.value=hasil.kegiatan[0]["sub kegiatan"]
         setKeteranganKegiatan(hasil.kegiatan[0])
@@ -31,7 +31,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
     }, []);
   
     const kegiatanChange = (e) => {
-      var url = configData.SERVER_API+"kegiatan/semua/"+e.target.value
+      var url = process.env.REACT_APP_BASE_URL+"kegiatan/semua/"+e.target.value
       panggil(hasil=>{
         setListKegiatan(hasil.kegiatan)
       },url)
@@ -56,7 +56,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
         kawasan:kawasan,
         remark:remark
       }
-      var url = configData.SERVER_API+"izin/"
+      var url = process.env.REACT_APP_BASE_URL+"izin/"
       
       fetch(url,{
         method: 'POST',

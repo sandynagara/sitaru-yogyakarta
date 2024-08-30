@@ -1,6 +1,6 @@
 import React,{useRef} from 'react'
 import "./Pelaporan.css"
-import configData from "./config.json"
+
 import Swal from "sweetalert2"
 
 function Pelaporan({setOpen,data}) {
@@ -12,7 +12,7 @@ function Pelaporan({setOpen,data}) {
 
     const submitLaporan = (e) => {
         e.preventDefault()
-        const url = configData.SERVER_API + "laporan"
+        const url = process.env.REACT_APP_BASE_URL + "laporan"
         const jenisLaporanInput = jenisLaporan.current.value
         const keteranganInput = keterangan.current.value
         const kelurahan = data["wadmkd"]

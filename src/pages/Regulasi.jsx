@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {AiFillInfoCircle,AiFillDelete,AiFillEye,AiOutlineHome,AiOutlineUpload,AiOutlineLogout} from "react-icons/ai"
 import Swal from "sweetalert2"
-import configData from "../component/config.json"
+
 import { useMediaQuery } from 'react-responsive'
 import LoginForm from '../component/LoginRegister/LoginForm'
 import {Link} from "react-router-dom"
@@ -22,7 +22,7 @@ function Regulasi() {
   })
 
   useEffect(() => {
-    var url = configData.SERVER_API+"regulasi"
+    var url = process.env.REACT_APP_BASE_URL+"regulasi"
       fetch(url,{
         method: 'GET',
         credentials: 'include',
@@ -42,7 +42,7 @@ function Regulasi() {
   }, [berubah])
 
   useEffect(() => {
-    var url = configData.SERVER_API+"user/check"
+    var url = process.env.REACT_APP_BASE_URL+"user/check"
     fetch(url,{
       method:"GET",
       credentials:"include"
@@ -55,7 +55,7 @@ function Regulasi() {
   
 
   const downloadFile = (idFile,nama="No name") => {
-    var url = configData.SERVER_API+"regulasi/"+idFile
+    var url = process.env.REACT_APP_BASE_URL+"regulasi/"+idFile
     fetch(url).then(res=>res.blob()).then((res)=>{
       var data = new Blob([res], {type: 'application/pdf'});
       var csvURL = window.URL.createObjectURL(data);
@@ -76,7 +76,7 @@ function Regulasi() {
       confirmButtonText: 'Ya, hapus'
     }).then((result) => {
       if (result.isConfirmed) {
-        var url = configData.SERVER_API+"regulasi/"+idFile
+        var url = process.env.REACT_APP_BASE_URL+"regulasi/"+idFile
         fetch(url,{
             method:"DELETE",
             credentials:"include"
@@ -125,7 +125,7 @@ function Regulasi() {
   }
 
   const openPdf = (data) => {
-    var url = configData.SERVER_API+"regulasi/"+data["namaId"]
+    var url = process.env.REACT_APP_BASE_URL+"regulasi/"+data["namaId"]
     var w = window.open("", '_blank');
     if(w.document) { 
       w.document.write('<html><head><title>'+data["nama"]+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
@@ -137,7 +137,7 @@ function Regulasi() {
     <div
       className='w-full  py-3 lg:py-0 lg:px-0 lg:col-span-3'
       onClick={()=>{
-        var url = configData.SERVER_API+"regulasi/"+data["namaId"]
+        var url = process.env.REACT_APP_BASE_URL+"regulasi/"+data["namaId"]
         if(!isDesktopOrLaptop){
           setPdf({url:url,nama:data["nama"]})
         }
@@ -175,7 +175,7 @@ function Regulasi() {
   }
 
   const logOut = () => {
-    const url = configData.SERVER_API + 'logout'
+    const url = process.env.REACT_APP_BASE_URL + 'logout'
     fetch(url,{
       method:"GET",
     }).then(res=>res.json()).then(res=>{

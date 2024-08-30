@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Swal from "sweetalert2"
 import {AiOutlineClose} from "react-icons/ai"
 import Loading from "../../images/Loading.svg"
-import configData from "../config.json"
+
 
 function UploadRegulasi({setUploadOpen,setBerubah,berubah}) {
 
@@ -12,7 +12,7 @@ function UploadRegulasi({setUploadOpen,setBerubah,berubah}) {
 
     const unggahRegulasi = () => {
         setIsLoading(true)
-        const url = configData.SERVER_API + "regulasi"
+        const url = process.env.REACT_APP_BASE_URL + "regulasi"
 
         var data = new FormData()
         data.append('regulasi', file)

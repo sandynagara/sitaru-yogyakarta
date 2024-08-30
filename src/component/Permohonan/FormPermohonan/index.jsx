@@ -1,6 +1,6 @@
 import React,{useState,useRef} from 'react'
 import {AiOutlineUpload,AiFillFile,AiOutlineClose} from "react-icons/ai"
-import configData from "../../config.json"
+
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import LoadingIcon from "../../../images/Loading.svg"
@@ -91,7 +91,7 @@ function FormPermohonan() {
     const uploadForm =  async () => {
         if (loading) return
         setLoading(true)
-        const url = configData.SERVER_API + "permohonan"
+        const url = process.env.REACT_APP_BASE_URL + "permohonan"
 
         var body = new FormData()
         var checkFile = true
