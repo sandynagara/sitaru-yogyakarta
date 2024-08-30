@@ -4,7 +4,7 @@ import {AiOutlineUser ,AiOutlineLock,AiOutlineContacts,AiOutlineClose} from 'rea
 import {BsPhone} from 'react-icons/bs'
 import {FaRegAddressBook} from "react-icons/fa"
 import Swal from 'sweetalert2'
-import configData from "../config.json"
+
 
 function RegisterForm({setLogin,setOpen}){
 
@@ -20,7 +20,7 @@ function RegisterForm({setLogin,setOpen}){
 
     const checkChange = (e) => {
         if(e.target.name === "Username"){
-            var url = configData.SERVER_API + "user/check/" + e.target.value
+            var url = process.env.REACT_APP_BASE_URL + "user/check/" + e.target.value
             fetch(url)
             .then(res => res.json())
             .then(hasil => setUsernameCheck(!hasil))
@@ -58,7 +58,7 @@ function RegisterForm({setLogin,setOpen}){
         const namaLengkap = e.target["Nama Lengkap"].value
         const alamat = e.target["Alamat"].value
         const noHp = e.target["Nomor Handphone (Opsional)"].value
-        const url = configData.SERVER_API + "user"
+        const url = process.env.REACT_APP_BASE_URL + "user"
         fetch(url,{
             method: 'POST',
             credentials: 'include',

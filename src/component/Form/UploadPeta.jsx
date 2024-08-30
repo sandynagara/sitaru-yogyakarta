@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Swal from "sweetalert2"
 import {AiOutlineClose} from "react-icons/ai"
 import Loading from "../../images/Loading.svg"
-import configData from "../config.json"
+
 
 function UploadPeta({setUploadOpen,setBerubah,berubah}) {
 
@@ -12,7 +12,7 @@ function UploadPeta({setUploadOpen,setBerubah,berubah}) {
 
     const unggahPeta = () => {
         setIsLoading(true)
-        const url = configData.SERVER_API + "peta"
+        const url = process.env.REACT_APP_BASE_URL + "peta"
 
         var data = new FormData()
         data.append('peta', file)

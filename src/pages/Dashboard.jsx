@@ -5,7 +5,7 @@ import Basemap from "../component/Basemap/ListBasemap";
 import Layer from "../component/Layer";
 import Pelaporan from "../component/Pelaporan";
 import Profile from "../component/Profile";
-import configData from "../component/config.json"
+
 import Legenda from "../component/Legenda";
 import LoginRegisterForm from "../component/LoginRegister/LoginRegisterForm";
 import Sidebar from "../component/Sidebar/LeftSidebar";
@@ -40,7 +40,7 @@ function Dashboard() {
     window.addEventListener('resize', handleScroll, { passive: true });
 
     useEffect(() => {
-      const url = configData.SERVER_API + "user"
+      const url = process.env.REACT_APP_BASE_URL + "user"
       fetch(url,{
         method:"GET",
         credentials:"include"

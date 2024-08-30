@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import  {AiOutlineUser ,AiOutlineLock,AiOutlineClose} from 'react-icons/ai'
-import configData from "../config.json"
+
 import Swal from 'sweetalert2'
 import Modal from '@mui/material/Modal';
 import InputLoginRegister from './InputLoginRegister'
@@ -17,7 +17,7 @@ function LoginForm({setLogin,setOpen,open}){
         }else if(password === ""){
             alert("Password tidak boleh kosong")
         }else{
-            const url = configData.SERVER_API + "login"
+            const url = process.env.REACT_APP_BASE_URL + "login"
             fetch(url,{method:"POST", 
                 headers: {
                 'Accept': 'application/json',

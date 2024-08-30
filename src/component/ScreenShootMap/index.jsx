@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 import { WMSTileLayer,MapContainer, TileLayer, Polygon, FeatureGroup,useMap, Marker } from 'react-leaflet'
-import configData from "../config.json"
+
 import ScreenshootContext from '../Context/ScreenshootContext';
 import L from "leaflet";
 import iconMarker from 'leaflet/dist/images/marker-icon.png'
@@ -104,7 +104,7 @@ function ScreenShootMap({selectedPersil=false}) {
             zoomControl={false}
         >   
             <WMSTileLayer
-                url={configData.SERVER_GEOSERVER+"geoserver/wms"}
+                url={process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms"}
                 layers={"Dispertaru:rdtr_ar_347120220607112209"}
                 {...props}
             />

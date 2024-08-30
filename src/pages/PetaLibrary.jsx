@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {AiFillInfoCircle,AiFillDelete,AiFillEye,AiOutlineDownload,AiOutlineHome,AiOutlineUpload,AiOutlineLogout} from "react-icons/ai"
 import Swal from "sweetalert2"
-import configData from "../component/config.json"
+
 import { useMediaQuery } from 'react-responsive'
 import LoginForm from '../component/LoginRegister/LoginForm'
 import UploadPeta from '../component/Form/UploadPeta'
@@ -21,7 +21,7 @@ function PetaLibrary() {
   })
 
   useEffect(() => {
-    var url = configData.SERVER_API+"peta"
+    var url = process.env.REACT_APP_BASE_URL+"peta"
       fetch(url,{
         method: 'GET',
         credentials: 'include',
@@ -41,7 +41,7 @@ function PetaLibrary() {
   }, [berubah])
 
   useEffect(() => {
-    var url = configData.SERVER_API+"user/check"
+    var url = process.env.REACT_APP_BASE_URL+"user/check"
     
     fetch(url,{
       credentials:'include'
@@ -53,7 +53,7 @@ function PetaLibrary() {
   }, [])
   
   const downloadFile = (idFile,nama="No name") => {
-    var url = configData.SERVER_API+"peta/"+idFile
+    var url = process.env.REACT_APP_BASE_URL+"peta/"+idFile
     fetch(url).then(res=>res.blob()).then((res)=>{
       var data = new Blob([res], {type: 'application/pdf'});
       var csvURL = window.URL.createObjectURL(data);
@@ -74,7 +74,7 @@ function PetaLibrary() {
       confirmButtonText: 'Ya, hapus'
     }).then((result) => {
       if (result.isConfirmed) {
-        var url = configData.SERVER_API+"peta/"+idFile
+        var url = process.env.REACT_APP_BASE_URL+"peta/"+idFile
         fetch(url,{
             method:"DELETE",
             credentials:"include"
@@ -133,7 +133,7 @@ function PetaLibrary() {
   }
 
   const openPdf = (data) => {
-    var url = configData.SERVER_API+"peta/"+data["namaId"]
+    var url = process.env.REACT_APP_BASE_URL+"peta/"+data["namaId"]
     var w = window.open("", '_blank');
     if(w.document) { 
       w.document.write('<html><head><title>'+data["nama"]+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
@@ -145,7 +145,7 @@ function PetaLibrary() {
     <div
       className='w-full  py-3 lg:py-0 lg:px-0 lg:col-span-3'
       onClick={()=>{
-        var url = configData.SERVER_API+"peta/"+data["namaId"]
+        var url = process.env.REACT_APP_BASE_URL+"peta/"+data["namaId"]
         if(!isDesktopOrLaptop){
           openPdf(data)
         }
@@ -169,7 +169,7 @@ function PetaLibrary() {
   }
 
   const logOut = () => {
-    const url = configData.SERVER_API + 'logout'
+    const url = process.env.REACT_APP_BASE_URL + 'logout'
     fetch(url,{
       method:"GET",
       credentials:"include"

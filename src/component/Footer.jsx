@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import Logo from "../images/Logo_Kota_Yogyakarta.png"
-import configData from "../component/config.json"
+
 import SurveyKepuasan from './SurveyKepuasan'
 // import Cookies from 'js-cookie'
 import { useCookies } from 'react-cookie';
@@ -10,29 +10,25 @@ function Footer() {
     const [jumlahPengunjung, setJumlahPengunjung] = useState(0)
     const [openRating, setOpenRating] = useState(false)
 
-    const [cookies, setCookie, removeCookie] = useCookies(['akses']);
+    const [cookies, setCookie] = useCookies(['akses']);
 
     useEffect(() => {
       const survey = cookies["akses"]
       if(survey){
-        const url = configData.SERVER_API + "jumlahakses"
+        const url = process.env.REACT_APP_BASE_URL + "jumlahakses"
         fetch(url,{
           method:"GET",
           credentials: 'same-origin',
         }).then(res=>res.json()).then(res=>{
           setJumlahPengunjung(res)
-        }).catch((err)=>{
-          console.log(err)
         })
       }else{
-        const url = configData.SERVER_API + "jumlahakses"
+        const url = process.env.REACT_APP_BASE_URL + "jumlahakses"
         fetch(url,{
           method:"PATCH",
           credentials: 'same-origin',
         }).then(res=>res.json()).then(res=>{
           setJumlahPengunjung(res)
-        }).catch((err)=>{
-          console.log(err)
         })
         setCookie("akses",true,{secure:true,httpOnly:true})
       }
