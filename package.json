@@ -1,7 +1,8 @@
 {
   "name": "sitaru",
-  "version": "1.1.0",
+  "version": "2.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

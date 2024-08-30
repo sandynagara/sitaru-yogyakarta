@@ -1,6 +1,6 @@
 import "./App.css";
 import Dashboard from "./pages/Dashboard";
-import {Routes, Route, HashRouter } from "react-router-dom";
+import {Routes, Route, BrowserRouter } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import PetaLibrary from "./pages/PetaLibrary";
 import Regulasi from "./pages/Regulasi";
@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <ScreenshootContext.Provider value={{takePhoto,setTakePhoto,screenshoot,setScreenshoot,result, setResult}}>
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
@@ -26,7 +26,7 @@ function App() {
             <Route path="/regulasi" element={<Regulasi />}/>
             <Route path="/permohonan" element={<Permohonan />}/>
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </ScreenshootContext.Provider>
     </div>
   );
