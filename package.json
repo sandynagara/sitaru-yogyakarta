@@ -38,7 +38,6 @@
     "react-star-ratings": "^2.3.0",
     "sass": "^1.58.3",
     "sweetalert2": "^11.4.14",
-    "turf": "^3.0.14",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
