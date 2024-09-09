@@ -38,7 +38,7 @@ function Footer() {
 
   return (
     <div className='flex flex-col'>
-        <div className=' bg-black py-10 px-20 text-white text-sm mt-5 flex flex-col'>
+        <div className=' bg-black py-10 px-20 text-white text-sm flex flex-col'>
           <div className='w-full relative flex flex-col'>
             <div className='grid lg:grid-cols-10'>
               <div className='text-center col-span-4 flex flex-col items-center lg:items-start '>
