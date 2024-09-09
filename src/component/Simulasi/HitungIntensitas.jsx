@@ -1,6 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react'
-import turf from "turf"
-import {area} from "turf"
+import {polygon,area} from "@turf/turf"
 import proj4 from 'proj4'
 function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
   
@@ -20,12 +19,8 @@ function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
       buttonIntensitas.current.disabled=true
       buttonIntensitas.current.style.backgroundColor = "rgb(180, 210, 248)"
       buttonIntensitas.current.style.cursor = "auto"
-      const polygon = turf.polygon([data.geometry]);
-      const coordinates = polygon.geometry.coordinates[0];
-      const convertedCoordinates = coordinates.map(coord => proj4(wgs84, utm49S, coord));
-      const convertedPolygon = turf.polygon([convertedCoordinates]);
-      
-      luasBidang.current.value = 10
+      const polygonTurf = polygon([data.geometry]);
+      luasBidang.current.value = area(polygonTurf).toFixed(0)
     }, [])
 
     useEffect(() => {
