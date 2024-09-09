@@ -1,5 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react'
 import turf from "turf"
+import {area} from "turf"
+import proj4 from 'proj4'
 function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
   
     const [intensitas, setIntensitasData] = useState(false)
@@ -9,12 +11,21 @@ function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
   
     useEffect(() => {
       setIntensitasData(hasilQuery.simulasi.intensitasBangunan[0])
+
+      const wgs84 = 'EPSG:4326';
+
+      // UTM Zone 49S (EPSG:32749)
+      const utm49S = '+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs';
+
       buttonIntensitas.current.disabled=true
       buttonIntensitas.current.style.backgroundColor = "rgb(180, 210, 248)"
       buttonIntensitas.current.style.cursor = "auto"
-      var polygon = turf.polygon([data.geometry]);
-      var area = turf.area(polygon);
-      luasBidang.current.value = area.toFixed(0)
+      const polygon = turf.polygon([data.geometry]);
+      const coordinates = polygon.geometry.coordinates[0];
+      const convertedCoordinates = coordinates.map(coord => proj4(wgs84, utm49S, coord));
+      const convertedPolygon = turf.polygon([convertedCoordinates]);
+      
+      luasBidang.current.value = 10
     }, [])
 
     useEffect(() => {

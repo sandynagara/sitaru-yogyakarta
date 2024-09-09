@@ -21,7 +21,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
     }
   }, [inputBasemap]);
 
-  var panggil = (cb, url) => {
+  const panggil = (cb, url) => {
     fetch(url,{
         method: 'GET',
       })
@@ -51,19 +51,9 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
       changeOpacity()
   }, [opacityBasemap,opacityRdtr,opacityPersil,map])
   
-  var getFeatureInfoUrl = (url, map, e,layer) => {
-    console.log( L.Proj);
-
-    var crs = new L.Proj.CRS('EPSG:32749', // define the CRS
-    '+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs', // define the proj4 definition
-    { 
-      transformation:  L.Transformation (1, 0, -1, 0),
-      scale: function (zoom) {
-        return Math.pow (2, zoom);
-      }
-    });
+  const getFeatureInfoUrl = (url, map, e,layer) => {
     // Construct a GetFeatureInfo request URL given a point
-    var size = map.getSize(),
+    const size = map.getSize(),
       params = {
         request: "GetFeatureInfo",
         service: "WMS",
@@ -80,33 +70,32 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
         info_format: "application/json",
         X: Math.round(e.containerPoint.x),
         Y: Math.round(e.containerPoint.y),
-        crs:crs
       };
 
     return url + L.Util.getParamString(params, url, true);
   };
 
-  var GetFeatureInfoUrlHandle = () =>{
-    var map = useMap();
+  const GetFeatureInfoUrlHandle = () =>{
+    let map = useMap();
     map = useMapEvents({click(e) { 
-        var urlRDTR = getFeatureInfoUrl(
+        const urlRDTR = getFeatureInfoUrl(
           process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
         );
-        var urlPersil = getFeatureInfoUrl(
+        const urlPersil = getFeatureInfoUrl(
           process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_gsb_revisi_347120231124140756"
         );
 
         panggil((result) => {
             panggil((resultPersil)=>{
                 if(resultPersil["features"].length == 0) return
-                var koordinat = resultPersil.features[0].geometry.coordinates[0][0].map((e)=>{
+                const koordinat = resultPersil.features[0].geometry.coordinates[0][0].map((e)=>{
                   return [e[1],e[0]]
                 })
                 setSelectedPersil(koordinat)
                 let properties = result.features[0].properties
                 properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
-                properties.gsb = resultPersil.features[0].properties["GSB"]
-                properties.remarkGsb = resultPersil.features[0].properties["REMARK"]
+                properties.gsb = resultPersil.features[0].properties["gsb"]
+                properties.remarkGsb = resultPersil.features[0].properties["remark"]
 
                 setData(properties)
             },urlPersil)
@@ -126,7 +115,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
   }
 
   const ChangeCenterMap = () => {
-    var map = useMap();
+    const map = useMap();
     if(!center) return null
     setCenter(false)
     setCenterMarker(center)
