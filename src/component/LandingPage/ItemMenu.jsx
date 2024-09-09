@@ -21,12 +21,12 @@ function ItemMenu({icon,judul,keterangan="Belum diisi",active=false,link="/",cus
   }
 
   return (
-    <div className='bg-white p-2 flex flex-col items-center'>
-      <div className='z-10 w-[80px] h-[80px] flex justify-center items-center bg-sky-200 m-2 rounded-md'>
+    <div className='p-2 flex flex-col items-center'>
+      <div className='z-10 w-[80px] h-[80px] flex justify-center items-center bg-[#111926] m-2 rounded-md border-2 border-gray-200 '>
         {active ? icon : <AiOutlineQuestion size={35}/>}
       </div>
     
-        <div className='text-center cursor-pointer w-64 border-2 rounded-xl mt-[-40px] pt-[40px] pb-5 border-gray-200 p-2 hover:shadow-lg hover:shadow-gray-300'
+        <div className='text-center bg-[#111926] cursor-pointer w-64 border-2 rounded-xl mt-[-40px] pt-[40px] pb-5 border-gray-200 p-2 hover:shadow-lg hover:shadow-gray-300'
           onClick={()=>{
             if(customAction){
               customAction()
@@ -36,10 +36,10 @@ function ItemMenu({icon,judul,keterangan="Belum diisi",active=false,link="/",cus
           }
           }
         >
-          <div className='font-bold text-sky-700 text-lg' style={active?{}:{color:"rgb(220 38 38)"}}>
+          <div className='font-bold text-white text-lg' style={active?{}:{color:"rgb(220 38 38)"}}>
             {judul}
           </div>
-          <div className='text-sm mt-4 text-gray-500 font-medium'>
+          <div className='text-sm mt-4 text-white font-medium'>
             {keterangan}
           </div>
         </div>
