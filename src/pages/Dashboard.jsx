@@ -72,10 +72,10 @@ function Dashboard() {
           <Simulasi open={open} data={data}/>
           <Peta center={center} setCenter={setCenter} inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData} centerMarker={centerMarker} setCenterMarker={setCenterMarker}/>
           <ToolAddressContainer setCenter={setCenter} open={open} setCenterMarker={setCenterMarker}/>
-          {open === "Login" && <LoginRegisterForm setOpen={setOpen}/>}
-          {open === "Panduan" && <Panduan open={open} setOpen={setOpen}/>}
-          {open === "Lapor" && <Pelaporan setOpen={setOpen} data={data} />} 
-          {open === "Profile" && <Profile setOpen={setOpen} user={user} setUser={setUser} />} 
+          {open == "Login" && <LoginRegisterForm setOpen={setOpen}/>}
+          {open == "Panduan" && <Panduan open={open} setOpen={setOpen}/>}
+          {open == "Lapor" && <Pelaporan setOpen={setOpen} data={data} />} 
+          {open == "Profile" && <Profile setOpen={setOpen} user={user} setUser={setUser} />} 
           <ModalDisclaimer/>
       </div>
     )
