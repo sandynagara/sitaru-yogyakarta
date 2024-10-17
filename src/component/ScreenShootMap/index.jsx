@@ -1,17 +1,17 @@
-import React,{useState,useEffect,useContext} from 'react'
+import React,{useState,useEffect,useContext,useRef} from 'react'
 import { WMSTileLayer,MapContainer, TileLayer, Polygon, FeatureGroup,useMap, Marker } from 'react-leaflet'
-
 import ScreenshootContext from '../Context/ScreenshootContext';
 import L from "leaflet";
 import iconMarker from 'leaflet/dist/images/marker-icon.png'
-import { SimpleMapScreenshoter } from 'leaflet-simple-map-screenshoter';
+import html2canvas from 'html2canvas';
+
 function ScreenShootMap({selectedPersil=false}) {
 
     const [centerMap,setCenterMap] = useState(false)
     const { takePhoto,setScreenshoot } = useContext(ScreenshootContext);
-    const [first, setFirst] = useState(true)
-    const [takeBasemap,setTakeBasemap]  = useState(false);
-    const [takeRdtr,setTaleRdtr]  = useState(false);
+    const mapRef = useRef(null);
+    const mapRdtr = useRef(null);
+    const [tilesLoaded, setTilesLoaded] = useState(false); 
 
     const props = {
         service: 'WMS',
@@ -20,7 +20,7 @@ function ScreenShootMap({selectedPersil=false}) {
         format: 'image/png',
         transparent: true,
         opacity: 0.7,
-        maxZoom: 18,
+        maxZoom: 22,
     }
 
     const icon = L.icon({ 
@@ -28,32 +28,27 @@ function ScreenShootMap({selectedPersil=false}) {
         iconAnchor:[15, 30]
     });
 
-    useEffect(async () => {
-        if(!takeBasemap) return null
-        if(!takeRdtr) return null
-        const basemapScreenShoot = await takeBasemap.takeScreen('image',
-            {cropImageByInnerWH: function () {return true},mimeType: 'image/png',})
-        const rdtrScreenShoot = await takeRdtr.takeScreen('image',
-            {cropImageByInnerWH: function () {return true},mimeType: 'image/png',})
-        setScreenshoot({"basemap":basemapScreenShoot,"rdtr":rdtrScreenShoot})
-      }, [takePhoto])
-
-    const TakeScreenShoot = ({type}) => {
-        var map = useMap();
-        if (!first) return null
-
-        var simpleMapScreenshoter = L.simpleMapScreenshoter({
-            hidden: true, // hide screen btn on map
-        }).addTo(map)
-
-        if(type == "basemap") setTakeBasemap(simpleMapScreenshoter)
-        if(type == "rdtr") setTaleRdtr(simpleMapScreenshoter)
-        setFirst(false);
-        return null
-    }
+    const takeScreenshot = async () => {
+        if (mapRef.current  && tilesLoaded) {
+          const mapElement = mapRef.current.getContainer();
+          const mapElementRdtr = mapRdtr.current.getContainer();
+          const canvas = await html2canvas(mapElement,{
+            allowTaint: true,
+            useCORS: true,
+          });
+          const basemapScreenShoot = canvas.toDataURL('image/png');
+          const canvasRdtr = await html2canvas(mapElementRdtr);
+          const rdtrScreenShoot = canvasRdtr.toDataURL('image/png');
+          setScreenshoot({"basemap":basemapScreenShoot,"rdtr":rdtrScreenShoot})
+        }
+    };
 
     useEffect(() => {
-        if(!selectedPersil) return null
+        takeScreenshot()
+    }, [takePhoto])
+    
+    useEffect(() => {
+        if(!selectedPersil) return  () => {}
         const polygonCenter = getPolygonCenter()
         setCenterMap(polygonCenter)
     }, [selectedPersil])
@@ -75,33 +70,35 @@ function ScreenShootMap({selectedPersil=false}) {
 
 
     const ChangeCenterMap = () => {
-        var map = useMap();
-        if(!centerMap) return null
+        const map = useMap();
+        if(!centerMap) return  () => {}
         map.setView(centerMap)
         return  null
     }
 
   return (
-    <div className='flex top-0 z-[-2] ml-[-1500px] relative'>
+    <div className='flex top-0  z-[-2] ml-[-1500px]   relative'>
         <MapContainer
             center={[-7.801408, 110.3647275]}
             zoom={17}
-            style={{ width: "300px", height: "180px",position:"absolute",top:0,left:0 }}
+            style={{ width: "300px", height: "180px",position:"absolute",top:0,right:0 }}
             zoomControl={false}
+            ref={mapRef}
+            whenReady={() => setTilesLoaded(true)}
         >   
             <TileLayer
                 url={"https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"}
             />
             {centerMap && <Marker position={centerMap} icon={icon}/>}
             <ChangeCenterMap/>
-            <TakeScreenShoot type={"basemap"}/>
         </MapContainer>
 
         <MapContainer
             center={[-7.801408, 110.3647275]}
             zoom={17}
-            style={{ width: "300px", height: "180px",position:"absolute",top:0,left:0}}
+            style={{ width: "300px", height: "180px",position:"absolute",top:0,right:0}}
             zoomControl={false}
+            ref={mapRdtr}
         >   
             <WMSTileLayer
                 url={process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms"}
@@ -112,7 +109,6 @@ function ScreenShootMap({selectedPersil=false}) {
             <FeatureGroup>
                 {selectedPersil && <SelectedLayerHandler/> }
             </FeatureGroup>
-            <TakeScreenShoot type={"rdtr"}/>
         </MapContainer>
     </div>
     

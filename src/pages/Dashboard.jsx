@@ -7,6 +7,7 @@ import Pelaporan from "../component/Pelaporan";
 import Profile from "../component/Profile";
 
 import Legenda from "../component/Legenda";
+import FindRoadContainer from "../component/FindRoad/FindRoadContainer";
 import LoginRegisterForm from "../component/LoginRegister/LoginRegisterForm";
 import Sidebar from "../component/Sidebar/LeftSidebar";
 import Simulasi from "../component/Simulasi/SimulasiHp";
@@ -70,6 +71,7 @@ function Dashboard() {
           <KeteranganContainerLeft data={data} open={open}/>
           { width && <RightSidebar data={data} setOpen={setOpen}/> }
           <Simulasi open={open} data={data}/>
+          <FindRoadContainer open={open}/>
           <Peta center={center} setCenter={setCenter} inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData} centerMarker={centerMarker} setCenterMarker={setCenterMarker}/>
           <ToolAddressContainer setCenter={setCenter} open={open} setCenterMarker={setCenterMarker}/>
           {open == "Login" && <LoginRegisterForm setOpen={setOpen}/>}

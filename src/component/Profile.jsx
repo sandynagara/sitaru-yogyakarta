@@ -11,20 +11,20 @@ function ItemPelaporan({daftarSelected,feature,properties,index}){
   return (
     <div className='item-laporan' onClick={()=>daftarSelected(feature)} >
         <div style={{fontSize:"12px",fontWeight:"bold"}}>
-                    {index+1}.
+            {index+1}.
         </div>
-          <div style={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
-                    <div style={{fontSize:"12px",fontWeight:"bold"}}>
-                      {properties.jenisLaporan}
-                    </div>
-                    <div style={{fontSize:"12px"}}>
-                      {properties.kecamatan}
-                    </div>
-                    <div style={{fontSize:"12px"}}>
-                      {properties.date}
-                    </div>
-                  </div>
-            </div>
+        <div style={{display:"flex",justifyContent:"center",flexDirection:"column"}}>
+        <div style={{fontSize:"12px",fontWeight:"bold"}}>
+          {properties.jenisLaporan}
+        </div>
+        <div style={{fontSize:"12px"}}>
+          {properties.kecamatan}
+        </div>
+        <div style={{fontSize:"12px"}}>
+          {properties.date}
+        </div>
+      </div>
+    </div>
   )
 }
 
