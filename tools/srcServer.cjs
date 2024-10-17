@@ -48,7 +48,7 @@ async function startServer() {
   });
   
   // Use Vite's connect instance as middleware
-  app.use('/api/*', unstable_fegateway);
+  app.use('/api-backend/*', unstable_fegateway);
   app.use(vite.middlewares);
   
   
