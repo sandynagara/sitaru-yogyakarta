@@ -6,7 +6,7 @@ import {FaMap,FaGlobe} from "react-icons/fa"
 import * as Bs from "react-icons/bs";
 import { RiTestTubeFill } from "react-icons/ri";
 import {Link} from "react-router-dom"
-import logo from "../../../images/Logo_Kota_Yogyakarta.png";
+import { IoIosSearch } from "react-icons/io";
 
 function Sidebar({open,setOpen,width}) {
 
@@ -41,6 +41,12 @@ function Sidebar({open,setOpen,width}) {
         to:false,
         title:"Simulasi",
         icon:<RiTestTubeFill style={styleIcon}/>,
+        responsive:false
+      },
+      {
+        to:false,
+        title:"Pencarian Jalan",
+        icon:<IoIosSearch style={styleIcon}/>,
         responsive:false
       },
       {

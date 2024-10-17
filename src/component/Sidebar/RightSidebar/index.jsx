@@ -20,19 +20,6 @@ function RightSidebar({data,setOpen}) {
       >
         
         {data ? <Keterangan data={data}/> : <KeteranganSitaru/>}
-        
-        {/* {data && 
-        <div className="absolute w-full p-2 bottom-0">
-          <div className="bg-sky-600  bottom-0 hover:bg-sky-700 text-sm text-center py-2 rounded-md text-white cursor-pointer"
-            onClick={()=>setOpen("Simulasi")}
-          >
-            <button >
-              Simulasi
-            </button>
-          </div>
-        </div>
-       
-        } */}
       </div>
     </div>
   );

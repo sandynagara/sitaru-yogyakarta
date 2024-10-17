@@ -3,8 +3,8 @@ import React, { useState, useEffect,useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import "./Peta.css";
 import L from "leaflet";
-
 import iconMarker from 'leaflet/dist/images/marker-icon.png'
+import RoadMap from "./FindRoad/RoadMap";
 import ScreenShootMap from "./ScreenShootMap";
 
 function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,center,setCenter,centerMarker,setCenterMarker}) {
@@ -129,12 +129,12 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
     version: '1.1.0',
     format: 'image/png',
     transparent: true,
-    maxZoom: 18,
+    maxZoom: 22,
   }
 
   const basemapsProps = {
     tiled: true,
-    maxZoom: 18,
+    maxZoom: 22,
     zIndex: 1
   }
 
@@ -143,13 +143,19 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
       <ScreenShootMap selectedPersil={selectedPersil}/>
       <MapContainer
         center={[-7.801408, 110.3647275]}
-        zoom={17}
+        zoom={18}
         style={{ width: "100vw", height: "100vh" }}
         zoomControl={false}
+        maxZoom={22}
         whenReady={(e)=>setMap(e)}
       >
     
         <TileLayer {...basemapsProps} url={inputBasemap}  ref={refBasemap}/>
+
+        <TileLayer
+          url="https://ppids-ugm.com/tile/{z}/{x}/{y}.jpg"
+          attribution='&copy; <a href="https://ppids-ugm.com">PPIDS UGM</a>'
+        />
 
         <WMSTileLayer
           url="https://ppids-ugm.com/geoserver/ppids/wms"
@@ -164,13 +170,15 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
           {...mapProps}
           ref={refRdtr}
         />
-  
+
+        
         <FeatureGroup>
           {selectedPersil && <SelectedLayerHandler/> }
         </FeatureGroup>
         {centerMarker && <Marker position={centerMarker} icon={icon}/>}
         <ChangeCenterMap/>
         <GetFeatureInfoUrlHandle/>
+        <RoadMap/>
       </MapContainer>
      
     </div>
