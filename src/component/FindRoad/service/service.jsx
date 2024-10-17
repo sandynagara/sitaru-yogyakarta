@@ -2,7 +2,7 @@ import Resource from '../../../api/resource';
 
 export class RoadService extends Resource {
     constructor() {
-      super('geocoding',"api","api-backend");
+      super('geocoding',"api-backend","base");
     }
 
     get_road(token) {

@@ -1,6 +1,6 @@
 module.exports = (param)=>[
   {
-    gateway: 'api-backend',
+    gateway: 'base',
     baseUrl: param.REACT_APP_BASE_URL,
   },
 ];
