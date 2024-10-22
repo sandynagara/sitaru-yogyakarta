@@ -153,7 +153,16 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
         <TileLayer {...basemapsProps} url={inputBasemap}  ref={refBasemap}/>
 
         <TileLayer
+          url="https://ppids-ugm.com/tile/{z}/{x}/{y}.png"
+          minZoom={20}
+          maxNativeZoom={21}
+          maxZoom={22}
+          attribution='&copy; <a href="https://ppids-ugm.com">PPIDS UGM</a>'
+        />
+
+        <TileLayer
           url="https://ppids-ugm.com/tile/{z}/{x}/{y}.jpg"
+          maxZoom={19}
           attribution='&copy; <a href="https://ppids-ugm.com">PPIDS UGM</a>'
         />
 
