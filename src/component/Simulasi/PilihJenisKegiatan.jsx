@@ -23,7 +23,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
     };
 
     useEffect(() => {
-      var url = process.env.REACT_APP_BASE_URL+"jeniskegiatan"
+      const url = process.env.REACT_APP_BASE_URL+"jeniskegiatan"
       panggil(hasil=>{
         kegiatan.current.value=hasil.kegiatan[0]["sub kegiatan"]
         setKeteranganKegiatan(hasil.kegiatan[0])

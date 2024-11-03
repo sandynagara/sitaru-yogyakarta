@@ -5,7 +5,6 @@ import ScreenshootContext from '../Context/ScreenshootContext';
 import {HiDownload} from "react-icons/hi"
 import {AiOutlineArrowLeft} from "react-icons/ai"
 import { useNavigate } from 'react-router';
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import PdfKop from './PdfKop';
 import { saveAs } from 'file-saver';
 import { pdf } from '@react-pdf/renderer';
@@ -49,13 +48,6 @@ function FormPdf() {
         dataPemohon[label] = value
         setResult({...result,dataPemohon})
     }
-
-    // const listIntensitas = [
-    //     {label:"a. Koefisien Dasar Bangunan (KDB)",value:`KDB maksimal adalah ${hasil.intensitas.kdb}% atau sebesar ${(hasil.intensitas.kdb*hasil.intensitas.luas*0.01).toFixed(2)} m2`},
-    //     {label:"b. Koefisien Lantai Bangunan (KLB)",value:`KLB maksimal adalah ${hasil.intensitas.klb} atau sebesar ${(hasil.intensitas.klb.replace(/,/g, '.')*hasil.intensitas.luas).toFixed(2)} m2`},
-    //     {label:"c. Koefisien Daerah Hijau (KDH)",value:`KDH minimal adalah ${hasil.intensitas.kdh}% atau sebesar ${(hasil.intensitas.kdh*hasil.intensitas.luas*0.01).toFixed(2)} m2`},
-    //     {label:"d. Tinggi Bangunan",value:`Tinggi maksimal bangunan adalah ${hasil.intensitas.tinggi} m`},
-    // ]
 
     const listMonth = ["January","February","Maret","April","Mei","Juni","July","Agustus","September","October","November","Desember"]
 

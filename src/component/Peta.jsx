@@ -6,14 +6,19 @@ import L from "leaflet";
 import iconMarker from 'leaflet/dist/images/marker-icon.png'
 import RoadMap from "./FindRoad/RoadMap";
 import ScreenShootMap from "./ScreenShootMap";
+import MeasureDrawing from "./ToolAddress/MeasureDrawing";
+import { useTool } from "./ToolAddress/hooks/useTool";
+import { useLayer } from "./Layer/hooks/useLayer";
 
-function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,center,setCenter,centerMarker,setCenterMarker}) {
+function Peta({ inputBasemap,setData,center,setCenter,centerMarker,setCenterMarker}) {
   const [map, setMap] = useState(false)
   const [selectedPersil, setSelectedPersil] = useState(false);
-
+  const TOOL = useTool()
+  const LAYER = useLayer()
   const refBasemap = useRef(null)
   const refRdtr = useRef(null)
   const refPersil = useRef(null)
+  const refFotoUdara = useRef(null)
 
   useEffect(() => {
     if (refBasemap.current) {
@@ -35,21 +40,26 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
   const changeOpacity = () => {
     refBasemap.current
       .getContainer()
-      .style.setProperty("filter", `opacity(${opacityBasemap}%)`);
+      .style.setProperty("filter", `opacity(${LAYER.state.opacityBasemap}%)`);
     
     refRdtr.current
       .getContainer()
-      .style.setProperty("filter", `opacity(${opacityRdtr}%)`);
+      .style.setProperty("filter", `opacity(${LAYER.state.opacityRdtr}%)`);
 
     refPersil.current
       .getContainer()
-      .style.setProperty("filter", `opacity(${opacityPersil}%)`);
+      .style.setProperty("filter", `opacity(${LAYER.state.opacityBidangTanah}%)`);
+
+    refFotoUdara.current
+      .getContainer()
+      .style.setProperty("filter", `opacity(${LAYER.state.opacityFotoUdara}%)`);
   }
 
   useEffect(() => {
-      if(!map) return
-      changeOpacity()
-  }, [opacityBasemap,opacityRdtr,opacityPersil,map])
+      if(map){
+        changeOpacity()
+      }
+  }, [LAYER.state,map])
   
   const getFeatureInfoUrl = (url, map, e,layer) => {
     // Construct a GetFeatureInfo request URL given a point
@@ -76,6 +86,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
   };
 
   const GetFeatureInfoUrlHandle = () =>{
+    if(TOOL.state.typeMeasure) return () => {}
     let map = useMap();
     map = useMapEvents({click(e) { 
         const urlRDTR = getFeatureInfoUrl(
@@ -158,12 +169,14 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
           maxNativeZoom={21}
           maxZoom={22}
           attribution='&copy; <a href="https://ppids-ugm.com">PPIDS UGM</a>'
+          ref={refFotoUdara}
         />
 
         <TileLayer
           url="https://ppids-ugm.com/tile/{z}/{x}/{y}.jpg"
           maxZoom={19}
           attribution='&copy; <a href="https://ppids-ugm.com">PPIDS UGM</a>'
+          ref={refFotoUdara}
         />
 
         <WMSTileLayer
@@ -188,6 +201,7 @@ function Peta({ inputBasemap ,opacityBasemap,opacityPersil,opacityRdtr,setData,c
         <ChangeCenterMap/>
         <GetFeatureInfoUrlHandle/>
         <RoadMap/>
+        <MeasureDrawing/>
       </MapContainer>
      
     </div>

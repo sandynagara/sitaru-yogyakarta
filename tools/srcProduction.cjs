@@ -16,7 +16,6 @@ const getCSP = () => `
   worker-src * blob:;
 `.replace(/\s+/g, ' ').trim();
 
-
 async function startServer() {
   const app = express();
 

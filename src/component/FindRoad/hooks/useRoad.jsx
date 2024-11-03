@@ -1,5 +1,4 @@
 import { ROAD_ACTIONS } from '../redux/ROAD_ACTION';
-import { ROAD_CONSTANT } from '../redux/ROAD_CONSTANT';
 import { useDispatch, useSelector } from 'react-redux';
 
 export function useRoad() {

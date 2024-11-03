@@ -10,12 +10,6 @@ function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
   
     useEffect(() => {
       setIntensitasData(hasilQuery.simulasi.intensitasBangunan[0])
-
-      const wgs84 = 'EPSG:4326';
-
-      // UTM Zone 49S (EPSG:32749)
-      const utm49S = '+proj=utm +zone=49 +south +datum=WGS84 +units=m +no_defs';
-
       buttonIntensitas.current.disabled=true
       buttonIntensitas.current.style.backgroundColor = "rgb(180, 210, 248)"
       buttonIntensitas.current.style.cursor = "auto"
@@ -77,7 +71,6 @@ function HitungIntensitas({setMode,setHasil,hasilQuery,data}) {
   
     const simulasiClick =()=>{
       if(luasBidang.current.value == "") return
-      console.log(hasilQuery.simulasi);
       const HasilSimulasi = {
         simulasi: hasilQuery.simulasi.zonasi[0],
         ketentuan: hasilQuery.simulasi?.ketentuan ? hasilQuery.simulasi.ketentuan[0] : "",
