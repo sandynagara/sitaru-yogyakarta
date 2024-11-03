@@ -2,7 +2,6 @@ import Peta from "../component/Peta";
 import React, { useState,useEffect } from 'react'
 import RightSidebar from "../component/Sidebar/RightSidebar";
 import Basemap from "../component/Basemap/ListBasemap";
-import Layer from "../component/Layer";
 import Pelaporan from "../component/Pelaporan";
 import Profile from "../component/Profile";
 
@@ -15,13 +14,11 @@ import Panduan from "../component/Panduan/Panduan";
 import ToolAddressContainer from "../component/ToolAddress/ToolAddressContainer";
 import KeteranganContainerLeft from "../component/Keterangan/KeteranganContainerLeft";
 import ModalDisclaimer from "../component/ModalDisclaimer";
+import LayerContainer from "../component/Layer/LayerContainer";
 
 function Dashboard() {
 
     const [basemap,setBasemap] = useState("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}")
-    const [opacityBasemap, setOpacityBasemap] = useState(100)
-    const [opacityPersil, setOpacityPersil] = useState(50)
-    const [opacityRdtr, setOpacityRdtr] = useState(80)
     const [open,setOpen] = useState(false)
     const [width, setWidth] = useState(false)
     const [data, setData] = useState(false)
@@ -66,13 +63,13 @@ function Dashboard() {
       <div >
           <Sidebar open={open}  setOpen={setOpen} width={width}/>
           <Basemap open={open} setInputBasemap={(e) => setBasemap(e)} inputBasemap={basemap}/>
-          <Layer open={open} setOpacityBasemap={(e)=>setOpacityBasemap(e)} setOpacityPersil={(e)=>setOpacityPersil(e)} setOpacityRdtr={(e)=>setOpacityRdtr(e)}/>
+          <LayerContainer open={open}/>
           <Legenda open={open}/>
           <KeteranganContainerLeft data={data} open={open}/>
           { width && <RightSidebar data={data} setOpen={setOpen}/> }
           <Simulasi open={open} data={data}/>
           <FindRoadContainer open={open}/>
-          <Peta center={center} setCenter={setCenter} inputBasemap={basemap} opacityBasemap={opacityBasemap} opacityPersil={opacityPersil} opacityRdtr={opacityRdtr} setData={setData} centerMarker={centerMarker} setCenterMarker={setCenterMarker}/>
+          <Peta center={center} setCenter={setCenter} inputBasemap={basemap} setData={setData} centerMarker={centerMarker} setCenterMarker={setCenterMarker}/>
           <ToolAddressContainer setCenter={setCenter} open={open} setCenterMarker={setCenterMarker}/>
           {open == "Login" && <LoginRegisterForm setOpen={setOpen}/>}
           {open == "Panduan" && <Panduan open={open} setOpen={setOpen}/>}

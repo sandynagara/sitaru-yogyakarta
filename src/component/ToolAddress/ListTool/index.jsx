@@ -1,28 +1,32 @@
-import React,{useState,useEffect} from 'react'
-import {AiOutlineSearch} from "react-icons/ai"
-import {GiPositionMarker} from 'react-icons/gi'
+import React from 'react'
+import {AiOutlineSearch} from "react-icons/ai";
+import { TbRulerMeasure } from "react-icons/tb";
+import { useTool } from '../hooks/useTool';
 
 function ListTool({on,setOn,setListAddress,setCenterMarker}) {
+
+    const TOOL = useTool()
 
     const handleToggleAddress = (value) => {
         if(on == value){
             setOn(false)
             setCenterMarker(false)
-            return
+            TOOL.resetAll()
+        }else{
+            setOn(value)
+            setListAddress([])
         }
-        setOn(value)
-        setListAddress(false)
     }
 
     const ListToolItem = [
         {
             toolbar:"geocoding",
             icon:<AiOutlineSearch color='#1E2E4A' size={20}/>
-        }
-        // {
-        //     toolbar:"koordinat",
-        //     icon:<GiPositionMarker color='#1976D2' size={20}/>
-        // },
+        },
+        {
+            toolbar:"measure",
+            icon:<TbRulerMeasure color='#1E2E4A' size={20}/>
+        },
     ]
 
   return (

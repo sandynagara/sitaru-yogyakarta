@@ -16,6 +16,8 @@ export const ROAD_ACTIONS = {
       });
       try {
         const data = await roadService.get_road(query); 
+        console.log(data,"Data");
+        
         dispatch({
           type: ROAD_CONSTANT.GET_ROAD_SUCCESS,
           payload: {
@@ -44,8 +46,6 @@ export const ROAD_ACTIONS = {
     };
   },
   setRoadSelected:(payload) => {
-    console.log(payload,"payload");
-    
     return (dispatch) => {
       dispatch({ type: ROAD_CONSTANT.SET_ROAD_SELECTED, 
         payload:{ selectedRoad: payload },

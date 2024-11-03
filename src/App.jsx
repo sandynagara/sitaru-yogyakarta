@@ -8,7 +8,7 @@ import Permohonan from "./pages/Permohonan";
 import FormPdfContainer from "./pages/FormPdfContainer";
 import NotFound from "./pages/NotFound";
 import ScreenshootContext from "./component/Context/ScreenshootContext";
-import React, { useState,useEffect } from 'react'
+import React, { useState } from 'react'
 import { Provider } from 'react-redux';
 
 function App({ store }) {

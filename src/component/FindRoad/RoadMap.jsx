@@ -8,7 +8,7 @@ function RoadMap() {
     const map = useMap()
 
     useEffect(() => {
-        if(!ROAD.state.selectedRoad?.geometry) return
+        if(!ROAD.state.selectedRoad?.geometry) return ()=>{}
         const bounds = L.geoJSON(ROAD.state.selectedRoad).getBounds();
         map.fitBounds(bounds)        
     }, [ROAD.state.selectedRoad])

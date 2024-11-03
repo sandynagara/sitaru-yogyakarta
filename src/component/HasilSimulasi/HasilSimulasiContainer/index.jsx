@@ -22,7 +22,7 @@ export default function HasilSimulasi({close,hasil = false }) {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(!hasil) return
+    if(!hasil) return ()=>{}
     const url = process.env.REACT_APP_BASE_URL + "user"
     fetch(url,{method:"GET",credentials:"include"}).
     then(res=>res.json()).
@@ -40,7 +40,7 @@ export default function HasilSimulasi({close,hasil = false }) {
   }
 
   useEffect(() => {
-    if(!hasil) return
+    if(!hasil) return () => {}
     setResult(hasil)
     if(hasil.simulasi.izin !== "X") setPilihSyarat("intensitas")
 

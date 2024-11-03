@@ -8,7 +8,6 @@ const initialState = {
 
 export function ROAD_REDUCER(state = initialState, action) {
   let returnData = state;
-  console.log(returnData);
   
   Object.values(ROAD_CONSTANT).forEach((ctx) => {
     if (action.type === ROAD_CONSTANT.RESET_STATUS) {
