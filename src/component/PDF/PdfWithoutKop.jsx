@@ -230,7 +230,7 @@ function PdfWithoutKop({hasil,screenshoot}) {
 
                     <View style={{display:"flex",flexDirection:"column"}}>
                         {hasil.dataZonasi.gsb.split(",").map((gsb,index)=>{
-                            var remark = hasil.dataZonasi.remarkGsb.split(",")
+                            var remark = hasil.dataZonasi?.remarkGsb?.split(",")
                             gsb = gsb.trimStart()
                             var namaGsb = gsb == "GSB Jalan Lingkungan" ? "GSB Jalan Lingkungan" : remark[index].trimStart()
                             return(
@@ -268,7 +268,7 @@ function PdfWithoutKop({hasil,screenshoot}) {
                     </Text>
                 </View>
                 <View style={{paddingLeft:10,display:"flex",flexDirection:"column"}}>
-                    {hasil.simulasi.syarat.split(";").map((syarat,index)=>{
+                    {hasil.simulasi?.syarat?.split(";").map((syarat,index)=>{
                         if(syarat == "") return
                         return(
                             <View style={{display:"flex",flexDirection:"row"}} key={index}>
@@ -297,7 +297,7 @@ function PdfWithoutKop({hasil,screenshoot}) {
                     </Text>
                 </View>
                 <View style={{paddingLeft:10,display:"flex",flexDirection:"column"}}>
-                    {hasil.ketentuan.gaya.split(";").map((syarat,index)=>{
+                    {hasil.ketentuan?.gaya?.split(";").map((syarat,index)=>{
                         if(syarat == "") return
                         return(
                             <View style={{display:"flex",flexDirection:"row"}}  key={index}>

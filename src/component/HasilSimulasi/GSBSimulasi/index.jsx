@@ -1,8 +1,9 @@
-import React,{useState} from 'react'
+import React from 'react'
 import gsbLogo from "../../../images/gsb.png"
 
 function GSBSimulasi({gsb,remark}) {
-
+    console.log(gsb,remark);
+    
     const listGsb = gsb.split(",")
     const listRemark = remark.split(",")
 

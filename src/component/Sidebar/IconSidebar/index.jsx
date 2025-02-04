@@ -8,7 +8,7 @@ function Icon({ icon ,judul ,open, setOpen}) {
         setOpen(false)
       }else{
         if(judul==="Login"){
-          const url = process.env.REACT_APP_BASE_URL + "user/check"
+          const url = `${process.env.REACT_APP_BASE_URL}/` + "user/check"
           fetch(url,{
             method:"GET",
             credentials:"include"

@@ -12,7 +12,7 @@ function Pelaporan({setOpen,data}) {
 
     const submitLaporan = (e) => {
         e.preventDefault()
-        const url = process.env.REACT_APP_BASE_URL + "laporan"
+        const url = `${process.env.REACT_APP_BASE_URL}/` + "laporan"
         const jenisLaporanInput = jenisLaporan.current.value
         const keteranganInput = keterangan.current.value
         const kelurahan = data["wadmkd"]

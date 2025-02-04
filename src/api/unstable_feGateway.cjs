@@ -36,7 +36,7 @@ async function unstable_fegateway(req, res) {
 
   const gateway = gatewayList(process.env).find(value=>req.baseUrl.includes(value.gateway) )
 
-  const BASE_PATH = gateway?.baseUrl ?? process.env.REACT_APP_BASE_URL;
+  const BASE_PATH = gateway?.baseUrl ?? `${process.env.REACT_APP_BASE_URL}/`;
   
   
   const forgeRequestHeaders = {

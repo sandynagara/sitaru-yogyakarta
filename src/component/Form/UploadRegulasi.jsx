@@ -12,7 +12,7 @@ function UploadRegulasi({setUploadOpen,setBerubah,berubah}) {
 
     const unggahRegulasi = () => {
         setIsLoading(true)
-        const url = process.env.REACT_APP_BASE_URL + "regulasi"
+        const url = `${process.env.REACT_APP_BASE_URL}/` + "regulasi"
 
         var data = new FormData()
         data.append('regulasi', file)

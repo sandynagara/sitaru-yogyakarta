@@ -32,7 +32,7 @@ function ModalPermohonan({open,setOpen,data=false}) {
     }
 
     const openFile = (path,name,type) => {
-        let url = `${process.env.REACT_APP_BASE_URL}permohonan/${path}`
+        let url = `${`${process.env.REACT_APP_BASE_URL}/`}permohonan/${path}`
         if(type === "image"){
             setOpenImage(true)
             setImageData({url:url,name:name})

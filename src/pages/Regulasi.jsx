@@ -29,7 +29,7 @@ function Regulasi() {
   });
 
   useEffect(() => {
-    const url = process.env.REACT_APP_BASE_URL + "regulasi";
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "regulasi";
     fetch(url, {
       method: "GET",
       credentials: "include",
@@ -49,7 +49,7 @@ function Regulasi() {
   }, [berubah]);
 
   useEffect(() => {
-    const url = process.env.REACT_APP_BASE_URL + "user/check";
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "user/check";
     fetch(url, {
       method: "GET",
       credentials: "include",
@@ -64,7 +64,7 @@ function Regulasi() {
   }, []);
 
   const downloadFile = (idFile, nama = "No name") => {
-    var url = process.env.REACT_APP_BASE_URL + "regulasi/" + idFile;
+    var url = `${process.env.REACT_APP_BASE_URL}/` + "regulasi/" + idFile;
     fetch(url)
       .then((res) => res.blob())
       .then((res) => {
@@ -87,7 +87,7 @@ function Regulasi() {
       confirmButtonText: "Ya, hapus",
     }).then((result) => {
       if (result.isConfirmed) {
-        var url = process.env.REACT_APP_BASE_URL + "regulasi/" + idFile;
+        var url = `${process.env.REACT_APP_BASE_URL}/` + "regulasi/" + idFile;
         fetch(url, {
           method: "DELETE",
           credentials: "include",
@@ -128,7 +128,7 @@ function Regulasi() {
   };
 
   const openPdf = (data) => {
-    var url = process.env.REACT_APP_BASE_URL + "regulasi/" + data["namaId"];
+    var url = `${process.env.REACT_APP_BASE_URL}/` + "regulasi/" + data["namaId"];
     var w = window.open("", "_blank");
     if (w.document) {
       w.document.write(
@@ -148,7 +148,7 @@ function Regulasi() {
           className="w-full  py-3 lg:py-0 lg:px-0 lg:col-span-3"
           onClick={() => {
             var url =
-              process.env.REACT_APP_BASE_URL + "regulasi/" + data["namaId"];
+              `${process.env.REACT_APP_BASE_URL}/` + "regulasi/" + data["namaId"];
             if (!isDesktopOrLaptop) {
               setPdf({ url: url, nama: data["nama"] });
             }
@@ -207,7 +207,7 @@ function Regulasi() {
   };
 
   const logOut = () => {
-    const url = process.env.REACT_APP_BASE_URL + "logout";
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "logout";
     fetch(url, {
       method: "GET",
     })
