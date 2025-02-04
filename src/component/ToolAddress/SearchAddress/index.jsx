@@ -27,7 +27,7 @@ function SearchAddress({ setCenter, setListAddress, listAddress }) {
 
   const fetchAddress = async (name) => {
     const url =
-      process.env.REACT_APP_BASE_URL + "geocoding/" + name;
+      `${process.env.REACT_APP_BASE_URL}/` + "geocoding/" + name;
     try {
       const response = await axios.get(url);
       if (response.data.length == 0) {

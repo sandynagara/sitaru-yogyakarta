@@ -17,7 +17,7 @@ function LoginForm({setLogin,setOpen,open}){
         }else if(password === ""){
             alert("Password tidak boleh kosong")
         }else{
-            const url = process.env.REACT_APP_BASE_URL + "login"
+            const url = `${process.env.REACT_APP_BASE_URL}/` + "login"
             fetch(url,{method:"POST", 
                 headers: {
                 'Accept': 'application/json',

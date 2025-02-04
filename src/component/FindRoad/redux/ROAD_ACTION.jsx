@@ -15,9 +15,7 @@ export const ROAD_ACTIONS = {
         },
       });
       try {
-        const data = await roadService.get_road(query); 
-        console.log(data,"Data");
-        
+        const data = await roadService.get_road(query);         
         dispatch({
           type: ROAD_CONSTANT.GET_ROAD_SUCCESS,
           payload: {

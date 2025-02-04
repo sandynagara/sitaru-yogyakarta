@@ -2,9 +2,7 @@ import React from 'react'
 import RoadItem from './RoadItem'
 import RoadNotFound from './RoadNotFound'
 
-function ListRoad({listRoad,onClick}) {
-    console.log(listRoad);
-    
+function ListRoad({listRoad,onClick}) {    
     return (
         <div className='flex flex-col gap-2'>
             {listRoad.list?.length > 0 ? listRoad?.list?.map((value,index)=>{

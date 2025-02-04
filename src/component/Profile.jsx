@@ -38,7 +38,7 @@ function Pelaporan(){
   const tileRef = useRef();
 
   useEffect(() => {
-    const urlLaporan = process.env.REACT_APP_BASE_URL + "laporan"
+    const urlLaporan = `${process.env.REACT_APP_BASE_URL}/` + "laporan"
     fetch(urlLaporan,{
       method: 'GET',
       credentials: 'include'})
@@ -80,7 +80,7 @@ function Pelaporan(){
         })
 
         if(laporanPersilSelected.length === 1){
-          const url = process.env.REACT_APP_BASE_URL + "user/pelapor/" + feature.properties.pelapor
+          const url = `${process.env.REACT_APP_BASE_URL}/` + "user/pelapor/" + feature.properties.pelapor
           fetch(url,{
             method:"GET",
             credentials:"include"
@@ -99,7 +99,7 @@ function Pelaporan(){
   }
 
   const daftarSelected = (feature) => {
-    const url = process.env.REACT_APP_BASE_URL + "user/pelapor/" + feature.properties.pelapor
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "user/pelapor/" + feature.properties.pelapor
         fetch(url,{
           method:"GET",
           credentials:"include"
@@ -132,7 +132,7 @@ function Pelaporan(){
     }).then((result) => {
       
       if (result.isConfirmed) {
-        const url = process.env.REACT_APP_BASE_URL + "laporan"
+        const url = `${process.env.REACT_APP_BASE_URL}/` + "laporan"
         fetch(url,{
           method:"DELETE",
           credentials:"include",
@@ -227,7 +227,7 @@ function DataProfile({setOpen}){
   const [dataUser, setDataUser] = useState(false)
 
   useEffect(() => {
-    const url = process.env.REACT_APP_BASE_URL + "user"
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "user"
     fetch(url,{method:"GET",credentials:"include"}).
     then(res=>res.json()).
     then(res=>{

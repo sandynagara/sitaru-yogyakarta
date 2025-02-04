@@ -38,7 +38,7 @@ function Dashboard() {
     window.addEventListener('resize', handleScroll, { passive: true });
 
     useEffect(() => {
-      const url = process.env.REACT_APP_BASE_URL + "user"
+      const url = `${process.env.REACT_APP_BASE_URL}/` + "user"
       fetch(url,{
         method:"GET",
         credentials:"include"

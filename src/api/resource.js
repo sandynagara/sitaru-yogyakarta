@@ -77,7 +77,6 @@ class Resource {
     this.uri +
     this.additonalUri +
     (id ? '/' + id : '')
-    console.log(url);
     return request({
       url:
         '/' +

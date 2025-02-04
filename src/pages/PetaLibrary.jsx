@@ -29,7 +29,7 @@ function PetaLibrary() {
   });
 
   useEffect(() => {
-    const url = process.env.REACT_APP_BASE_URL + "peta";
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "peta";
     fetch(url, {
       method: "GET",
       credentials: "include",
@@ -49,7 +49,7 @@ function PetaLibrary() {
   }, [berubah]);
 
   useEffect(() => {
-    const url = process.env.REACT_APP_BASE_URL + "user/check";
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "user/check";
 
     fetch(url, {
       credentials: "include",
@@ -64,7 +64,7 @@ function PetaLibrary() {
   }, []);
 
   const downloadFile = (idFile, nama = "No name") => {
-    var url = process.env.REACT_APP_BASE_URL + "peta/" + idFile;
+    var url = `${process.env.REACT_APP_BASE_URL}/` + "peta/" + idFile;
     fetch(url)
       .then((res) => res.blob())
       .then((res) => {
@@ -87,7 +87,7 @@ function PetaLibrary() {
       confirmButtonText: "Ya, hapus",
     }).then((result) => {
       if (result.isConfirmed) {
-        var url = process.env.REACT_APP_BASE_URL + "peta/" + idFile;
+        var url = `${process.env.REACT_APP_BASE_URL}/` + "peta/" + idFile;
         fetch(url, {
           method: "DELETE",
           credentials: "include",
@@ -139,7 +139,7 @@ function PetaLibrary() {
   };
 
   const openPdf = (data) => {
-    var url = process.env.REACT_APP_BASE_URL + "peta/" + data["namaId"];
+    var url = `${process.env.REACT_APP_BASE_URL}/` + "peta/" + data["namaId"];
     var w = window.open("", "_blank");
     if (w.document) {
       w.document.write(
@@ -158,7 +158,7 @@ function PetaLibrary() {
         <div
           className="w-full  py-3 lg:py-0 lg:px-0 lg:col-span-3"
           onClick={() => {
-            var url = process.env.REACT_APP_BASE_URL + "peta/" + data["namaId"];
+            var url = `${process.env.REACT_APP_BASE_URL}/` + "peta/" + data["namaId"];
             if (!isDesktopOrLaptop) {
               openPdf(data);
             }
@@ -207,7 +207,7 @@ function PetaLibrary() {
   };
 
   const logOut = () => {
-    const url = process.env.REACT_APP_BASE_URL + "logout";
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "logout";
     fetch(url, {
       method: "GET",
       credentials: "include",

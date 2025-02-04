@@ -90,10 +90,10 @@ function Peta({ inputBasemap,setData,center,setCenter,centerMarker,setCenterMark
     let map = useMap();
     map = useMapEvents({click(e) { 
         const urlRDTR = getFeatureInfoUrl(
-          process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:rdtr_ar_347120220607112209"
+          process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"sitaru:RDTR"
         );
         const urlPersil = getFeatureInfoUrl(
-          process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"Dispertaru:persil_gsb_revisi_347120231124140756"
+          process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms?",map,e,"ppids:persil_gsb_revisi"
         );
 
         panggil((result) => {
@@ -104,10 +104,12 @@ function Peta({ inputBasemap,setData,center,setCenter,centerMarker,setCenterMark
                 })
                 setSelectedPersil(koordinat)
                 let properties = result.features[0].properties
+                properties = Object.fromEntries(
+                  Object.entries(properties).map(([key, value]) => [key.toLowerCase(), value])
+                );
                 properties.geometry = resultPersil.features[0].geometry.coordinates[0][0]
-                properties.gsb = resultPersil.features[0].properties["gsb"]
-                properties.remarkGsb = resultPersil.features[0].properties["remark"]
-
+                properties.gsb = resultPersil.features[0].properties["GSB"]
+                properties.remarkGsb = resultPersil.features[0].properties["REMARK"]
                 setData(properties)
             },urlPersil)
         }, urlRDTR);
@@ -180,15 +182,15 @@ function Peta({ inputBasemap,setData,center,setCenter,centerMarker,setCenterMark
         />
 
         <WMSTileLayer
-          url="https://ppids-ugm.com/geoserver/ppids/wms"
-          layers="ppids:persil_gsb_revisi"
+          url={process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms"}
+          layers="ppids:persil"
           {...mapProps}
           ref={refPersil}
         />
 
         <WMSTileLayer
           url={process.env.REACT_APP_SERVER_GEOSERVER+"geoserver/wms"}
-          layers={"Dispertaru:rdtr_ar_347120220607112209"}
+          layers={"sitaru:RDTR"}
           {...mapProps}
           ref={refRdtr}
         />

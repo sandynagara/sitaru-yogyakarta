@@ -15,7 +15,7 @@ function Footer() {
     useEffect(() => {
       const survey = cookies["akses"]
       if(survey){
-        const url = process.env.REACT_APP_BASE_URL + "jumlahakses"
+        const url = `${process.env.REACT_APP_BASE_URL}/` + "jumlahakses"
         fetch(url,{
           method:"GET",
           credentials: 'same-origin',
@@ -23,7 +23,7 @@ function Footer() {
           setJumlahPengunjung(res)
         })
       }else{
-        const url = process.env.REACT_APP_BASE_URL + "jumlahakses"
+        const url = `${process.env.REACT_APP_BASE_URL}/` + "jumlahakses"
         fetch(url,{
           method:"PATCH",
           credentials: 'same-origin',

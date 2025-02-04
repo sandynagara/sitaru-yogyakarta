@@ -15,6 +15,8 @@ function Simulasi({open,data}) {
     useEffect(() => {
       setIntensitas(false)
       setMode("kegiatan")
+      console.log(data,hasil,"hasil");
+      
     }, [data])
   
     return (

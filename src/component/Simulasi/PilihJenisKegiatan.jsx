@@ -23,7 +23,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
     };
 
     useEffect(() => {
-      const url = process.env.REACT_APP_BASE_URL+"jeniskegiatan"
+      const url = `${process.env.REACT_APP_BASE_URL}/`+"jeniskegiatan"
       panggil(hasil=>{
         kegiatan.current.value=hasil.kegiatan[0]["sub kegiatan"]
         setKeteranganKegiatan(hasil.kegiatan[0])
@@ -31,7 +31,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
     }, []);
   
     const kegiatanChange = (e) => {
-      var url = process.env.REACT_APP_BASE_URL+"kegiatan/semua/"+e.target.value
+      var url = `${process.env.REACT_APP_BASE_URL}/`+"kegiatan/semua/"+e.target.value
       panggil(hasil=>{
         setListKegiatan(hasil.kegiatan)
       },url)
@@ -56,7 +56,7 @@ function PilihJenisKegiatan({data, setMode,setHasilQuery,setHasil}) {
         kawasan:kawasan,
         remark:remark
       }
-      var url = process.env.REACT_APP_BASE_URL+"izin/"
+      var url = `${process.env.REACT_APP_BASE_URL}/`+"izin/"
       
       fetch(url,{
         method: 'POST',

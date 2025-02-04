@@ -21,7 +21,7 @@ function ListPermohonanButton({setMode,mode}) {
         }
 
         try{
-          var url = process.env.REACT_APP_BASE_URL+"user/check"
+          var url = `${process.env.REACT_APP_BASE_URL}/`+"user/check"
           let response = await fetch(url,{credentials:'include'})
           response = await response.json()
           if(response !== "unauthorized"){

@@ -12,7 +12,7 @@ function UploadPeta({setUploadOpen,setBerubah,berubah}) {
 
     const unggahPeta = () => {
         setIsLoading(true)
-        const url = process.env.REACT_APP_BASE_URL + "peta"
+        const url = `${process.env.REACT_APP_BASE_URL}/` + "peta"
 
         var data = new FormData()
         data.append('peta', file)

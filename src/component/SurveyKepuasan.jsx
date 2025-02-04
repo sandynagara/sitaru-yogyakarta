@@ -20,7 +20,7 @@ function SurveyKepuasan({ setOpenRating }) {
     if (!survey) {
       setSurvey(true);
     } else {
-      const url = process.env.REACT_APP_BASE_URL + "rating";
+      const url = `${process.env.REACT_APP_BASE_URL}/` + "rating";
       fetch(url, {
         method: "GET",
         credentials: "same-origin",
@@ -41,7 +41,7 @@ function SurveyKepuasan({ setOpenRating }) {
   const beriRating = () => {
     setIsLoading(true);
     setCookie("survey", true);
-    const url = process.env.REACT_APP_BASE_URL + "rating";
+    const url = `${process.env.REACT_APP_BASE_URL}/` + "rating";
     fetch(url, {
       method: "PATCH",
       headers: {
