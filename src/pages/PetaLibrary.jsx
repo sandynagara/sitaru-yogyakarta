@@ -55,7 +55,7 @@ function PetaLibrary() {
       credentials: "include",
     })
       .then((res) => res.json())
-      .then((res) => {
+      .then((res) => {        
         if (res != "unauthorized") {
           setLogin(true);
         }
@@ -233,8 +233,6 @@ function PetaLibrary() {
               Home
             </div>
           </Link>
-          {/* <BiMapAlt className='w-8 h-8 mr-1 rounded-full text-black p-1'/>
-          Library Peta */}
         </div>
         <div className="flex">
           {isDesktopOrLaptop && (
@@ -305,7 +303,6 @@ function PetaLibrary() {
             })}
         </div>
       </div>
-      {/* {pdf && <OpenPdf pdf={pdf} setPdf={setPdf}/>} */}
       <LoginForm setOpen={setOpen} setLogin={setLogin} open={open} />
       {uploadOpen && (
         <UploadPeta

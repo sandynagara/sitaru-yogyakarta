@@ -16,20 +16,18 @@ const getCSP = () => `
   worker-src * blob:;
 `.replace(/\s+/g, ' ').trim();
 
-
-
 async function startServer() {
   const app = express();
   
   app.use((_, res, next) => {
     res.setHeader('Expect-CT', 'enforce, max-age=86400');
-    res.setHeader('Cross-Origin-Embedder-Policy', 'credentialless');
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'cross-origin');
+    res.setHeader('Cross-Origin-Opener-Policy', 'cross-origin');
     res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('X-XSS-Protection', '1; mode=block');
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    res.setHeader('X-Frame-Options', 'ALLOWALL');
     res.setHeader('X-DNS-Prefetch-Control', 'on');
     res.setHeader(
       'Strict-Transport-Security',

@@ -16,7 +16,7 @@ function ListPermohonan() {
     const [totalPage, setTotalPage] = useState(5)
 
     useEffect(async() => {
-      const url = `${`${process.env.REACT_APP_BASE_URL}/`}/permohonan?page=${page}&limit=10`
+      const url = `${process.env.REACT_APP_BASE_URL}/permohonan?page=${page}&limit=10`
       try{
         const response = await fetch(url,{
             method:"GET",
@@ -42,15 +42,15 @@ function ListPermohonan() {
     }
 
     const openFile = (path,name,type) => {
-        let url = `${`${process.env.REACT_APP_BASE_URL}/`}permohonan/${path}`
+        let url = `${process.env.REACT_APP_BASE_URL}}/permohonan/${path}`
         if(type === "image"){
             setOpenImage(true)
             setImageData({url:url,name:name})
-            return
-        }
-        let w = window.open("", '_blank');
-        if(w.document) { 
-             w.document.write('<html><head><title>'+name+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
+        }else{
+            let w = window.open("", '_blank');
+            if(w.document) { 
+                 w.document.write('<html><head><title>'+name+'</title></head><body style="margin:0px;overflow:"hidden"><iframe src="' + url + '" height="100%" width="100%"></iframe></body></html>');
+            }
         }
     }
 
