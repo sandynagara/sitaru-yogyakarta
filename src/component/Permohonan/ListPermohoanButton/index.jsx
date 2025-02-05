@@ -10,21 +10,16 @@ function ListPermohonanButton({setMode,mode}) {
     const [login, setLogin] = useState(false)
 
     const clickHandle = async () => {
-
-        if(mode == "listform" ){
-          setMode("form")
-          return
-        }
-
-        if(open){
-          return
-        }
-
+      console.log(mode);
+      
+      if(mode == "listform" ){
+        setMode("form")
+      }else if(!open){
         try{
-          var url = `${process.env.REACT_APP_BASE_URL}/`+"user/check"
+          const url = `${process.env.REACT_APP_BASE_URL}/user/check`
           let response = await fetch(url,{credentials:'include'})
           response = await response.json()
-          if(response !== "unauthorized"){
+          if(response != "unauthorized"){
             setMode("listform")
           }else{
             setOpen(true)
@@ -32,8 +27,9 @@ function ListPermohonanButton({setMode,mode}) {
         }catch (error) {
           console.log(error);
         }
-       
+      }
     }
+    
 
   return (
     <div className='bg-[#2a4eb9] hover:bg-[#0C2879] p-2 rounded-md cursor-pointer flex gap-2'

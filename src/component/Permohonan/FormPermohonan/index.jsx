@@ -89,7 +89,7 @@ function FormPermohonan() {
     }
 
     const uploadForm =  async () => {
-        if (loading) return
+        if (loading) return 
         setLoading(true)
         const url = `${process.env.REACT_APP_BASE_URL}/` + "permohonan"
 
