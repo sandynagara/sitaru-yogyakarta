@@ -34,21 +34,19 @@ async function unstable_fegateway(req, res) {
   const reqPath = req.baseUrl.split('/').slice(3).join('/');
   const method = req.method.toUpperCase();
 
-  const gateway = gatewayList(process.env).find(value=>req.baseUrl.includes(value.gateway) )
+  const gateway = gatewayList(process.env).find(value => req.baseUrl.includes(value.gateway))
 
   const BASE_PATH = gateway?.baseUrl ?? `${process.env.REACT_APP_BASE_URL}/`;
-  
-  
+
+
   const forgeRequestHeaders = {
     ...(reqPath.startsWith('de/') ? {} : req.headers),
     ...{
       host: (new URL(BASE_PATH)).hostname
     }
   };
-  
-  let forgeResponse = {};
 
-  console.log(`[${req.method}] : ${BASE_PATH + '/' + reqPath}`);
+  let forgeResponse = {};
 
   try {
     // Check request method
@@ -108,13 +106,13 @@ async function unstable_fegateway(req, res) {
   } catch (error) {
     let typedError = {
       message: 'Internal Server Error',
-      name:error?.name,
+      name: error?.name,
       ms: BASE_PATH,
     };
-    if(error.code === 'ECONNABORTED'){
+    if (error.code === 'ECONNABORTED') {
       typedError.message = 'Request Time-out';
       res.status(408).send(typedError);
-    }else{
+    } else {
       res.status(500).send(typedError);
     }
   }

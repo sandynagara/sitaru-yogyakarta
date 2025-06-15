@@ -1,78 +1,112 @@
-import React,{useState} from 'react'
-import  {AiOutlineUser ,AiOutlineLock,AiOutlineClose} from 'react-icons/ai'
+import React, { Fragment, useState } from 'react';
+import Swal from 'sweetalert2';
+import TextField from '@mui/material/TextField';
+import { AuthService } from '../../service/login';
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material';
+import { UserService } from '../../service/user';
 
-import Swal from 'sweetalert2'
-import Modal from '@mui/material/Modal';
-import InputLoginRegister from './InputLoginRegister'
+function LoginForm({ setLogin, setOpen, open }) {
 
-function LoginForm({setLogin,setOpen,open}){
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'info'
+    });
 
-    const [username, setusername] = useState("")
-    const [password, setPassword] = useState("")
+    const handleClose = () => setOpen(false);
 
-    const submitHandler = (event) =>{
-        event.preventDefault();
-        if(username === ""){
-            alert("Username tidak boleh kosong")
-        }else if(password === ""){
-            alert("Password tidak boleh kosong")
-        }else{
-            const url = `${process.env.REACT_APP_BASE_URL}/` + "login"
-            fetch(url,{method:"POST", 
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-              },body: JSON.stringify({
-                username: username,
-                password: password
-              }),
-              credentials: 'include',
-            })
-            .then(res=>res.json())
-            .then(hasil=>{
-                if(hasil.RTN){
-                    setOpen(false)
-                    setLogin(true)
-                    Swal.fire({
-                        icon: 'success',
-                        title:'Anda berhasil login',
-                        timer: 2000,
-                        }
-                    )
-                }else{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Maaf',
-                        text: 'Username / Password yang anda masukkan salah',
-                    })
-                }
-            }).catch((err)=>console.log(err))
+    const handleCloseSnackbar = () => {
+        setSnackbar((prev) => ({ ...prev, open: false }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const username = form.elements.username.value.trim();
+        const password = form.elements.password.value.trim();
+
+        if (!username) {
+            return setSnackbar({
+                open: true,
+                message: 'Username tidak boleh kosong',
+                severity: 'warning',
+            });
         }
-    }
+
+        if (!password) {
+            return setSnackbar({
+                open: true,
+                message: 'Password tidak boleh kosong',
+                severity: 'warning',
+            });
+        }
+
+        try {
+            const token = await AuthService.login(username, password);
+            localStorage.setItem('authToken', token);
+            const myProfile = await UserService.getMyAccount();
+            localStorage.setItem('role', myProfile.status);
+            setSnackbar({
+                open: true,
+                message: 'Anda berhasil login',
+                severity: 'success',
+            });
+            handleClose();
+        } catch (err) {
+            console.error(err);
+            setSnackbar({
+                open: true,
+                message: 'Username / Password yang anda masukkan salah',
+                severity: 'error',
+            });
+        }
+    };
 
     return (
-        <Modal open={open}
-            onClose={()=>setOpen(!open)}
-        >
-            <div className='fixed bg-black bg-opacity-60 top-0 w-screen h-screen items-center flex justify-center'>
-                <div className="login-container">
-                    <div style={{width:"100%",display:"flex",padding:0,minWidth:"100%",justifyContent:"justify-between",alignItems:"center"}}>
-                        <h2 style={{width:"100%"}} className="font-bold">Login</h2>
-                        <AiOutlineClose style={{cursor:"pointer"}} size={22} color="red" onClick={()=>setOpen(false)}/>
-                    </div>
-                    <form onSubmit={(e)=> submitHandler(e)}>
-                        <InputLoginRegister onChange={(e)=>setusername(e.target.value)} tipe="text" label="Username" logo={<AiOutlineUser/>}/>
-                        <InputLoginRegister onChange={(e)=>setPassword(e.target.value)} tipe="password" label="Password" logo={<AiOutlineLock/>}/>
-                        <button type="submit" className='p-2'>Login </button>
-                    </form>
-                    {/* <div className='register-link'>
-                        <p>Belum punya akun?</p>
-                        <p className='to-register' onClick={()=>setLogin(false)}>Register</p>
-                    </div> */}
-                </div>
-            </div> 
-        </Modal>
-    )
-} 
+        <Fragment>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+            >
+                <DialogTitle>Login</DialogTitle>
+                <form onSubmit={handleSubmit} >
+                    <DialogContent className="flex flex-col gap-3">
+                        <DialogContentText>
+                            Silakan masukkan username dan password
+                        </DialogContentText>
+                        <TextField
+                            name="username"
+                            label="Username" />
+                        <TextField
+                            name="password"
+                            label="Password"
+                            type="password"
+                            fullWidth
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button size="small" onClick={handleClose} variant="contained" s>
+                            Close
+                        </Button>
+                        <Button size="small" type="submit" variant="contained">
+                            Login
+                        </Button>
+                    </DialogActions>
+                </form>
+            </Dialog>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={3000}
+                onClose={handleCloseSnackbar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert onClose={handleCloseSnackbar} severity={snackbar.severity}>
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
+        </Fragment>
 
-export default LoginForm
+    );
+}
+
+export default LoginForm;
