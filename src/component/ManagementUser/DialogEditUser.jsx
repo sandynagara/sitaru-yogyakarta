@@ -5,11 +5,7 @@ import { useEffect, useState } from "react";
 export default function DialogEditUser({ id, open, handleClose, onSubmit }) {
 
     const [dataUser, setDataUser] = useState({
-        namaLengkap: "",
-        alamat: '',
-        noHp: '',
-        status: 'user',
-        password: ''
+        status: 'user'
     })
 
     const fetchUserData = async () => {
@@ -33,11 +29,7 @@ export default function DialogEditUser({ id, open, handleClose, onSubmit }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = {
-            namaLengkap: dataUser.namaLengkap,
-            alamat: dataUser.alamat,
-            noHp: dataUser.noHp,
             status: dataUser.status,
-            password: dataUser.password
         };
         onSubmit(form)
     };
@@ -53,9 +45,7 @@ export default function DialogEditUser({ id, open, handleClose, onSubmit }) {
                     <DialogContentText>
                         Silakan perbarui informasi pengguna di bawah ini. Pastikan semua data yang dimasukkan sudah benar sebelum menyimpan.
                     </DialogContentText>
-                    <TextField name="namaLengkap" label="Nama Lengkap" value={dataUser.namaLengkap ?? ""} onChange={handleInputChange} />
-                    <TextField name="alamat" label="Alamat" value={dataUser.alamat ?? ""} onChange={handleInputChange} />
-                    <TextField name="noHp" type="number" label="Nomor Handphone" value={dataUser.noHp ?? ""} onChange={handleInputChange} />
+                
                     <Select
                         name="status"
                         value={dataUser.status ?? "user"}
@@ -66,7 +56,6 @@ export default function DialogEditUser({ id, open, handleClose, onSubmit }) {
                         <MenuItem value={"admin"}>Admin</MenuItem>
                         <MenuItem value={"superadmin"}>Super Admin</MenuItem>
                     </Select>
-                    <TextField name="password" label="Password" type="password" defaultValue={"Testing"} onChange={handleInputChange} />
                 </DialogContent>
                 <DialogActions>
                     <Button size="small" onClick={handleClose}>

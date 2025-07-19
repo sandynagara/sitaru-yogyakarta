@@ -14,8 +14,7 @@ export default function TableManagementUser({ data = [], onDeleteUser, onEditUse
                 <TableHead>
                     <TableRow className='font-bold text-[#0C2879] text-lg'>
                         <TableCell>Nama Lengkap</TableCell>
-                        <TableCell align="right">Alamat</TableCell>
-                        <TableCell align="right">Nomor Handphone</TableCell>
+                        <TableCell align="right">Email</TableCell>
                         <TableCell align="right">Status</TableCell>
                         <TableCell align="right">Action</TableCell>
                     </TableRow>
@@ -27,9 +26,8 @@ export default function TableManagementUser({ data = [], onDeleteUser, onEditUse
                                 key={row._id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">{row.namaLengkap}</TableCell>
-                                <TableCell align="right">{row.alamat}</TableCell>
-                                <TableCell align="right">{row.noHp}</TableCell>
+                                <TableCell component="th" scope="row">{row.name}</TableCell>
+                                <TableCell align="right">{row.email}</TableCell>
                                 <TableCell align="right">{row.status}</TableCell>
                                 <TableCell align="right">
                                     <div className="flex justify-end">
@@ -37,12 +35,6 @@ export default function TableManagementUser({ data = [], onDeleteUser, onEditUse
                                             size={23}
                                             className="mr-2 text-slate-600 cursor-pointer"
                                             onClick={() => onEditUser(row._id)}
-                                        />
-                                        <AiFillDelete
-                                            size={23}
-                                            color="red"
-                                            className="cursor-pointer"
-                                            onClick={() => onDeleteUser(row._id)}
                                         />
                                     </div>
                                 </TableCell>

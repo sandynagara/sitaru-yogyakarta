@@ -13,7 +13,7 @@ function Layanan({setLayananOpen}) {
                 Layanan
             </div>
             <div className='lg:flex'>
-            <Link to="permohonan">
+            <Link to="permohonan/form">
               <ItemMenu judul={"Layanan IKTR"} 
                 keterangan={"Permohonan Informasi Kesesuaian Tata Ruang"}
                 customAction={()=>{}}

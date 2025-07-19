@@ -7,7 +7,7 @@ async function getMany() {
     return res.data
 }
 
-async function upload(body) {
+async function upload(body) {    
     const res = await useMainServiceFetch('peta', {
         method: "POST",
         body: body

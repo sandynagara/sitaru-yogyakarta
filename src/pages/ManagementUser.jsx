@@ -143,9 +143,6 @@ function ManagementUser() {
                             onChange={(e) => changeKeyword(e.target.value)}
                         />
                     )}
-                    <Button startIcon={<AiOutlinePlus />} size="small" variant="contained" onClick={() => setOpenAddUser(true)}>
-                        User
-                    </Button>
                 </div>
             </div>
             <div className="rounded-lg bg-white text-black mx-2">

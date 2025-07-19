@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { FaClipboardList } from "react-icons/fa"
-
-import LoginForm from '../../LoginRegister/LoginForm'
 import { AiOutlineForm } from "react-icons/ai"
+import { AuthService } from '../../../service/login'
 
 function ListPermohonanButton({ setMode, mode }) {
 
   const [open, setOpen] = useState(false)
-  const [login, setLogin] = useState(false)
 
   const clickHandle = async () => {
     if (mode == "listform") {
@@ -18,7 +16,7 @@ function ListPermohonanButton({ setMode, mode }) {
         if (token) {
           setMode("listform")
         } else {
-          setOpen(true)
+          AuthService.ssoLogin()
         }
       } catch (error) {
         console.log(error);
@@ -31,7 +29,6 @@ function ListPermohonanButton({ setMode, mode }) {
     <div className='bg-[#2a4eb9] hover:bg-[#0C2879] p-2 rounded-md cursor-pointer flex gap-2'
       onClick={() => clickHandle()}
     >
-      <LoginForm setOpen={setOpen} open={open} setLogin={setLogin} />
       {mode == "form" ? <FaClipboardList size={20} color="white" /> : <AiOutlineForm size={20} color="white" />}
       <div className='text-white font-semibold hidden lg:block'>
         {mode == "form" ? "List Permohonan" : "Permohonan"}

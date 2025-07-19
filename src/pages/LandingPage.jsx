@@ -1,19 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ItemMenu from '../component/LandingPage/ItemMenu'
 import Navbar from '../component/LandingPage/Navbar'
 import SitaruLaptop from '../images/sitaru_laptop.png'
 import { BiMapAlt } from 'react-icons/bi'
 import { AiOutlineSetting, AiOutlineWhatsApp } from 'react-icons/ai'
 import { GrDocumentText } from "react-icons/gr"
-import { Link as LinkTo } from 'react-router-dom'
+import { Link as LinkTo, useLocation } from 'react-router-dom'
 import Footer from '../component/Footer'
 import Layanan from '../component/Layanan'
 import logoGatraMatra from "../images/logo_gatra.png"
+import callbackHandle from '../utils/callbackHandle'
 
 function LandingPage() {
 
   const [layananOpen, setLayananOpen] = useState(false)
-
+    
   return (
     <div className=''>
       <Navbar />
@@ -50,7 +51,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5'>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4'>
           <ItemMenu judul={"Peta"}
             keterangan={"Peta Tematik Tata Ruang"}
             link="/peta"
@@ -64,12 +65,13 @@ function LandingPage() {
             icon={<AiOutlineSetting color="white" size={50} />}
           />
 
+          {/* 
           <ItemMenu judul={"SiReklame"}
             keterangan={"Pengendalian Pemanfaatan Ruang Reklame Berbasis Sistem Informasi Kota Yogyakarta"}
             customAction={() => { window.open("https://pepadhang-resik.ppids-ugm.com/", '_blank', 'noopener,noreferrer'); }}
             active={true}
             icon={<GrDocumentText color="white" size={50} />}
-          />
+          /> */}
 
           <ItemMenu judul={"Layanan"}
             keterangan={"Akses layanan IKTR dan KKPR"}

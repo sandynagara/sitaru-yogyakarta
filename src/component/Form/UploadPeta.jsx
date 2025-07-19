@@ -18,10 +18,12 @@ function UploadPeta({ setUploadOpen, setBerubah, berubah }) {
             var data = new FormData()
             data.append('peta', file)
             data.append('nama', nama)
-
-            const res = await PetaService.upload(data)
+          
+            await PetaService.upload(data)
+            
             setBerubah(!berubah)
             setUploadOpen(false)
+
             Swal.fire({
                 icon: 'success',
                 title: 'Peta berhasil ditambahkan',
@@ -29,6 +31,7 @@ function UploadPeta({ setUploadOpen, setBerubah, berubah }) {
             }
             )
         } catch (err) {
+            setIsLoading(false)
             Swal.fire({
                 icon: 'error',
                 title: 'Maaf',

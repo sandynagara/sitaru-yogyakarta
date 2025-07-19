@@ -10,11 +10,9 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-    <CookiesProvider>
-      <App store={rootStore} />
-    </CookiesProvider>
-  </React.StrictMode>
+  <CookiesProvider>
+    <App store={rootStore} />
+  </CookiesProvider>
 );
 
 reportWebVitals();

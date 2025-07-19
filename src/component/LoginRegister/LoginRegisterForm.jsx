@@ -1,7 +1,7 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 import './LoginRegisterForm.css'
 import RegisterForm from './RegisterForm'
-import LoginForm from './LoginForm'
+import { AuthService } from '../../service/login'
  
 function LoginRegisterForm({setOpen}) {
 
@@ -9,7 +9,7 @@ function LoginRegisterForm({setOpen}) {
 
     return (
         <div>
-            {login ? <LoginForm setLogin={setLogin} setOpen={setOpen}/> : <RegisterForm setOpen={setOpen} setLogin={setLogin}/> } 
+            {login ? AuthService.ssoLogin() : <RegisterForm setOpen={setOpen} setLogin={setLogin}/> } 
         </div>
     )
 }

@@ -6,16 +6,15 @@ import {
 import Swal from "sweetalert2";
 
 import { useMediaQuery } from "react-responsive";
-import LoginForm from "../component/LoginRegister/LoginForm";
-import UploadPeta from "../component/Form/UploadPeta";
 import TablePetaLibrary from "../component/PetaLibrary/TablePetaLibrary";
 import BackHome from "../component/Permohonan/BackHome";
 import { PetaService } from "../service/peta";
+import { AuthService } from "../service/login";
+import UploadPeta from "../component/Form/UploadPeta";
 
 function PetaLibrary() {
   const [daftarPetaAwal, setDaftarPetaAwal] = useState(false);
   const [daftarPeta, setDaftarPeta] = useState([]);
-  const [open, setOpen] = useState(false);
   const [login, setLogin] = useState(false);
   const [berubah, setBerubah] = useState(false);
   const [uploadOpen, setUploadOpen] = useState(false);
@@ -59,7 +58,9 @@ function PetaLibrary() {
   }
 
   const logOut = () => {
+    AuthService.logout()
     localStorage.removeItem("authToken")
+    localStorage.removeItem('refreshToken');
     setLogin(false);
   };
 
@@ -99,7 +100,7 @@ function PetaLibrary() {
           ) : (
             <div
               className="flex h-full text-sm items-center cursor-pointer rounded-md bg-sky-600 hover:bg-sky-700 px-5 py-1 mr-2 text-white"
-              onClick={() => setOpen(true)}
+              onClick={() => AuthService.ssoLogin()}
             >
               Login
             </div>
@@ -118,9 +119,8 @@ function PetaLibrary() {
       <div className=" rounded-lg bg-white text-black mx-2">
         <TablePetaLibrary data={daftarPeta} onDeleteEvent={onDeleteEvent} />
       </div>
-      <LoginForm setOpen={setOpen} setLogin={setLogin} open={open} />
       {uploadOpen && (
-        <Upload
+        <UploadPeta
           setUploadOpen={setUploadOpen}
           setBerubah={setBerubah}
           berubah={berubah}

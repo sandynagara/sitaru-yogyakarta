@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import logoYogya from "../../images/Logo_Kota_Yogyakarta.png";
-import LoginForm from '../LoginRegister/LoginForm';
 import { Link } from 'react-router-dom';
+import { AuthService } from '../../service/login';
 
 function Navbar() {
 
   const [stickyClass, setStickyClass] = useState(0);
-  const [openLogin, setOpenLogin] = useState(false);
 
   useEffect(() => {
     window.addEventListener('scroll', stickNavbar);
@@ -23,11 +22,20 @@ function Navbar() {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem("authToken")
-    localStorage.removeItem("role")
-    window.location.reload();
+  const logout = async () => {
+    try{
+      const data = await AuthService.logout()
+      localStorage.removeItem("authToken")
+      localStorage.removeItem('refreshToken');
+      window.location.reload();
+    }catch{
+      console.log("error failed");
+    }
   };
+
+  const login = () => {
+    AuthService.ssoLogin()
+  }
 
   return (
     <div className='fixed z-[12] top-0  w-screen  p-3 flex items-center justify-center duration-300' style={stickyClass ? { backgroundColor: "white" } : {}}>
@@ -61,13 +69,12 @@ function Navbar() {
 
           :
           <div
-            onClick={() => setOpenLogin(true)}
+            onClick={login}
             className="flex h-full text-sm items-center cursor-pointer rounded-md bg-slate-800 hover:bg-slate-900 px-5 py-1 mr-2 text-white"
           >
             Login
           </div>}
       </div>
-      <LoginForm setOpen={setOpenLogin} open={openLogin} />
     </div>
   )
 }

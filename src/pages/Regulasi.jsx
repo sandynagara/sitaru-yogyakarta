@@ -5,11 +5,11 @@ import {
 } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { useMediaQuery } from "react-responsive";
-import LoginForm from "../component/LoginRegister/LoginForm";
 import UploadRegulasi from "../component/Form/UploadRegulasi";
 import BackHome from "../component/Permohonan/BackHome";
 import TableRegulasiLibrary from "../component/RegulasiLibrary/TableRegulasiLibrary";
 import { RegulasiService } from "../service/regulasi";
+import { AuthService } from "../service/login";
 
 function Regulasi() {
   const [daftarPetaAwal, setDaftarPetaAwal] = useState(false);
@@ -58,7 +58,9 @@ function Regulasi() {
   }
 
   const logOut = () => {
+    AuthService.logout()
     localStorage.removeItem("authToken")
+    localStorage.removeItem('refreshToken');
     setLogin(false);
   };
 
@@ -98,7 +100,7 @@ function Regulasi() {
           ) : (
             <div
               className="flex h-full text-sm items-center cursor-pointer rounded-md bg-sky-600 hover:bg-sky-700 px-5 py-1 mr-2 text-white"
-              onClick={() => setOpen(true)}
+              onClick={() => AuthService.ssoLogin()}
             >
               Login
             </div>
@@ -117,7 +119,6 @@ function Regulasi() {
       <div className=" rounded-lg bg-white text-black mx-2">
         <TableRegulasiLibrary data={daftarPeta} onDeleteEvent={onDeleteEvent} />
       </div>
-      <LoginForm setOpen={setOpen} setLogin={setLogin} open={open} />
       {uploadOpen && (
         <UploadRegulasi
           setUploadOpen={setUploadOpen}
